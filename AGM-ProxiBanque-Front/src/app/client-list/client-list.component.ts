@@ -8,12 +8,11 @@ const CLIENT_DATA: ClientModel[] = [
     lastName: 'Boureau',
     email: 'email',
     address: {
-      street: 'rue blabla',
-      streetNumber: 5,
-      zipCode: 44000,
+      street: '5 rue blabla',
+      zipCode: "44000",
       city: 'Nantes',
     },
-    phoneNumber: 123,
+    phoneNumber: "123",
   },
   {
     id: 2,
@@ -21,12 +20,11 @@ const CLIENT_DATA: ClientModel[] = [
     lastName: 'Boureau',
     email: 'email',
     address: {
-      street: 'rue blabla',
-      streetNumber: 5,
-      zipCode: 44000,
+      street: '5 rue blabla',
+      zipCode: "44000",
       city: 'Nantes',
     },
-    phoneNumber: 123,
+    phoneNumber: "123",
   },
   {
     id: 3,
@@ -34,12 +32,11 @@ const CLIENT_DATA: ClientModel[] = [
     lastName: 'Boureau',
     email: 'email',
     address: {
-      street: 'rue blabla',
-      streetNumber: 5,
-      zipCode: 44000,
+      street: '5 rue blabla',
+      zipCode: "44000",
       city: 'Nantes',
     },
-    phoneNumber: 123,
+    phoneNumber: "123",
   },
 ];
 
