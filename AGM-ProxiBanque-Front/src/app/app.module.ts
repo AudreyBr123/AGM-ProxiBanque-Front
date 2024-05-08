@@ -17,6 +17,10 @@ import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { TransferComponent } from './transfer/transfer.component';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     AdvisorListComponent,
     ClientShowComponent,
     ClientCreateComponent,
-    ClientEditComponent
+    ClientEditComponent,
+    TransferComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +43,10 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [
     provideAnimationsAsync()
