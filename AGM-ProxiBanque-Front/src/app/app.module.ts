@@ -18,7 +18,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { TransferComponent } from './transfer/transfer.component';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule,} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
@@ -33,7 +36,8 @@ import {MatCardModule} from '@angular/material/card';
     AdvisorListComponent,
     ClientShowComponent,
     ClientCreateComponent,
-    ClientEditComponent
+    ClientEditComponent,
+    TransferComponent
   ],
   imports: [
     BrowserModule,
@@ -43,8 +47,9 @@ import {MatCardModule} from '@angular/material/card';
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
-    MatButtonModule,
     MatListModule,
+    MatFormField,
+    MatSelectModule
     MatFormFieldModule,
     MatInputModule,
     FormsModule,

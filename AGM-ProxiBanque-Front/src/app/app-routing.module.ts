@@ -6,6 +6,7 @@ import { ClientListComponent } from './client-list/client-list.component';
 import { ClientShowComponent } from './client-show/client-show.component';
 import { ClientEditComponent } from './client-edit/client-edit.component';
 import { AdvisorListComponent } from './advisor-list/advisor-list.component';
+import { TransferComponent } from './transfer/transfer.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'client-show', component: ClientShowComponent },
   { path: 'client-edit', component: ClientEditComponent },
   { path: 'advisor-list', component: AdvisorListComponent },
+  { path: 'transfer', component: TransferComponent },
   { path: '**', component: LoginComponent }
 ];
 

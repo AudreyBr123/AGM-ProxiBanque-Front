@@ -1,1 +1,31 @@
-<p>login works!</p>
+<h2>Authentification</h2>
+
+<!-- Sans check: -->
+<div class="login-form">
+    <mat-label>Email</mat-label>
+    <mat-form-field>
+        <input matInput type="email" name="email" id="email" placeholder="email@example.com" required>   
+    </mat-form-field>
+    <br>
+    <mat-label for="password">Mot de passe</mat-label>
+    <mat-form-field>
+        <input matInput type="password" name="password" id="password"  placeholder="password" required>
+    </mat-form-field>
+    <br>
+    <button type="submit">Se connecter</button>
+</div>
+
+
+<!-- test avec check: -->
+
+
+<!-- <form [formGroup]="myForm" (ngSubmit)="myForm.value" [class.error]="!myForm.valid && myForm.touched">
+    <div [class.error]="!Email.valid && Email.touched"> 
+        <label for="Email">userName</label>
+        <input type="email" id="Email" placeholder="userName" [formControl]="$any(Email)">
+        @if (!Email.valid) {<div>userName is invalid</div>}
+        @if (Email.hasError('required')) {<div>userName is required</div>}
+    </div>
+    @if (!myForm.valid) {<div>Form is invalid</div>}
+    <button (click)="onSubmit(myForm.value)" type="submit" [disabled]="userName.invalid" >Submit</button>
+</form> -->
