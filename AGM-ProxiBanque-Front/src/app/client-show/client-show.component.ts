@@ -16,12 +16,11 @@ export class ClientShowComponent {
       "Audrey",
       "Boureau",
       "email",
-    { street: 'rue blabla',
-      streetNumber: 5,
-      zipCode: 44000,
+    { street: '5 rue blabla',
+      zipCode: "44000",
       city: 'Nantes',
     }, 
-    123
+    "123"
   )
 }
 }
