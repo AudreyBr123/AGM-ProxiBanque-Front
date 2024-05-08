@@ -6,9 +6,9 @@ export class PersonModel {
     lastName: String;
     email: String;
     address: AddressModel;
-    phoneNumber: number;
+    phoneNumber: String;
 
-    constructor(id: number, firstName: String, lastName: String, email: String, address: AddressModel, phoneNumber: number) {
+    constructor(id: number, firstName: String, lastName: String, email: String, address: AddressModel, phoneNumber: String) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
