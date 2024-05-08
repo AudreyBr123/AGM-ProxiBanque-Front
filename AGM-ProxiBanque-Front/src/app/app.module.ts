@@ -11,6 +11,9 @@ import { AdvisorListComponent } from './advisor-list/advisor-list.component';
 import { ClientShowComponent } from './client-show/client-show.component';
 import { ClientCreateComponent } from './client-create/client-create.component';
 import { ClientEditComponent } from './client-edit/client-edit.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -26,9 +29,13 @@ import { ClientEditComponent } from './client-edit/client-edit.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatSlideToggleModule,
+    MatTableModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
