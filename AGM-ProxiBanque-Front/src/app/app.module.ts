@@ -17,6 +17,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatListModule} from '@angular/material/list';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { TransferComponent } from './transfer/transfer.component';
 import {MatInputModule} from '@angular/material/input';
@@ -46,9 +47,8 @@ import {MatCardModule} from '@angular/material/card';
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
-    MatButtonModule,
+    MatListModule,
     MatFormField,
-    MatInputModule,
     MatSelectModule
     MatFormFieldModule,
     MatInputModule,
