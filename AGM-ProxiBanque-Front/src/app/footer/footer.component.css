@@ -1,0 +1,20 @@
+footer {
+    background-color: rgb(223, 223, 223);
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+}
+
+mat-toolbar {
+    width: 100%;
+    background-color: rgb(223, 223, 223);
+    display: flex;
+    justify-content: space-around;
+}
+
+.description {
+    font-style: italic;
+    font-size: small;
+    color: grey;
+}
