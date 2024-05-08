@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ClientModel } from '../models/client.model';
 
 @Component({
   selector: 'app-client-show',
@@ -6,5 +7,21 @@ import { Component } from '@angular/core';
   styleUrl: './client-show.component.css'
 })
 export class ClientShowComponent {
-
+  
+  client: ClientModel
+  
+  constructor(){
+    this.client = new ClientModel(
+      1,
+      "Audrey",
+      "Boureau",
+      "email",
+    { street: 'rue blabla',
+      streetNumber: 5,
+      zipCode: 44000,
+      city: 'Nantes',
+    }, 
+    123
+  )
+}
 }

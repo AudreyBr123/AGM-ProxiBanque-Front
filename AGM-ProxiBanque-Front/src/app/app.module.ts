@@ -17,6 +17,9 @@ import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatCardModule} from '@angular/material/card';
+import {MatListModule} from '@angular/material/list';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +41,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    MatListModule,
   ],
   providers: [
     provideAnimationsAsync()
