@@ -14,6 +14,9 @@ import { ClientEditComponent } from './client-edit/client-edit.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatTableModule} from '@angular/material/table';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,11 @@ import {MatTableModule} from '@angular/material/table';
     BrowserModule,
     AppRoutingModule,
     MatSlideToggleModule,
-    MatTableModule
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatButtonModule
   ],
   providers: [
     provideAnimationsAsync()
