@@ -20,7 +20,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { TransferComponent } from './transfer/transfer.component';
-import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule,} from '@angular/forms';
@@ -49,7 +48,7 @@ import {MatCardModule} from '@angular/material/card';
     MatToolbarModule,
     MatListModule,
     MatFormField,
-    MatSelectModule
+    MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
     FormsModule,

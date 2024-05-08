@@ -9,11 +9,10 @@ const ADVISOR_DATA: AdvisorModel[] = [
     email: 'email',
     address: {
       street: 'rue blabla',
-      streetNumber: 5,
-      zipCode: 44000,
+      zipCode: '44000',
       city: 'Nantes',
     },
-    phoneNumber: 123,
+    phoneNumber: '123',
   },
   {
     id: 2,
@@ -22,11 +21,10 @@ const ADVISOR_DATA: AdvisorModel[] = [
     email: 'email',
     address: {
       street: 'rue blabla',
-      streetNumber: 5,
-      zipCode: 44000,
+      zipCode: '44000',
       city: 'Nantes',
     },
-    phoneNumber: 123,
+    phoneNumber: '123',
   }
 ];
 
