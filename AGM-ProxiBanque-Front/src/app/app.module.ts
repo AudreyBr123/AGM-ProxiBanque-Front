@@ -17,15 +17,13 @@ import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { TransferComponent } from './transfer/transfer.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule,} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
-
 
 @NgModule({
   declarations: [
@@ -49,8 +47,8 @@ import {MatCardModule} from '@angular/material/card';
     MatButtonModule,
     MatToolbarModule,
     MatButtonModule,
+    MatFormField,
     MatInputModule,
-    MatFormFieldModule,
     MatSelectModule
     MatFormFieldModule,
     MatInputModule,
