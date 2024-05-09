@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'client-create', component: ClientCreateComponent },
   { path: 'client-list', component: ClientListComponent },
-  { path: 'client-show', component: ClientShowComponent },
+  { path: 'client-show/:id', component: ClientShowComponent },
   { path: 'client-edit', component: ClientEditComponent },
   { path: 'advisor-list', component: AdvisorListComponent },
   { path: 'transfer', component: TransferComponent },

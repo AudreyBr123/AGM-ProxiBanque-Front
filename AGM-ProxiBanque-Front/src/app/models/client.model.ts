@@ -1,6 +1,6 @@
+import { PersonModel } from "./person.model";
 import { AddressModel } from "./address.model";
 import { CurrentAccountModel } from "./current-account.model";
-import { PersonModel } from "./person.model";
 import { SavingAccountModel } from "./saving-account.model";
 
 export class ClientModel extends PersonModel {

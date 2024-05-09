@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ClientModel } from '../models/client.model';
+import { ClientService } from '../services/client.service';
 
+// On pourra désormais supprimer cela quand ce sera OK pour Audrey
 const CLIENT_DATA: ClientModel[] = [
   {
     id: 1,
@@ -52,7 +54,12 @@ const CLIENT_DATA: ClientModel[] = [
   styleUrl: './client-list.component.css',
 })
 
-export class ClientListComponent {
+export class ClientListComponent implements OnInit {
+  clients: ClientModel[] = [];
+
+  // Transmission du service dans le constructeur
+  constructor(private service: ClientService) {}
+
   handleClickOnShow(clientId: number) {
     console.log("Vous voulez voir la fiche du client : ", clientId)
   }
@@ -65,6 +72,8 @@ export class ClientListComponent {
     console.log("Vous voulez accéder aux virements du client : ", clientId)
   }
 
+  // Je définis ici les colonnes de ma liste, mais je donnerai le tableau à lister (clients) 
+  // directement dans le HTML, après l'avoir récupéré depuis le server dans la méthode ngOnInit()
   displayedColumns: string[] = [
     'id',
     'firstName',
@@ -77,5 +86,12 @@ export class ClientListComponent {
     'buttonEdit',
     'buttonTransfer'
   ];
-  dataSource = CLIENT_DATA;
+
+  //Récupération des clients depuis json-server (dans un premier temps, avant la mise en place du back-end)
+  ngOnInit(): void {
+    this.service.getClients()
+    .subscribe((clientsFromJsonServer) => {
+      this.clients = clientsFromJsonServer
+    })
+  }
 }
