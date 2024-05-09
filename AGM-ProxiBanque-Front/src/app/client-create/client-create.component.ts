@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ClientModel } from '../models/client.model';
 import { AddressModel } from '../models/address.model';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -21,8 +21,16 @@ export class ClientCreateComponent {
   addressModel = new AddressModel("", "", "");
   clientModel = new ClientModel(0, "", "", "", this.addressModel, "");
 
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  textFormControl = new FormControl('', [Validators.required]);
+  registerForm = new FormGroup({
+    firstNameFormControl: new FormControl('', [Validators.required]),
+    lastNameFormControl: new FormControl('', [Validators.required]),
+    emailFormControl: new FormControl('', [Validators.required, Validators.email]),
+    streetFormControl: new FormControl('', [Validators.required]),
+    cityFormControl: new FormControl('', [Validators.required]),
+    zipCodeFormControl: new FormControl('', [Validators.required]),
+    phoneNumberFormControl: new FormControl('', [Validators.required]),
+  });
+
 
   matcher = new MyErrorStateMatcher();
   
@@ -30,7 +38,7 @@ export class ClientCreateComponent {
     console.log(this.clientModel);
   }
 
-  newClient() {
+  resetClient() {
     this.addressModel = new AddressModel("", "", "");
     this.clientModel = new ClientModel(0, "", "", "", this.addressModel, "");
   }
