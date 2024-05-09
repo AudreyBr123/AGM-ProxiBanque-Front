@@ -24,6 +24,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule,} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import {MatCardModule} from '@angular/material/card';
     FormsModule,
     MatCardModule,
     ReactiveFormsModule,
+    MatCheckboxModule
   ],
   providers: [
     provideAnimationsAsync()

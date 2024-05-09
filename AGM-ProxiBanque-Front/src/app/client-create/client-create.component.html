@@ -1,5 +1,8 @@
-<h1>Créer un client</h1>
-<mat-card>
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title *ngIf="isAddMode">Créer un client</mat-card-title>
+        <mat-card-title *ngIf="!isAddMode">Mettre a jour un client</mat-card-title>
+    </mat-card-header>
     <mat-card-content>
         <form (ngSubmit)="onSubmit()" [formGroup]="registerForm" class="example-form">
             <mat-form-field class="example-full-width">
@@ -50,7 +53,15 @@
                     Le numéro de téléphone est <strong>obligatoire</strong>
                 </mat-error>
             </mat-form-field>
-            <button mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid">Submit</button>
+            <div *ngIf="isAddMode">
+                <section class="example-section" [formGroup]="accounts">
+                    <h4>Sélectionner les comptes que vous voulez créer :</h4>
+                    <p><mat-checkbox formControlName="savingAccount">Compte courant</mat-checkbox></p>
+                    <p><mat-checkbox formControlName="currentAccount">Compte épargne</mat-checkbox></p>
+                  </section>
+            </div>
+            <button mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid" *ngIf="isAddMode">Créer</button>
+            <button mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid" *ngIf="!isAddMode">Mettre a jour</button>
         </form>
     </mat-card-content>
 </mat-card>
