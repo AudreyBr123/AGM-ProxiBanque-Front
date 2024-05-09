@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject, LOCALE_ID } from '@angular/core';
 import { ClientModel } from '../models/client.model';
+import {formatDate} from '@angular/common';
+
 
 @Component({
   selector: 'app-client-show',
@@ -10,7 +12,7 @@ import { ClientModel } from '../models/client.model';
 export class ClientShowComponent {
    client: ClientModel
   
-  constructor(){
+  constructor(@Inject(LOCALE_ID) private locale: string){
     this.client = new ClientModel(    
       1,
       "Audrey",
@@ -21,8 +23,8 @@ export class ClientShowComponent {
       city: 'Nantes',
     }, 
     "123",
-    {id: 11, balance: 1000, creationDate: new Date(Date.now())},
-    {id: 21, balance: 2000, creationDate: new Date(Date.now())}
+    {id: 11, balance: 1000, creationDate: new Date(formatDate(Date.now(), 'short' , this.locale))},
+    {id: 21, balance: 2000, creationDate: new Date(formatDate(Date.now(), 'short', this.locale))}
   ) 
 }
 }
