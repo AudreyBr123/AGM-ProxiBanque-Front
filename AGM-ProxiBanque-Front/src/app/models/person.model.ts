@@ -2,13 +2,13 @@ import { AddressModel } from "./address.model";
 
 export class PersonModel {
     id: number;
-    firstName: String;
-    lastName: String;
-    email: String;
+    firstName: string;
+    lastName: string;
+    email: string;
     address: AddressModel;
-    phoneNumber: String;
+    phoneNumber: string;
 
-    constructor(id: number, firstName: String, lastName: String, email: String, address: AddressModel, phoneNumber: String) {
+    constructor(id: number, firstName: string, lastName: string, email: string, address: AddressModel, phoneNumber: string) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
