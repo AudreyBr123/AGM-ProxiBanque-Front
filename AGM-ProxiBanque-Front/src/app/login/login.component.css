@@ -1,3 +1,9 @@
 h2 , div {
     text-align: center;
 }
+
+mat-card{
+    margin-left : 30%;
+    margin-right : 30%;
+    margin-top : 2%;
+}

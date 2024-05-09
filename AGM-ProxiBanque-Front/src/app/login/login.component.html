@@ -1,31 +1,28 @@
-<h2>Authentification</h2>
-
-<!-- Sans check: -->
-<div class="login-form">
-    <mat-label>Email</mat-label>
-    <mat-form-field>
-        <input matInput type="email" name="email" id="email" placeholder="email@example.com" required>   
-    </mat-form-field>
-    <br>
-    <mat-label for="password">Mot de passe</mat-label>
-    <mat-form-field>
-        <input matInput type="password" name="password" id="password"  placeholder="password" required>
-    </mat-form-field>
-    <br>
-    <button type="submit">Se connecter</button>
+<mat-card>
+    <div class="login-form">
+    <mat-card-header>
+        <mat-card-title> Authentification </mat-card-title>
+    </mat-card-header>
+    <mat-label>Veuillez entrer votre email : </mat-label>
+    <p>
+        <mat-form-field>
+            <input matInput type="email" name="email" id="email" placeholder="email@example.com" required 
+            [formControl]="emailFormControl" [errorStateMatcher]="matcher">  
+            @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+                <mat-error>Veuillez entrez un email valide</mat-error>
+            }
+            @if (emailFormControl.hasError('required')) {
+                <mat-error>L'email est <strong>obligatoire</strong></mat-error>
+            }
+        </mat-form-field>
+    </p>    
+    <mat-label for="password">Veuillez entrer votre mot de passe :</mat-label>
+    <p>
+        <mat-form-field>
+            <input matInput type="password" name="password" id="password"  placeholder="password" required>
+        </mat-form-field>
+        <br>
+        <a mat-flat-button type="submit" color="primary" routerLink="/client-list">Se connecter</a>
+    </p>
 </div>
-
-
-<!-- test avec check: -->
-
-
-<!-- <form [formGroup]="myForm" (ngSubmit)="myForm.value" [class.error]="!myForm.valid && myForm.touched">
-    <div [class.error]="!Email.valid && Email.touched"> 
-        <label for="Email">userName</label>
-        <input type="email" id="Email" placeholder="userName" [formControl]="$any(Email)">
-        @if (!Email.valid) {<div>userName is invalid</div>}
-        @if (Email.hasError('required')) {<div>userName is required</div>}
-    </div>
-    @if (!myForm.valid) {<div>Form is invalid</div>}
-    <button (click)="onSubmit(myForm.value)" type="submit" [disabled]="userName.invalid" >Submit</button>
-</form> -->
+</mat-card>
