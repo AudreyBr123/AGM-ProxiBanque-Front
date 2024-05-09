@@ -13,8 +13,8 @@ const CLIENT_DATA: ClientModel[] = [
       city: 'Nantes',
     },
     phoneNumber: '123',
-    currentAccount: {accountNumber: 11, balance: 1000, creationDate: Date.now()},
-    savingAccount: {accountNumber: 21, balance: 2000, creationDate: Date.now()},
+    currentAccount: {id: 11, balance: 1000, creationDate: new Date (Date.now())},
+    savingAccount: {id: 21, balance: 2000, creationDate: new Date (Date.now())},
   },
   {
     id: 2,
@@ -27,8 +27,8 @@ const CLIENT_DATA: ClientModel[] = [
       city: 'Nantes',
     },
     phoneNumber: '123',
-    currentAccount: {accountNumber: 12, balance: 500, creationDate: Date.now()},
-    savingAccount: {accountNumber: 22, balance: 2500, creationDate: Date.now()},
+    currentAccount: {id: 12, balance: 500, creationDate: new Date (Date.now())},
+    savingAccount: {id: 22, balance: 2500, creationDate: new Date (Date.now())},
   },
   {
     id: 3,
@@ -41,8 +41,8 @@ const CLIENT_DATA: ClientModel[] = [
       city: 'Nantes',
     },
     phoneNumber: '123',
-    currentAccount: {accountNumber: 13, balance: 3, creationDate: Date.now()},
-    savingAccount: {accountNumber: 23, balance: 1200, creationDate: Date.now()},
+    currentAccount: {id: 13, balance: 3, creationDate: new Date (Date.now())},
+    savingAccount: {id: 23, balance: 1200, creationDate: new Date (Date.now())},
   },
 ];
 

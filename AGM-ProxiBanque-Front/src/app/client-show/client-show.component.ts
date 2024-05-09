@@ -6,12 +6,12 @@ import { ClientModel } from '../models/client.model';
   templateUrl: './client-show.component.html',
   styleUrl: './client-show.component.css'
 })
+
 export class ClientShowComponent {
-  
-  client: ClientModel
+   client: ClientModel
   
   constructor(){
-    this.client = new ClientModel(
+    this.client = new ClientModel(    
       1,
       "Audrey",
       "Boureau",
@@ -20,7 +20,10 @@ export class ClientShowComponent {
       zipCode: "44000",
       city: 'Nantes',
     }, 
-    "123"
-  )
+    "123",
+    {id: 11, balance: 1000, creationDate: new Date(Date.now())},
+    {id: 21, balance: 2000, creationDate: new Date(Date.now())}
+  ) 
 }
 }
+

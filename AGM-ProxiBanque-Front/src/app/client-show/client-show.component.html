@@ -11,6 +11,18 @@
             <mat-list-item role="listitem"> Email : {{client.email}}</mat-list-item>
             <mat-list-item role="listitem"> Adresse : {{client.address.street}}, {{client.address.zipCode}} {{client.address.city}}</mat-list-item>
             <mat-list-item role="listitem"> Téléphone : {{client.phoneNumber}}</mat-list-item>
+            <mat-list-item> 
+                <span matListItemTitle> Compte épargne : </span>
+                <span matListItemLine> Numero : {{client.savingAccount?.id}} </span>
+                <span matListItemLine> Solde : {{client.savingAccount?.balance}} </span>
+                <span matListItemLine> Date de création : {{client.savingAccount?.creationDate}}  </span>         
+            </mat-list-item>
+            <mat-list-item> 
+                <span matListItemTitle> Compte courant : </span>
+                <span matListItemLine> Numero : {{client.currentAccount?.id}} </span>
+                <span matListItemLine> Solde : {{client.currentAccount?.balance}} </span>
+                <span matListItemLine> Date de création : {{client.currentAccount?.creationDate}}  </span>         
+            </mat-list-item>
         </mat-list>        
         <a mat-flat-button color="primary" routerLink="/client-edit" target="_blank">Modifier</a>
         <a mat-flat-button color="primary" routerLink="/transfer" target="_blank">Virement</a>
