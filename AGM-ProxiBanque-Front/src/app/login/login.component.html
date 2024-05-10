@@ -1,9 +1,8 @@
 <mat-card>
-    <div class="login-form">
-    <mat-card-header>
+    <mat-card-header class="title_center">
         <mat-card-title> Authentification </mat-card-title>
     </mat-card-header>
-    <mat-label>Veuillez entrer votre email : </mat-label>
+    <mat-label>Email : </mat-label>
     <p>
         <mat-form-field>
             <input matInput type="email" name="email" id="email" placeholder="email@example.com" required 
@@ -16,13 +15,12 @@
             }
         </mat-form-field>
     </p>    
-    <mat-label for="password">Veuillez entrer votre mot de passe :</mat-label>
+    <mat-label for="password">Mot de passe :</mat-label>
     <p>
         <mat-form-field>
             <input matInput type="password" name="password" id="password"  placeholder="password" required>
         </mat-form-field>
         <br>
-        <a mat-flat-button type="submit" color="primary" routerLink="/client-list">Se connecter</a>
+        <button mat-flat-button type="submit" color="primary" routerLink="/client-list">Se connecter</button>
     </p>
-</div>
 </mat-card>
