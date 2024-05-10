@@ -1,32 +1,40 @@
-<mat-card>
-    <mat-card-header class="title_center">
-        <mat-card-title> Authentification </mat-card-title>
-    </mat-card-header>
-    <form [formGroup]="loginForm" (ngSubmit)="loginForm.value" [class.error]="!loginForm.valid && loginForm.touched" >
-        <div [class.error]="!email.valid && email.touched">
-            <mat-label for="email">Email : </mat-label><br>
-            <mat-form-field>
-                <input matInput type="email" name="email" id="email" placeholder="email@example.com" required 
-                [formControl]="$any(email)">  
-                @if (!email.valid) {
-                    <mat-error>Veuillez entrez un email valide</mat-error>
-                }
-                @if (email.hasError('required')) {
-                    <mat-error>L'email est <strong>obligatoire</strong></mat-error>
-                }
-            </mat-form-field>
-        </div>    
-        <div [class.error]="!password.valid && password.touched">
-        <mat-label for="password">Mot de passe :</mat-label><br>
-            <mat-form-field>
-                <input matInput type="password" name="password" id="password"  placeholder="password" required [formControl]="$any(password)">
-                @if (password.hasError('required')) {
-                    <mat-error>Le mot de passe est <strong>obligatoire</strong></mat-error>
-                }
-            </mat-form-field>
-        </div>
-            <!-- routerLink="/client-list" -->
-            @if (!loginForm.valid && loginForm.touched) {<div>Form is invalid</div>}
-            <button mat-flat-button (click)="onSubmit(loginForm.value)" type="submit" color="primary" [disabled]="email.invalid || password.invalid">Se connecter</button>
-    </form>
-</mat-card>
+<div class="main-container">
+    <mat-card class="mat-card-style">
+        <!-- Header -->
+        <mat-card-header class="title_center">
+            <mat-card-title> Authentification </mat-card-title>
+        </mat-card-header>
+        <form [formGroup]="loginForm" (ngSubmit)="loginForm.value" [class.error]="!loginForm.valid && loginForm.touched" >
+            <!-- Email -->
+            <div [class.error]="!email.valid && email.touched">
+                <mat-label for="email">Email : </mat-label><br>
+                <mat-form-field>
+                    <input matInput type="email" name="email" id="email" placeholder="email@example.com" required 
+                    [formControl]="$any(email)">  
+                    @if (email.hasError('required')) {
+                        <mat-error>L'email est <strong>obligatoire</strong></mat-error>
+                    }
+                    @else if (!email.valid) {
+                        <mat-error>Veuillez entrez un email valide</mat-error>
+                    }
+                </mat-form-field>
+            </div>    
+            <!-- Password -->
+            <div [class.error]="!password.valid && password.touched">
+                <mat-label for="password">Mot de passe :</mat-label><br>
+                <mat-form-field>
+                    <input matInput type="password" name="password" id="password"  placeholder="password" required [formControl]="$any(password)">
+                    @if (password.hasError('required')) {
+                        <mat-error>Le mot de passe est <strong>obligatoire</strong></mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <!-- Submit -->
+            <button mat-flat-button (click)="onSubmit(loginForm.value)" type="submit" color="primary" routerLink="/client-list">Se connecter
+            </button>
+            <!-- Remettre la version bouton désactivé :
+                <button mat-flat-button (click)="onSubmit(loginForm.value)" type="submit" color="primary" [disabled]="email.invalid || password.invalid" routerLink="/client-list">Se connecter</button> 
+            -->
+        </form>
+    </mat-card>
+</div>
