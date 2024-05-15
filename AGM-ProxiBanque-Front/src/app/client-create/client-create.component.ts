@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ClientModel } from '../models/client.model';
 import { AddressModel } from '../models/address.model';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -20,18 +20,56 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class ClientCreateComponent {
   addressModel = new AddressModel("", "", "");
   clientModel = new ClientModel(0, "", "", "", this.addressModel, "");
+  isAddMode: boolean = true;
+  submitted = false;
 
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  textFormControl = new FormControl('', [Validators.required]);
+  registerForm = new FormGroup({
+    firstNameFormControl: new FormControl('', [Validators.required]),
+    lastNameFormControl: new FormControl('', [Validators.required]),
+    emailFormControl: new FormControl('', [Validators.required, Validators.email]),
+    streetFormControl: new FormControl('', [Validators.required]),
+    cityFormControl: new FormControl('', [Validators.required]),
+    zipCodeFormControl: new FormControl('', [Validators.required]),
+    phoneNumberFormControl: new FormControl('', [Validators.required]),
+  });
 
   matcher = new MyErrorStateMatcher();
+
+  accounts = this._formBuilder.group({
+    currentAccount: false,
+    savingAccount: false
+  });
+
+  constructor(private _formBuilder: FormBuilder) {
+  }
   
   onSubmit() {
-    console.log(this.clientModel);
+    this.submitted = false;
+
+    if(this.registerForm.invalid) {
+      return;
+    }
+
+    if(this.isAddMode) {
+      this.createClient();
+    }
+    else {
+      this.updateClient();
+    }
   }
 
-  newClient() {
+  resetClient() {
     this.addressModel = new AddressModel("", "", "");
     this.clientModel = new ClientModel(0, "", "", "", this.addressModel, "");
+  }
+
+  private createClient() {
+    console.log(this.clientModel);
+    console.log(`current account : ${this.accounts.value.currentAccount}`);
+    console.log(`saving account : ${this.accounts.value.savingAccount}`);
+  }
+
+  private updateClient() {
+    console.log(this.clientModel);
   }
 }

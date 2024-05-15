@@ -24,6 +24,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule,} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -55,6 +56,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     MatCardModule,
     ReactiveFormsModule,
+    MatCheckboxModule
     HttpClientModule
   ],
   providers: [

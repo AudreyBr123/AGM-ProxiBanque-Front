@@ -1,6 +1,11 @@
+.example-card {
+    max-width: 700px;
+    margin: auto;
+}
+
 .example-form {
     min-width: 150px;
-    max-width: 500px;
+    max-width: 400px;
     width: 100%;
 }
   
