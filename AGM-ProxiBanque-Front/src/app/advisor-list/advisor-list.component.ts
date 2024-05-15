@@ -1,45 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AdvisorModel } from '../models/advisor.model';
-
-const ADVISOR_DATA: AdvisorModel[] = [
-  {
-    id: 1,
-    firstName: 'Yann',
-    lastName: 'Creach',
-    email: 'email',
-    address: {
-      street: 'rue blabla',
-      zipCode: '44000',
-      city: 'Nantes',
-    },
-    phoneNumber: '123',
-  },
-  {
-    id: 2,
-    firstName: 'Alain',
-    lastName: 'Flageollet',
-    email: 'email',
-    address: {
-      street: 'rue blabla',
-      zipCode: '44000',
-      city: 'Nantes',
-    },
-    phoneNumber: '123',
-  }
-];
+import { AdvisorService } from '../services/advisor.service';
 
 @Component({
   selector: 'app-advisor-list',
   templateUrl: './advisor-list.component.html',
-  styleUrl: './advisor-list.component.css'
+  styleUrl: './advisor-list.component.css',
 })
-export class AdvisorListComponent {
-  
+export class AdvisorListComponent implements OnInit {
+  advisors: AdvisorModel[] = [];
+
+  constructor(private service: AdvisorService) {}
+
   displayedColumns: string[] = [
     'id',
     'firstName',
     'lastName',
-    'numberOfClients'
+    'numberOfClients',
   ];
-  dataSource = ADVISOR_DATA;
+
+  ngOnInit(): void {
+    this.service.getClients().subscribe((advisorsFromJsonServer) => {
+      this.advisors = advisorsFromJsonServer;
+    });
+  }
 }

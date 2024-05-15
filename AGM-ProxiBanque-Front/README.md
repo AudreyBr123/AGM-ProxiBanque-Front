@@ -2,6 +2,12 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.3.
 
+# How to launch the project
+- Run `npm install` to get all the dependencies.
+- Run `ng serve` for angular server. 
+- Run `npx json-server db.json` to run back-end on json-server. Navigate to `http://localhost:3000/` to watch data on localhost (or use RESTer).
+- Navigate to `http://localhost:4200/` to watch the website.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.

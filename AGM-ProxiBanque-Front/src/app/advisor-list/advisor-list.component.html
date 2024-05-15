@@ -1,25 +1,25 @@
 <h2>Liste des conseillers</h2>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table [dataSource]="advisors" class="mat-elevation-z8">
   
     <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef> ID </th>
-    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    <td mat-cell *matCellDef="let advisor"> {{advisor.id}} </td>
     </ng-container>
 
     <ng-container matColumnDef="firstName">
       <th mat-header-cell *matHeaderCellDef> Prénom </th>
-      <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+      <td mat-cell *matCellDef="let advisor"> {{advisor.firstName}} </td>
     </ng-container>
   
     <ng-container matColumnDef="lastName">
       <th mat-header-cell *matHeaderCellDef> Nom </th>
-      <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+      <td mat-cell *matCellDef="let advisor"> {{advisor.lastName}} </td>
     </ng-container>
 
       <ng-container matColumnDef="numberOfClients">
         <th mat-header-cell *matHeaderCellDef> Nombre de clients </th>
-        <td mat-cell *matCellDef="let element"> A gérer plus tard </td>
+        <td mat-cell *matCellDef="let advisor"> A gérer plus tard </td>
       </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
