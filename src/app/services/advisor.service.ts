@@ -7,9 +7,10 @@ import { AdvisorModel } from '../models/advisor.model';
 })
 export class AdvisorService {
 
+  endpoint = 'http://localhost:8080/advisors'
   constructor(private httpClient : HttpClient) { }
 
   getClients() {
-    return this.httpClient.get<AdvisorModel[]>('http://localhost:3000/advisors')
+    return this.httpClient.get<AdvisorModel[]>(this.endpoint)
   }
 }

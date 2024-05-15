@@ -7,21 +7,22 @@ import { ClientModel } from '../models/client.model';
 })
 export class ClientService {
 
+  endpoint = 'http://localhost:8080/clients'
   constructor(private httpClient : HttpClient) {} //Attention à l'ajouter aussi dans app.modules.ts
 
   getClients() {
-    return this.httpClient.get<ClientModel[]>('http://localhost:3000/clients')
+    return this.httpClient.get<ClientModel[]>(this.endpoint)
   }
 
   getClientById(clientId: number) {
-    return this.httpClient.get<ClientModel>('http://localhost:3000/clients/' + clientId)
+    return this.httpClient.get<ClientModel>(this.endpoint + clientId)
   }
 
   // EXEMPLE BASIQUE pour méthode postClient avec uniquement un attribut "firstName"
   // A reprendre et compléter pour l'adapter au formulaire
   
   // postClient(firstName: string) {
-  //   return this.httpClient.post<ClientModel>('http://localhost:3000/clients', { firstName: firstName })
+  //   return this.httpClient.post<ClientModel>(this.endpoint, { firstName: firstName })
   //   .subscribe(data => {
   //      firstName = data.firstName }
   //   )
