@@ -56,7 +56,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     MatCardModule,
     ReactiveFormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
     HttpClientModule
   ],
   providers: [
