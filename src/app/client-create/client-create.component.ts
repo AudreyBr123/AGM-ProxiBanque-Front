@@ -3,6 +3,8 @@ import { ClientModel } from '../models/client.model';
 import { AddressModel } from '../models/address.model';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
+import { PersonInfos } from '../models/person-infos';
+import { AccountModel } from '../models/account.model';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -18,8 +20,9 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrl: './client-create.component.css'
 })
 export class ClientCreateComponent {
-  addressModel = new AddressModel("", "", "");
-  clientModel = new ClientModel(0, "", "", "", this.addressModel, "");
+  personInfosModel = new PersonInfos("", "", "", "", "", "", "");
+  account = new AccountModel(0, 0.0, new Date());
+  clientModel = new ClientModel(0, this.personInfosModel, this.account);
   isAddMode: boolean = true;
   submitted = false;
 
@@ -59,14 +62,14 @@ export class ClientCreateComponent {
   }
 
   resetClient() {
-    this.addressModel = new AddressModel("", "", "");
-    this.clientModel = new ClientModel(0, "", "", "", this.addressModel, "");
+    this.personInfosModel = new PersonInfos("", "", "", "", "", "", "");
+    this.account = new AccountModel(0, 0.0, new Date());
+    this.clientModel = new ClientModel(0, this.personInfosModel, this.account);
   }
 
   private createClient() {
     console.log(this.clientModel);
     console.log(`current account : ${this.accounts.value.currentAccount}`);
-    console.log(`saving account : ${this.accounts.value.savingAccount}`);
   }
 
   private updateClient() {
