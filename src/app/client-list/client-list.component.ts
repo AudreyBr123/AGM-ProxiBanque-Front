@@ -3,50 +3,50 @@ import { ClientModel } from '../models/client.model';
 import { ClientService } from '../services/client.service';
 
 // On pourra désormais supprimer cela quand ce sera OK pour Audrey
-const CLIENT_DATA: ClientModel[] = [
-  {
-    id: 1,
-    firstName: 'Audrey',
-    lastName: 'Boureau',
-    email: 'email',
-    address: {
-      street: 'rue blabla',
-      zipCode: '44000',
-      city: 'Nantes',
-    },
-    phoneNumber: '123',
-    currentAccount: {id: 11, balance: 1000, creationDate: new Date (Date.now())},
-    savingAccount: {id: 21, balance: 2000, creationDate: new Date (Date.now())},
-  },
-  {
-    id: 2,
-    firstName: 'Gwendal',
-    lastName: 'Breton',
-    email: 'email',
-    address: {
-      street: 'rue blabla',
-      zipCode: '44000',
-      city: 'Nantes',
-    },
-    phoneNumber: '123',
-    currentAccount: {id: 12, balance: 500, creationDate: new Date (Date.now())},
-    savingAccount: {id: 22, balance: 2500, creationDate: new Date (Date.now())},
-  },
-  {
-    id: 3,
-    firstName: 'Marine',
-    lastName: 'Spaak',
-    email: 'email',
-    address: {
-      street: 'rue blabla',
-      zipCode: '44000',
-      city: 'Nantes',
-    },
-    phoneNumber: '123',
-    currentAccount: {id: 13, balance: 3, creationDate: new Date (Date.now())},
-    savingAccount: {id: 23, balance: 1200, creationDate: new Date (Date.now())},
-  },
-];
+// const CLIENT_DATA: ClientModel[] = [
+//   {
+//     id: 1,
+//     firstName: 'Audrey',
+//     lastName: 'Boureau',
+//     email: 'email',
+//     address: {
+//       street: 'rue blabla',
+//       zipCode: '44000',
+//       city: 'Nantes',
+//     },
+//     phoneNumber: '123',
+//     currentAccount: {id: 11, balance: 1000, creationDate: new Date (Date.now())},
+//     savingAccount: {id: 21, balance: 2000, creationDate: new Date (Date.now())},
+//   },
+//   {
+//     id: 2,
+//     firstName: 'Gwendal',
+//     lastName: 'Breton',
+//     email: 'email',
+//     address: {
+//       street: 'rue blabla',
+//       zipCode: '44000',
+//       city: 'Nantes',
+//     },
+//     phoneNumber: '123',
+//     currentAccount: {id: 12, balance: 500, creationDate: new Date (Date.now())},
+//     savingAccount: {id: 22, balance: 2500, creationDate: new Date (Date.now())},
+//   },
+//   {
+//     id: 3,
+//     firstName: 'Marine',
+//     lastName: 'Spaak',
+//     email: 'email',
+//     address: {
+//       street: 'rue blabla',
+//       zipCode: '44000',
+//       city: 'Nantes',
+//     },
+//     phoneNumber: '123',
+//     currentAccount: {id: 13, balance: 3, creationDate: new Date (Date.now())},
+//     savingAccount: {id: 23, balance: 1200, creationDate: new Date (Date.now())},
+//   },
+// ];
 
 @Component({
   selector: 'app-client-list',
@@ -78,10 +78,8 @@ export class ClientListComponent implements OnInit {
     'id',
     'firstName',
     'lastName',
-    'currentAccountNumber',
-    'currentAccountBalance',
-    'savingAccountNumber',
-    'savingAccountBalance',
+    'accountNumber',
+    'accountBalance',
     'buttonShow',
     'buttonEdit',
     'buttonTransfer'
