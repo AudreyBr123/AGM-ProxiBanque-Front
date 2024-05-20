@@ -19,6 +19,7 @@ export class ClientService {
     console.log("Passe par getClientById dans le service");
     return this.httpClient.get<ClientModel>(this.endpoint + "/" + clientId)
     .pipe(
+      // TO DO : gérer la redirection vers la liste de clients en cas d'erreur
       catchError(this.handleError)
     )
   }
