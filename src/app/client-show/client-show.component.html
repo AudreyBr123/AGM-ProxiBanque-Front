@@ -15,7 +15,7 @@
                 <span matListItemTitle> Compte épargne : </span>
                 <span matListItemLine> Numero : {{client.account?.id}} </span>
                 <span matListItemLine> Solde : {{client.account?.balance}} </span>
-                <span matListItemLine> Date de création : {{client.account?.creationDate| date:'fullDate'}}  </span>         
+                <span matListItemLine> Date de création : {{client.account?.creationDate| date:'dd/MM/yyyy'}}  </span>         
             </mat-list-item>
         </mat-list>        
         <a mat-flat-button color="primary" routerLink="/client-edit" target="_blank">Modifier</a>
