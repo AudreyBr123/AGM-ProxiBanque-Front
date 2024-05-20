@@ -20,8 +20,10 @@ export class AdvisorListComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.service.getClients().subscribe((advisorsFromJsonServer) => {
-      this.advisors = advisorsFromJsonServer;
+    this.service.getAdvisors().subscribe((advisorsFromBack) => {
+      this.advisors = advisorsFromBack;
+      console.log(advisorsFromBack.at(1));
+      
     });
   }
 }
