@@ -11,34 +11,29 @@ export class ClientService {
   endpoint = 'http://localhost:8080/clients'
   constructor(private httpClient : HttpClient) {} //Attention à l'ajouter aussi dans app.modules.ts
   
-  // httpOptions = {
-  //   headers: new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     'Access-Control-Allow-Origin' : '*'
-  //   })
-  // }
-  
   getClients() {
     return this.httpClient.get<ClientModel[]>(this.endpoint)
   }
   
   getClientById(clientId: number) {
+    console.log("Passe par getClientById dans le service");
     return this.httpClient.get<ClientModel>(this.endpoint + "/" + clientId)
-    // .pipe(
-    //   catchError(this.handleError)
-    // )
+    .pipe(
+      catchError(this.handleError)
+    )
   }
   
-//   handleError(error:any) {
-//     let errorMessage = '';
-//     if (error.error instanceof ErrorEvent) {
-//         errorMessage = error.error.message;
-//     } else {
-//         errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-//     }
-//     window.alert(errorMessage);
-//     return throwError(() => new Error(errorMessage));
-// }
+  handleError(error:any) {
+    console.log("Passe par handleError dans le service");
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+        errorMessage = error.error.message;
+    } else {
+        errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    window.alert(errorMessage);
+    return throwError(() => new Error(errorMessage));
+}
 
 
 
