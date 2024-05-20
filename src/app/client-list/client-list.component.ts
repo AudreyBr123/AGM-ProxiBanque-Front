@@ -2,52 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ClientModel } from '../models/client.model';
 import { ClientService } from '../services/client.service';
 
-// On pourra désormais supprimer cela quand ce sera OK pour Audrey
-// const CLIENT_DATA: ClientModel[] = [
-//   {
-//     id: 1,
-//     firstName: 'Audrey',
-//     lastName: 'Boureau',
-//     email: 'email',
-//     address: {
-//       street: 'rue blabla',
-//       zipCode: '44000',
-//       city: 'Nantes',
-//     },
-//     phoneNumber: '123',
-//     currentAccount: {id: 11, balance: 1000, creationDate: new Date (Date.now())},
-//     savingAccount: {id: 21, balance: 2000, creationDate: new Date (Date.now())},
-//   },
-//   {
-//     id: 2,
-//     firstName: 'Gwendal',
-//     lastName: 'Breton',
-//     email: 'email',
-//     address: {
-//       street: 'rue blabla',
-//       zipCode: '44000',
-//       city: 'Nantes',
-//     },
-//     phoneNumber: '123',
-//     currentAccount: {id: 12, balance: 500, creationDate: new Date (Date.now())},
-//     savingAccount: {id: 22, balance: 2500, creationDate: new Date (Date.now())},
-//   },
-//   {
-//     id: 3,
-//     firstName: 'Marine',
-//     lastName: 'Spaak',
-//     email: 'email',
-//     address: {
-//       street: 'rue blabla',
-//       zipCode: '44000',
-//       city: 'Nantes',
-//     },
-//     phoneNumber: '123',
-//     currentAccount: {id: 13, balance: 3, creationDate: new Date (Date.now())},
-//     savingAccount: {id: 23, balance: 1200, creationDate: new Date (Date.now())},
-//   },
-// ];
-
 @Component({
   selector: 'app-client-list',
   templateUrl: './client-list.component.html',
@@ -72,6 +26,18 @@ export class ClientListComponent implements OnInit {
     console.log("Vous voulez accéder aux virements du client : ", clientId)
   }
 
+  handleClickOnDelete(clientId: number) {
+    console.log("Vous voulez supprimer le client : ", clientId)
+        
+    // On va chercher le client grâce à l'id récupéré en URL et on le supprime
+    this.service.deleteClientById(clientId).subscribe(() => {
+      alert('Le client ' + clientId + ' a bien été supprimé.');
+
+      // NOTE est-ce que c'est la meilleure façon de rafraichir après avoir supprimé un client ?
+      this.service.getClients().subscribe(clientsFromServer => this.clients = clientsFromServer);
+    })
+  }
+
   // Je définis ici les colonnes de ma liste, mais je donnerai le tableau à lister (clients) 
   // directement dans le HTML, après l'avoir récupéré depuis le server dans la méthode ngOnInit()
   displayedColumns: string[] = [
@@ -81,6 +47,7 @@ export class ClientListComponent implements OnInit {
     'accountNumber',
     'accountBalance',
     'buttonShow',
+    'buttonDelete',
     'buttonEdit',
     'buttonTransfer'
   ];

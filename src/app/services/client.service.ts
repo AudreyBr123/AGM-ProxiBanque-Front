@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ClientModel } from '../models/client.model';
+import { Observable } from 'rxjs';
 import { catchError, throwError } from 'rxjs';
 
 @Injectable({
@@ -16,12 +17,15 @@ export class ClientService {
   }
   
   getClientById(clientId: number) {
-    console.log("Passe par getClientById dans le service");
     return this.httpClient.get<ClientModel>(this.endpoint + "/" + clientId)
     .pipe(
       // TO DO : gérer la redirection vers la liste de clients en cas d'erreur
       catchError(this.handleError)
     )
+  }
+  
+  deleteClientById(clientId: number): Observable<void> {
+    return this.httpClient.delete<void>(this.endpoint + "/" + clientId)
   }
   
   handleError(error:any) {
