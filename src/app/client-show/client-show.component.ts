@@ -26,8 +26,9 @@ export class ClientShowComponent implements OnInit {
 
   ngOnInit(): void {
     // On va chercher le client grâce à l'id récupéré en URL
-    this.service.getClientById(this.id).subscribe((clientFromJsonServer) => {
-      this.client = clientFromJsonServer;
+    this.service.getClientById(this.id).subscribe((clientFromDB) => {
+      console.log("Passe par client-show-component - getclientbyid");
+      this.client = clientFromDB;
     });
   }
 }
