@@ -31,7 +31,7 @@ export class ClientListComponent implements OnInit {
         
     // On va chercher le client grâce à l'id récupéré en URL et on le supprime
     this.service.deleteClientById(clientId).subscribe(() => {
-      alert('Client deleted successfully');
+      alert('Le client ' + clientId + ' a bien été supprimé.');
 
       // NOTE est-ce que c'est la meilleure façon de rafraichir après avoir supprimé un client ?
       this.service.getClients().subscribe(clientsFromServer => this.clients = clientsFromServer);

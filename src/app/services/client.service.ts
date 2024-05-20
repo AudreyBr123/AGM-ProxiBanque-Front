@@ -16,7 +16,7 @@ export class ClientService {
   }
 
   getClientById(clientId: number) {
-    return this.httpClient.get<ClientModel>(this.endpoint + clientId)
+    return this.httpClient.get<ClientModel>(this.endpoint + "/" + clientId)
   }
 
   deleteClientById(clientId: number): Observable<void> {
