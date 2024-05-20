@@ -41,6 +41,13 @@
         </td>
       </ng-container>
 
+      <ng-container matColumnDef="buttonDelete">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let client">
+          <button routerLink="/client-list" (click)="handleClickOnDelete(client.id)"><mat-icon>delete</mat-icon></button>
+        </td>
+      </ng-container>
+
       <ng-container matColumnDef="buttonEdit">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let client">

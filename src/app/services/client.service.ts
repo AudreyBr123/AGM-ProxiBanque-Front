@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ClientModel } from '../models/client.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,11 @@ export class ClientService {
 
   getClientById(clientId: number) {
     return this.httpClient.get<ClientModel>(this.endpoint + clientId)
+  }
+
+  deleteClientById(clientId: number): Observable<void> {
+    console.log("entrée dans deleteClientById dans client.service.ts")
+    return this.httpClient.delete<void>(this.endpoint + "/" + clientId)
   }
 
   // EXEMPLE BASIQUE pour méthode postClient avec uniquement un attribut "firstName"
