@@ -51,7 +51,7 @@
       <ng-container matColumnDef="buttonEdit">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let client">
-          <button routerLink="/client-edit" (click)="handleClickOnEdit(client.id)"><mat-icon>edit</mat-icon></button>
+          <button routerLink="/client-edit/{{client.id}}" (click)="handleClickOnEdit(client.id)"><mat-icon>edit</mat-icon></button>
         </td>
       </ng-container>
 
