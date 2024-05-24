@@ -26,7 +26,7 @@ export class ClientService {
   getClientById(clientId: number) {
     return this.httpClient.get<ClientModel>(this.endpoint + "/" + clientId)
     .pipe(
-      // TO DO : gérer la redirection vers la liste de clients en cas d'erreur
+      // TODO : gérer la redirection vers la liste de clients en cas d'erreur
       catchError(this.handleError)
     )
   }
@@ -37,6 +37,10 @@ export class ClientService {
 
   deleteClientById(clientId: number): Observable<void> {
     return this.httpClient.delete<void>(this.endpoint + "/" + clientId)
+  }
+
+  putClient(clientId: number, client:ClientModel) {
+    return this.httpClient.put<ClientModel>(this.endpoint + "/" + clientId, JSON.stringify(client), this.httpOptions)  
   }
   
   handleError(error:any) {

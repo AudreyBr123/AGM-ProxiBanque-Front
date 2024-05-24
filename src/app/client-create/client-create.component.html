@@ -7,48 +7,48 @@
         <form (ngSubmit)="onSubmit()" [formGroup]="registerForm" class="example-form">
             <mat-form-field class="example-full-width">
                 <mat-label>Nom</mat-label>
-                <input matInput placeholder="Ex. Doe" value="" [(ngModel)]="clientModel.personInfos.lastName" name="lastName" required formControlName="firstNameFormControl" [errorStateMatcher]="matcher">
+                <input matInput placeholder="Ex. Doe" value="" [(ngModel)]="client.personInfos.lastName" name="lastName" required formControlName="firstNameFormControl" [errorStateMatcher]="matcher">
                 <mat-error *ngIf="registerForm.get('firstNameFormControl')?.hasError('required')">
                     Le nom est <strong>obligatoire</strong>
                 </mat-error>
             </mat-form-field>
             <mat-form-field class="example-full-width">
                 <mat-label>Prénom</mat-label>
-                <input matInput placeholder="Ex. John" value="" [(ngModel)]="clientModel.personInfos.firstName" name="firstName" required formControlName="lastNameFormControl" [errorStateMatcher]="matcher">
+                <input matInput placeholder="Ex. John" value="" [(ngModel)]="client.personInfos.firstName" name="firstName" required formControlName="lastNameFormControl" [errorStateMatcher]="matcher">
                 <mat-error *ngIf="registerForm.get('lastNameFormControl')?.hasError('required')">
                     Le Prénom est <strong>obligatoire</strong>
                 </mat-error>
             </mat-form-field>
             <mat-form-field class="example-full-width">
                 <mat-label>Email</mat-label>
-                <input type="email" matInput placeholder="Ex. johndoe@gmail.com" value="" [(ngModel)]="clientModel.personInfos.email" name="email" required formControlName="emailFormControl" [errorStateMatcher]="matcher">
+                <input type="email" matInput placeholder="Ex. johndoe@gmail.com" value="" [(ngModel)]="client.personInfos.email" name="email" required formControlName="emailFormControl" [errorStateMatcher]="matcher">
                 <mat-error *ngIf="registerForm.get('emailFormControl')?.hasError('email')">Veuillez entrez un email valide</mat-error>
                 <mat-error *ngIf="registerForm.get('emailFormControl')?.hasError('required')">L'email est <strong>obligatoire</strong></mat-error>
             </mat-form-field>
             <mat-form-field class="example-full-width">
                 <mat-label>Adresse</mat-label>
-                <input matInput placeholder="Ex. 12 rue des does" value="" [(ngModel)]="clientModel.personInfos.street" name="street" required formControlName="streetFormControl" [errorStateMatcher]="matcher">
+                <input matInput placeholder="Ex. 12 rue des does" value="" [(ngModel)]="client.personInfos.street" name="street" required formControlName="streetFormControl" [errorStateMatcher]="matcher">
                 <mat-error *ngIf="registerForm.get('streetFormControl')?.hasError('required')">
                     L'addresse est <strong>obligatoire</strong>
                 </mat-error>
             </mat-form-field>
             <mat-form-field class="example-full-width">
                 <mat-label>Ville</mat-label>
-                <input matInput placeholder="Ex. Bordeaux" value="" [(ngModel)]="clientModel.personInfos.city" name="city" required formControlName="cityFormControl" [errorStateMatcher]="matcher">
+                <input matInput placeholder="Ex. Bordeaux" value="" [(ngModel)]="client.personInfos.city" name="city" required formControlName="cityFormControl" [errorStateMatcher]="matcher">
                 <mat-error *ngIf="registerForm.get('cityFormControl')?.hasError('required')">
                     La ville est <strong>obligatoire</strong>
                 </mat-error>
             </mat-form-field>
             <mat-form-field class="example-full-width">
                 <mat-label>Code postal</mat-label>
-                <input matInput placeholder="Ex. 42000" value="" [(ngModel)]="clientModel.personInfos.zipCode" name="zipCode" required formControlName="zipCodeFormControl" [errorStateMatcher]="matcher">
+                <input matInput placeholder="Ex. 42000" value="" [(ngModel)]="client.personInfos.zipCode" name="zipCode" required formControlName="zipCodeFormControl" [errorStateMatcher]="matcher">
                 <mat-error *ngIf="registerForm.get('zipCodeFormControl')?.hasError('required')">
                     Le code postal est <strong>obligatoire</strong>
                 </mat-error>
             </mat-form-field>
             <mat-form-field class="example-full-width">
                 <mat-label>Numéro de téléphone</mat-label>
-                <input type="tel" matInput placeholder="Ex. 035426178912" value="" [(ngModel)]="clientModel.personInfos.phoneNumber" name="phoneNumber" required formControlName="phoneNumberFormControl" [errorStateMatcher]="matcher">
+                <input type="tel" matInput placeholder="Ex. 035426178912" value="" [(ngModel)]="client.personInfos.phoneNumber" name="phoneNumber" required formControlName="phoneNumberFormControl" [errorStateMatcher]="matcher">
                 <mat-error *ngIf="registerForm.get('phoneNumberFormControl')?.hasError('required')">
                     Le numéro de téléphone est <strong>obligatoire</strong>
                 </mat-error>

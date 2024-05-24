@@ -18,9 +18,9 @@ export class ClientShowComponent implements OnInit {
 
   constructor(@Inject(LOCALE_ID) private locale: string, private service: ClientService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.client = new ClientModel(
-      1,
-      new PersonInfos('Audrey', 'Boureau', 'email', '123', '5 rue blabla', '44000', 'Nantes'),
-      {id: 11, balance: 1000, creationDate: new Date(formatDate(Date.now(), 'short' , this.locale))},
+      0,
+      new PersonInfos('Prénom', 'Nom', 'Email', '0101010101', '1 rue blabla', '11000', 'Ville'),
+      {id: 0, balance: 10000, creationDate: new Date(formatDate(Date.now(), 'short' , this.locale))},
     )
   }
 

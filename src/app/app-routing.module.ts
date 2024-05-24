@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'client-create', component: ClientCreateComponent },
   { path: 'client-list', component: ClientListComponent },
   { path: 'client-show/:id', component: ClientShowComponent },
-  { path: 'client-edit', component: ClientEditComponent },
+  { path: 'client-edit/:id', component: ClientCreateComponent },
   { path: 'advisor-list', component: AdvisorListComponent },
   { path: 'transfer', component: TransferComponent },
   { path: '**', component: LoginComponent }
