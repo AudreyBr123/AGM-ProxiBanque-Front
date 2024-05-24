@@ -26,6 +26,8 @@ import { FormsModule, ReactiveFormsModule,} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+import { statusReducer } from './store/status.reducer';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatCardModule,
     ReactiveFormsModule,
     MatCheckboxModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot({
+      status:  statusReducer
+    })
   ],
   providers: [
     provideAnimationsAsync()
