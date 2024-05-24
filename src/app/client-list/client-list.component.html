@@ -26,12 +26,12 @@
 
       <ng-container matColumnDef="accountNumber">
         <th mat-header-cell *matHeaderCellDef> N° Compte Courant </th>
-        <td mat-cell *matCellDef="let client"> {{client.account.id}} </td>
+        <td mat-cell *matCellDef="let client"> {{client.accountNumber}} </td>
       </ng-container>
 
       <ng-container matColumnDef="accountBalance">
         <th mat-header-cell *matHeaderCellDef> Solde </th>
-        <td mat-cell *matCellDef="let client"> {{client.account.balance}} </td>
+        <td mat-cell *matCellDef="let client"> {{client.accountBalance}} </td>
       </ng-container>
 
       <ng-container matColumnDef="buttonShow">
