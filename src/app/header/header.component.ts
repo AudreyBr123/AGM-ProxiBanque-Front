@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { init } from '../store/status.actions';
+import { init, setGuestStatus, setManagerStatus } from '../store/status.actions';
 import { Observable } from 'rxjs';
 import { selectStatus } from '../store/status.selectors';
 
@@ -10,22 +10,21 @@ import { selectStatus } from '../store/status.selectors';
   styleUrl: './header.component.css'
 })
 
-export class HeaderComponent {
-  //export class HeaderComponent implements OnInit {
+  export class HeaderComponent {
 
-  userStatus$!: Observable<string>
+  userStatusFromStore$!: Observable<string>
+  userStatus$ = ""
 
   constructor(private store: Store<{status: string}>) {
-    this.userStatus$ = store.select('status')
+    this.userStatusFromStore$ = store.select('status')
+    this.userStatusFromStore$.subscribe((value: string) => this.userStatus$ = value )
   }
-  
-  handleClickOnInit() {
-    this.store.dispatch(init());
+
+  handleLogout() {
+    this.store.dispatch(setGuestStatus());
     }
 
-  // ngOnInit(): void {
-  //   this.store.dispatch(init());
-  //   this.userStatus$ = this.store.select(selectStatus)
-  // }
-
+  handleLoginAsManager() {
+    this.store.dispatch(setManagerStatus());
+    }
 }

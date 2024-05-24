@@ -14,15 +14,21 @@
     <mat-icon>menu</mat-icon>
   </button>
   <span>Proxibanque</span>
-  <span class="status-span">Statut : </span>
-  <button (click)="handleClickOnInit()">Init</button>
-  <span>{{ this.userStatus$ | async }}</span>
+  <span class="status-span">Statut : {{ this.userStatus$ }}</span>
+  <span></span>
 
   <span class="example-spacer"></span>
-  <a mat-button routerLink="/login">Login</a>
-  <a mat-button routerLink="/client-create">Create client</a>
-  <a mat-button routerLink="/client-show/1">Show First client</a>
-  <a mat-button routerLink="/client-edit">Edit client</a>
-  <a mat-button routerLink="/client-list">List client</a>
-  <a mat-button routerLink="/advisor-list">List advisor</a>
+
+    <!-- <a *ngIf="this.userStatus$ === 'GUEST'" routerLink="/login">Login</a> -->
+    <button *ngIf="this.userStatus$ === 'GUEST'" (click)="handleLoginAsManager()">Login as Manager</button>
+
+    <button *ngIf="this.userStatus$ !== 'GUEST'" (click)="handleLogout()">Logout</button>
+
+  <div *ngIf="this.userStatus$ !== 'GUEST'">
+    <a mat-button routerLink="/client-create">Create client</a>
+    <a mat-button routerLink="/client-show/1">Show First client</a>
+    <a mat-button routerLink="/client-edit">Edit client</a>
+    <a mat-button routerLink="/client-list">List client</a>
+    <a mat-button routerLink="/advisor-list">List advisor</a>
+  </div>
 </mat-toolbar>
