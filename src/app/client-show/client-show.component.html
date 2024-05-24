@@ -12,6 +12,7 @@
             <mat-list-item role="listitem"> Adresse : {{client.personInfos.street}}, {{client.personInfos.zipCode}} {{client.personInfos.city}}</mat-list-item>
             <mat-list-item role="listitem"> Téléphone : {{client.personInfos.phoneNumber}}</mat-list-item>
             <mat-list-item id = "compteepargne"> 
+                <!-- MEMO : Le warning "maximum three lines" est causé car il y a plus de 3 spans ci-dessous -->
                 <span matListItemTitle> Compte épargne : </span>
                 <span matListItemLine> Numero : {{client.account?.id}} </span>
                 <span matListItemLine> Solde : {{client.account?.balance}} </span>
