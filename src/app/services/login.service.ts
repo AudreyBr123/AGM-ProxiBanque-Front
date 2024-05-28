@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserModel } from '../models/user.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,8 @@ export class LoginService {
     })
   }
   
-  postLogin(user: UserModel) {
-    return this.httpClient.post<UserModel>(this.endpoint + "login", JSON.stringify(user), this.httpOptions)
+  postLogin(user: UserModel): Observable<{ role: string }> {
+    return this.httpClient.post<{ role: string }>(this.endpoint + "login", JSON.stringify(user), this.httpOptions)
   }
 
 }

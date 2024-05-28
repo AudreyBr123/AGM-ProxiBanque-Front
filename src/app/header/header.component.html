@@ -14,8 +14,6 @@
     <mat-icon>menu</mat-icon>
   </button>
   <span>Proxibanque</span>
-  <span class="status-span">Statut : {{ this.userStatus$ }}</span>
-  <span></span>
 
   <span class="example-spacer"></span>
 
@@ -29,6 +27,8 @@
     <a mat-button routerLink="/client-show/1">Show First client</a>
     <a mat-button routerLink="/client-edit">Edit client</a>
     <a mat-button routerLink="/client-list">List client</a>
-    <a mat-button routerLink="/advisor-list">List advisor</a>
+    <a *ngIf="this.userStatus$ === 'MANAGER'" mat-button routerLink="/advisor-list">List advisor</a>
   </div>
 </mat-toolbar>
+
+<p>Vous accédez à l'application en tant que {{ this.userStatus$ }}</p>

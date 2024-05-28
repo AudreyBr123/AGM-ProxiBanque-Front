@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { init, setGuestStatus, setManagerStatus } from '../store/status.actions';
 import { Observable } from 'rxjs';
 import { selectStatus } from '../store/status.selectors';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -15,13 +16,14 @@ import { selectStatus } from '../store/status.selectors';
   userStatusFromStore$!: Observable<string>
   userStatus$ = ""
 
-  constructor(private store: Store<{status: string}>) {
+  constructor(private store: Store<{status: string}>, private router: Router) {
     this.userStatusFromStore$ = store.select('status')
     this.userStatusFromStore$.subscribe((value: string) => this.userStatus$ = value )
   }
 
   handleLogout() {
     this.store.dispatch(setGuestStatus());
+    this.router.navigate(['login'])
     }
 
   handleLoginAsManager() {
