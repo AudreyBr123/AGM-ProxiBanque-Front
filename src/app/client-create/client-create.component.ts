@@ -6,6 +6,7 @@ import {ErrorStateMatcher} from '@angular/material/core';
 import { PersonInfos } from '../models/person-infos';
 import { AccountModel } from '../models/account.model';
 import { ClientService } from '../services/client.service';
+import { Router } from '@angular/router';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -18,7 +19,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-client-create',
   templateUrl: './client-create.component.html',
-  styleUrl: './client-create.component.css'
+  styleUrls: ['./client-create.component.css', '../../styles.css'],
 })
 export class ClientCreateComponent {
   personInfosModel = new PersonInfos("", "", "", "", "", "", "");
@@ -44,7 +45,7 @@ export class ClientCreateComponent {
     savingAccount: false
   });
 
-  constructor(private _formBuilder: FormBuilder, private service: ClientService) {
+  constructor(private _formBuilder: FormBuilder, private service: ClientService, private router: Router) {
   }
   
   onSubmit() {
@@ -71,7 +72,8 @@ export class ClientCreateComponent {
   private createClient() {
     console.log(this.clientModel);
     console.log(`current account : ${this.accounts.value.currentAccount}`);
-    this.service.postClient(this.clientModel).subscribe()
+    this.service.postClient(this.clientModel).subscribe();
+    this.router.navigate(['client-list']);
   }
 
   private updateClient() {

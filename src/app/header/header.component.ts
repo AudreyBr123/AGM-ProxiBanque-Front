@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { init, setGuestStatus, setManagerStatus } from '../store/status.actions';
+import {setGuestStatus } from '../store/status.actions';
 import { Observable } from 'rxjs';
-import { selectStatus } from '../store/status.selectors';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css', '../../styles.css'],
 })
 
   export class HeaderComponent {
@@ -24,9 +23,5 @@ import { Router } from '@angular/router';
   handleLogout() {
     this.store.dispatch(setGuestStatus());
     this.router.navigate(['login'])
-    }
-
-  handleLoginAsManager() {
-    this.store.dispatch(setManagerStatus());
     }
 }

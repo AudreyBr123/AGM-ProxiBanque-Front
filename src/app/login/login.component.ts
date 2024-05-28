@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css', '../../styles.css'],
 })
 export class LoginComponent {
   loginForm : FormGroup;
@@ -18,7 +18,6 @@ export class LoginComponent {
   password: FormControl;
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   passwordFormControl = new FormControl('', [Validators.required]);
-  userRole = 'GUEST';
 
   constructor(formBuilder: FormBuilder, private service: LoginService, private store: Store<{status: string}>, private router: Router) {
     this.loginForm = formBuilder.group({

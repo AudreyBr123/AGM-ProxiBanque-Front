@@ -5,7 +5,7 @@ import { AdvisorService } from '../services/advisor.service';
 @Component({
   selector: 'app-advisor-list',
   templateUrl: './advisor-list.component.html',
-  styleUrl: './advisor-list.component.css',
+  styleUrls: ['./advisor-list.component.css', '../../styles.css'],
 })
 export class AdvisorListComponent implements OnInit {
   advisors: AdvisorModel[] = [];
