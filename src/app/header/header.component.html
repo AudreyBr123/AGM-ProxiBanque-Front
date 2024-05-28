@@ -4,14 +4,7 @@
     class="example-icon home-icon"
     aria-label="Example icon-button with home icon"
   >
-    <mat-icon>home</mat-icon>
-  </button>
-  <button
-    mat-icon-button
-    class="example-icon"
-    aria-label="Example icon-button with menu icon"
-  >
-    <mat-icon>menu</mat-icon>
+    <mat-icon>account_balance</mat-icon>
   </button>
   <span>Proxibanque</span>
   <span class="status-span">Statut : {{ this.userStatus$ }}</span>
@@ -19,16 +12,28 @@
 
   <span class="example-spacer"></span>
 
-    <!-- <a *ngIf="this.userStatus$ === 'GUEST'" routerLink="/login">Login</a> -->
-    <button *ngIf="this.userStatus$ === 'GUEST'" (click)="handleLoginAsManager()">Login as Manager</button>
-
-    <button *ngIf="this.userStatus$ !== 'GUEST'" (click)="handleLogout()">Logout</button>
-
   <div *ngIf="this.userStatus$ !== 'GUEST'">
-    <a mat-button routerLink="/client-create">Create client</a>
-    <a mat-button routerLink="/client-show/1">Show First client</a>
-    <a mat-button routerLink="/client-edit">Edit client</a>
-    <a mat-button routerLink="/client-list">List client</a>
-    <a mat-button routerLink="/advisor-list">List advisor</a>
+    <a mat-button class="nav-link" routerLink="/client-create">Nouveau client</a>
+    <a mat-button class="nav-link" routerLink="/client-show/1">1er client</a>
+    <!-- <a mat-button class="nav-link" routerLink="/client-edit">Edit client</a> -->
+    <a mat-button class="nav-link" routerLink="/client-list">Liste des clients</a>
+    <a mat-button class="nav-link" routerLink="/advisor-list">Liste des conseillers</a>
   </div>
+
+  <!-- <a *ngIf="this.userStatus$ === 'GUEST'" routerLink="/login">Login</a> -->
+  <button
+    class="btn-grad"
+    *ngIf="this.userStatus$ === 'GUEST'"
+    (click)="handleLoginAsManager()"
+  >
+    Accès manager
+  </button>
+
+  <button
+    class="btn-grad"
+    *ngIf="this.userStatus$ !== 'GUEST'"
+    (click)="handleLogout()"
+  >
+    Déconnexion
+  </button>
 </mat-toolbar>
