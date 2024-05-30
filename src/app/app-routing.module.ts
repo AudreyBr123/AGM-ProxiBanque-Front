@@ -7,6 +7,7 @@ import { ClientShowComponent } from './client-show/client-show.component';
 import { ClientEditComponent } from './client-edit/client-edit.component';
 import { AdvisorListComponent } from './advisor-list/advisor-list.component';
 import { TransferComponent } from './transfer/transfer.component';
+import { AdvisorClientListComponent } from './advisor-client-list/advisor-client-list.component';
 // import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'client-show/:id', component: ClientShowComponent},
   { path: 'client-edit', component: ClientEditComponent},
   { path: 'advisor-list', component: AdvisorListComponent},
+  { path: 'advisor-client-list/:id', component: AdvisorClientListComponent},
   { path: 'transfer', component: TransferComponent},
   { path: '**', component: LoginComponent }
 ];

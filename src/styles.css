@@ -55,3 +55,7 @@ text-decoration: none;
 .list-action-icons:hover {
     background-color: var(--lightBlue);
 }
+
+.table-container {
+    max-width: 90%;
+}

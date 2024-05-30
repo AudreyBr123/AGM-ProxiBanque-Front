@@ -14,7 +14,7 @@
           <!-- Email -->
           <div [class.error]="!email.valid && email.touched">
             <mat-label for="email"></mat-label><br />
-            <mat-form-field>
+            <mat-form-field appearance="fill" class="mat-form-field-custom">
               <input
                 matInput
                 type="email"
@@ -34,7 +34,7 @@
           <!-- Password -->
           <div [class.error]="!password.valid && password.touched">
             <mat-label for="password"></mat-label><br />
-            <mat-form-field>
+            <mat-form-field appearance="fill" class="mat-form-field-custom">
               <input
                 class="input"
                 matInput

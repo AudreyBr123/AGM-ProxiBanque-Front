@@ -28,6 +28,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { statusReducer } from './store/status.reducer';
+import { AdvisorClientListComponent } from './advisor-client-list/advisor-client-list.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { statusReducer } from './store/status.reducer';
     ClientShowComponent,
     ClientCreateComponent,
     ClientEditComponent,
-    TransferComponent
+    TransferComponent,
+    AdvisorClientListComponent
   ],
   imports: [
     BrowserModule,
