@@ -1,78 +1,112 @@
 <h2>Liste des clients</h2>
 
-<button class="btn-grad" mat-flat-button color="primary" routerLink="/client-create">
+<button
+  class="btn-grad"
+  mat-flat-button
+  color="primary"
+  routerLink="/client-create"
+>
   <mat-icon>add</mat-icon>Créer un nouveau client
 </button>
 
 <div class="table-container">
   <table mat-table [dataSource]="clients" class="mat-elevation-z8">
-  
-      <!--- Note that these columns can be defined in any order.
+    <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
-    
-      <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> ID </th>
-      <td mat-cell *matCellDef="let client"> {{client.id}} </td>
-      </ng-container>
-  
-      <ng-container matColumnDef="firstName">
-        <th mat-header-cell *matHeaderCellDef> Prénom </th>
-        <td mat-cell *matCellDef="let client"> {{client.personInfos.firstName}} </td>
 
-        <ng-container matColumnDef="lastName">
-      <th mat-header-cell *matHeaderCellDef> Nom </th>
-      <td mat-cell *matCellDef="let client"> {{client.personInfos.lastName}} </td>
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let client">{{ client.id }}</td>
     </ng-container>
 
-      <ng-container matColumnDef="currentAccountNumber">
-        <th mat-header-cell *matHeaderCellDef> N° Compte Courant </th>
-        <td mat-cell *matCellDef="let client"> {{client.currentAccount?.id}} </td>
-      </ng-container>
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef>Prénom</th>
+      <td mat-cell *matCellDef="let client">
+        {{ client.personInfos.firstName }}
+      </td>
+    </ng-container>
 
-      <ng-container matColumnDef="currentAccountBalance">
-        <th mat-header-cell *matHeaderCellDef> Solde </th>
-        <td mat-cell *matCellDef="let client"> {{client.currentAccount?.balance}} </td>
-      </ng-container>
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef>Nom</th>
+      <td mat-cell *matCellDef="let client">
+        {{ client.personInfos.lastName }}
+      </td>
+    </ng-container>
 
-      <ng-container matColumnDef="savingAccountNumber">
-        <th mat-header-cell *matHeaderCellDef> N° Compte épargne </th>
-        <td mat-cell *matCellDef="let client"> {{client.savingAccount?.id}} </td>
-      </ng-container>
+    <ng-container matColumnDef="currentAccountNumber">
+      <th mat-header-cell *matHeaderCellDef>N° Compte Courant</th>
+      <td mat-cell *matCellDef="let client">{{ client.currentAccount?.id }}</td>
+    </ng-container>
 
-      <ng-container matColumnDef="savingAccountBalance">
-        <th mat-header-cell *matHeaderCellDef> Solde </th>
-        <td mat-cell *matCellDef="let client"> {{client.savingAccount?.balance}} </td>
-      </ng-container>
+    <ng-container matColumnDef="currentAccountBalance">
+      <th mat-header-cell *matHeaderCellDef>Solde</th>
+      <td mat-cell *matCellDef="let client">
+        {{ client.currentAccount?.balance }}
+      </td>
+    </ng-container>
 
-      <ng-container matColumnDef="buttonShow">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let client">
-          <button routerLink="/client-show/{{client.id}}" (click)="handleClickOnShow(client.id)"><mat-icon>visibility</mat-icon></button>
-        </td>
-      </ng-container>
+    <ng-container matColumnDef="savingAccountNumber">
+      <th mat-header-cell *matHeaderCellDef>N° Compte épargne</th>
+      <td mat-cell *matCellDef="let client">{{ client.savingAccount?.id }}</td>
+    </ng-container>
 
-      <ng-container matColumnDef="buttonDelete">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let client">
-          <button routerLink="/client-list" (click)="handleClickOnDelete(client.id)"><mat-icon>delete</mat-icon></button>
-        </td>
-      </ng-container>
+    <ng-container matColumnDef="savingAccountBalance">
+      <th mat-header-cell *matHeaderCellDef>Solde</th>
+      <td mat-cell *matCellDef="let client">
+        {{ client.savingAccount?.balance }}
+      </td>
+    </ng-container>
 
-      <ng-container matColumnDef="buttonEdit">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let client">
-          <button routerLink="/client-edit/{{client.id}}" (click)="handleClickOnEdit(client.id)"><mat-icon>edit</mat-icon></button>
-        </td>
-      </ng-container>
-   
-        <ng-container matColumnDef="buttonTransfer">
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let client">
-            <button class="list-action-icons" routerLink="" (click)="handleClickOnTransfer(client.id)">💳</button>
-          </td>
-        </ng-container>
-  
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+    <ng-container matColumnDef="buttonShow">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let client">
+        <button
+          routerLink="/client-show/{{ client.id }}"
+          (click)="handleClickOnShow(client.id)"
+        >
+          <mat-icon>visibility</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="buttonDelete">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let client">
+        <button
+          routerLink="/client-list"
+          (click)="handleClickOnDelete(client.id)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="buttonEdit">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let client">
+        <button
+          routerLink="/client-edit/{{ client.id }}"
+          (click)="handleClickOnEdit(client.id)"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="buttonTransfer">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let client">
+        <button
+          class="list-action-icons"
+          routerLink=""
+          (click)="handleClickOnTransfer(client.id)"
+        >
+          💳
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
 </div>
