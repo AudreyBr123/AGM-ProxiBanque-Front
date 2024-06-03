@@ -12,13 +12,13 @@ import { AdvisorClientListComponent } from './advisor-client-list/advisor-client
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'client-create', component: ClientCreateComponent},
-  { path: 'client-list', component: ClientListComponent},
-  { path: 'client-show/:id', component: ClientShowComponent},
-  { path: 'client-edit', component: ClientEditComponent},
-  { path: 'advisor-list', component: AdvisorListComponent},
-  { path: 'advisor-client-list/:id', component: AdvisorClientListComponent},
-  { path: 'transfer', component: TransferComponent},
+  { path: 'client-create', component: ClientCreateComponent },
+  { path: 'client-list', component: ClientListComponent },
+  { path: 'client-show/:id', component: ClientShowComponent },
+  { path: 'client-edit/:id', component: ClientCreateComponent },
+  { path: 'advisor-list', component: AdvisorListComponent },
+   { path: 'advisor-client-list/:id', component: AdvisorClientListComponent},
+  { path: 'transfer', component: TransferComponent },
   { path: '**', component: LoginComponent }
 ];
 

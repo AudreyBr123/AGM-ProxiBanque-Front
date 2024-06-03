@@ -13,13 +13,20 @@
             <mat-list-item role="listitem"> Téléphone : {{client.personInfos.phoneNumber}}</mat-list-item>
             <mat-list-item id = "compteepargne"> 
                 <!-- MEMO : Le warning "maximum three lines" est causé car il y a plus de 3 spans ci-dessous -->
+                <span matListItemTitle> Compte courant : </span>
+                <span matListItemLine> Numero : {{client.currentAccount?.id}} </span>
+                <span matListItemLine> Solde : {{client.currentAccount?.balance}} </span>
+                <span matListItemLine> Date de création : {{client.currentAccount?.creationDate| date:'dd/MM/yyyy'}}</span>         
+            </mat-list-item>
+            <mat-list-item id = "compteepargne"> 
+                <!-- MEMO : Le warning "maximum three lines" est causé car il y a plus de 3 spans ci-dessous -->
                 <span matListItemTitle> Compte épargne : </span>
-                <span matListItemLine> Numero : {{client.account?.id}} </span>
-                <span matListItemLine> Solde : {{client.account?.balance}} </span>
-                <span matListItemLine> Date de création : {{client.account?.creationDate| date:'dd/MM/yyyy'}}  </span>         
+                <span matListItemLine> Numero : {{client.savingAccount?.id}} </span>
+                <span matListItemLine> Solde : {{client.savingAccount?.balance}} </span>
+                <span matListItemLine> Date de création : {{client.savingAccount?.creationDate| date:'dd/MM/yyyy'}}</span>         
             </mat-list-item>
         </mat-list>        
-        <a class="btn-grad" mat-flat-button color="primary" routerLink="/client-edit" target="_blank">Modifier</a>
+        <a class="btn-grad" mat-flat-button color="primary" routerLink="/client-edit/{{client.id}}" target="_blank">Modifier</a>
         <a class="btn-grad" mat-flat-button color="primary" routerLink="/transfer" target="_blank">Virement</a>
     </mat-card-content>
 </mat-card>
