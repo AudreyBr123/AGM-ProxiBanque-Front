@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Valida
 import {ErrorStateMatcher} from '@angular/material/core';
 import { PersonInfos } from '../models/person-infos';
 import { ClientService } from '../services/client.service';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { CurrentAccountModel } from '../models/current-account.model';
 import { SavingAccountModel } from '../models/saving-account.model';
@@ -19,7 +20,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-client-create',
   templateUrl: './client-create.component.html',
-  styleUrl: './client-create.component.css'
+  styleUrls: ['./client-create.component.css', '../../styles.css'],
 })
 export class ClientCreateComponent {
   personInfos = new PersonInfos("", "", "", "", "", "", "");

@@ -43,6 +43,7 @@ export class ClientService {
     return this.httpClient.put<ClientModel>(this.endpoint + "/" + clientId, JSON.stringify(client), this.httpOptions)  
   }
   
+  // Cette méthode peut retourner une valeur qui est récupérée par le composant, selon la valeur de retour on utilise "navigate" pour forcer la navigation
   handleError(error:any) {
     console.log("Passe par handleError dans le service");
     let errorMessage = '';

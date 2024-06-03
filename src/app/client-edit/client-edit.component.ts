@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-client-edit',
   templateUrl: './client-edit.component.html',
-  styleUrl: './client-edit.component.css'
+  styleUrls: ['./client-edit.component.css', '../../styles.css'],
 })
 export class ClientEditComponent {
 

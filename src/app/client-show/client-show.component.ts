@@ -9,7 +9,7 @@ import { PersonInfos } from '../models/person-infos';
 @Component({
   selector: 'app-client-show',
   templateUrl: './client-show.component.html',
-  styleUrl: './client-show.component.css',
+  styleUrls: ['./client-show.component.css', '../../styles.css'],
 })
 
 export class ClientShowComponent implements OnInit {

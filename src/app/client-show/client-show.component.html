@@ -26,7 +26,7 @@
                 <span matListItemLine> Date de création : {{client.savingAccount?.creationDate| date:'dd/MM/yyyy'}}</span>         
             </mat-list-item>
         </mat-list>        
-        <a mat-flat-button color="primary" routerLink="/client-edit/{{client.id}}">Modifier</a>
-        <a mat-flat-button color="primary" routerLink="/transfer">Virement</a>
+        <a class="btn-grad" mat-flat-button color="primary" routerLink="/client-edit/{{client.id}}" target="_blank">Modifier</a>
+        <a class="btn-grad" mat-flat-button color="primary" routerLink="/transfer" target="_blank">Virement</a>
     </mat-card-content>
 </mat-card>

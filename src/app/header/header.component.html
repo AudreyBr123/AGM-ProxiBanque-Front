@@ -4,21 +4,32 @@
     class="example-icon home-icon"
     aria-label="Example icon-button with home icon"
   >
-    <mat-icon>home</mat-icon>
-  </button>
-  <button
-    mat-icon-button
-    class="example-icon"
-    aria-label="Example icon-button with menu icon"
-  >
-    <mat-icon>menu</mat-icon>
+    <mat-icon>account_balance</mat-icon>
   </button>
   <span>Proxibanque</span>
+
   <span class="example-spacer"></span>
-  <a mat-button routerLink="/login">Login</a>
-  <a mat-button routerLink="/client-create">Create client</a>
-  <a mat-button routerLink="/client-show/1">Show First client</a>
-  <a mat-button routerLink="/client-edit">Edit client</a>
-  <a mat-button routerLink="/client-list">List client</a>
-  <a mat-button routerLink="/advisor-list">List advisor</a>
+
+  <div *ngIf="this.userStatus$ !== 'GUEST'">
+    <a mat-button class="nav-link" routerLink="/client-create">Nouveau client</a>
+    <a mat-button class="nav-link" routerLink="/client-list">Liste des clients</a>
+    <a
+      *ngIf="this.userStatus$ === 'MANAGER'"
+      mat-button
+      class="nav-link"
+      routerLink="/advisor-list"
+      >Liste des conseillers</a
+    >
+  </div>
+
+  <!-- <button class="btn-grad" *ngIf="this.userStatus$ !== 'GUEST'" (click)="handleLogout()">
+    Déconnexion
+  </button> -->
+
+  <button class="btn-grad" (click)="handleLogout()"> Déconnexion </button>
+
 </mat-toolbar>
+
+<p class="status">
+  Vous accédez à l'application en tant que {{ this.userStatus$ }}
+</p>

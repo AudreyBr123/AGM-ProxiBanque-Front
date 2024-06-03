@@ -26,6 +26,9 @@ import { FormsModule, ReactiveFormsModule,} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+import { statusReducer } from './store/status.reducer';
+import { AdvisorClientListComponent } from './advisor-client-list/advisor-client-list.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,8 @@ import { HttpClientModule } from '@angular/common/http';
     ClientShowComponent,
     ClientCreateComponent,
     ClientEditComponent,
-    TransferComponent
+    TransferComponent,
+    AdvisorClientListComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +61,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatCardModule,
     ReactiveFormsModule,
     MatCheckboxModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot({
+      status:  statusReducer
+    })
   ],
   providers: [
     provideAnimationsAsync()

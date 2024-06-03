@@ -1,4 +1,61 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
+
+@font-face {
+    font-family: 'Asap';
+    src: url('assets/fonts/static/Asap_SemiCondensed-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    font-family: 'Asap';
+}
+
+.btn-grad {
+    background-image: linear-gradient(to right, #1A2980 0%, #26D0CE  51%, #1A2980  100%);
+    margin: 10px;
+    width:fit-content;
+    padding: 10px 10px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
+    border: none;
+    font-weight: 600;
+    }
+    
+.btn-grad:hover {
+background-position: right center; /* change the direction of the change here */
+color: #fff;
+text-decoration: none;
+}
+
+.list-action-icons {
+    margin-top: 1.7em;
+    font-size: 1.7em;
+    background-color: var(--lightestGrey);
+    width: fit-content;
+    border-radius: 20%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-action-icons:hover {
+    background-color: var(--lightBlue);
+}
+
+.table-container {
+    max-width: 90%;
+}

@@ -1,28 +1,44 @@
 <h2>Liste des conseillers</h2>
 
-<table mat-table [dataSource]="advisors" class="mat-elevation-z8">
-  
+<div class="table-container">
+  <table mat-table [dataSource]="advisors" class="mat-elevation-z8">
     <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef> ID </th>
-    <td mat-cell *matCellDef="let advisor"> {{advisor.id}} </td>
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let advisor">{{ advisor.id }}</td>
     </ng-container>
-
+  
     <ng-container matColumnDef="firstName">
-      <th mat-header-cell *matHeaderCellDef> Prénom </th>
-      <td mat-cell *matCellDef="let advisor"> {{advisor.personInfos.firstName}} </td>
+      <th mat-header-cell *matHeaderCellDef>Prénom</th>
+      <td mat-cell *matCellDef="let advisor">
+        {{ advisor.personInfos.firstName }}
+      </td>
     </ng-container>
   
     <ng-container matColumnDef="lastName">
-      <th mat-header-cell *matHeaderCellDef> Nom </th>
-      <td mat-cell *matCellDef="let advisor"> {{advisor.personInfos.lastName}} </td>
+      <th mat-header-cell *matHeaderCellDef>Nom</th>
+      <td mat-cell *matCellDef="let advisor">
+        {{ advisor.personInfos.lastName }}
+      </td>
     </ng-container>
-
-      <ng-container matColumnDef="numberOfClients">
-        <th mat-header-cell *matHeaderCellDef> Nombre de clients </th>
-        <td mat-cell *matCellDef="let advisor"> A gérer plus tard </td>
-      </ng-container>
-
+  
+    <ng-container matColumnDef="numberOfClients">
+      <th mat-header-cell *matHeaderCellDef>Nombre de clients</th>
+      <td mat-cell *matCellDef="let advisor">{{ advisor.numberOfClients }}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="buttonShow">
+      <th mat-header-cell *matHeaderCellDef>Voir les clients suivis par ce conseiller</th>
+      <td mat-cell *matCellDef="let advisor">
+        <button
+          class="list-action-icons"
+          routerLink="/advisor-client-list/{{ advisor.id }}"
+          (click)="handleClickOnShow(advisor.id)"
+        >👁️</button>
+      </td>
+    </ng-container>
+  
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+</div>
 

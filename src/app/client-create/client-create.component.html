@@ -61,7 +61,7 @@
                     <p *ngIf="isAddMode || (!isAddMode && (client.savingAccount?.id === null))"><mat-checkbox formControlName="savingAccount">Compte épargne</mat-checkbox></p>
                   </section>
             </div>
-            <button mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid" *ngIf="isAddMode">Créer</button>
+            <button class="btn-grad" mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid" *ngIf="isAddMode">Créer</button>
             <button mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid" *ngIf="!isAddMode">Mettre a jour</button>
         </form>
     </mat-card-content>
