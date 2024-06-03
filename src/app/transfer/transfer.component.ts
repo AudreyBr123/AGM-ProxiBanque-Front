@@ -40,6 +40,7 @@ export class TransferComponent implements OnInit {
     typeDebitAccountFormControl: new FormControl('', [Validators.required]),
     typeCreditAccountFormControl: new FormControl('', [Validators.required]),
     idDebitAccountFormControl: new FormControl('', [Validators.required]),
+    idCreditAccountFormControl: new FormControl('', [Validators.required]),
     amountFormControl: new FormControl('', [Validators.required]),
   });
   
@@ -78,15 +79,29 @@ export class TransferComponent implements OnInit {
   
   // this.form.value.idDebitAccountFormControl = this.debitClient.currentAccount?.id;
   
-  onSubmit() {
+  onSubmit(value: any) {
+    if (value.typeCreditAccountFormControl == "Compte Courant") {
+      this.typeCreditAccount= "currentAccount"
+    } else {
+      this.typeCreditAccount= "savingAccount"
+    }
+
+    if (value.typeDebitAccountFormControl == "Compte Courant") {
+      this.typeDebitAccount= "currentAccount"
+    } else {
+      this.typeDebitAccount= "savingAccount"
+    }
+
     this.transferDtoRequest = {
       typeCreditAccount: this.typeCreditAccount, 
       typeDebitAccount: this.typeDebitAccount, 
-      idCreditAccount: 1,
-      idDebitAccount: 2,
-      amount: -1000.0
+      idCreditAccount: value.idCreditAccountFormControl,
+      idDebitAccount: value.idDebitAccountFormControl,
+      amount: value.amountFormControl
     }
 
+    console.log("Sending to the back : " + this.transferDtoRequest.amount + this.transferDtoRequest.idDebitAccount);
+    
     this.transferService.putTransfer(this.transferDtoRequest)
     .subscribe({
       next: () => {

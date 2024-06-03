@@ -27,7 +27,10 @@ export class TransferService {
  
 
   putTransfer(transferDtoRequest: TransferDtoRequest) {
+    console.log("sending "+ transferDtoRequest.idCreditAccount + transferDtoRequest.typeCreditAccount + 
+    transferDtoRequest.idDebitAccount + transferDtoRequest.typeDebitAccount + transferDtoRequest.amount);
     return this.httpClient.put(this.endpoint, JSON.stringify(transferDtoRequest), this.httpOptions) 
+    
     .pipe(
       catchError(this.handleError)
     )  

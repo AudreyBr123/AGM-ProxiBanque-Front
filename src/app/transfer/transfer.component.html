@@ -1,12 +1,12 @@
 <h2>Virement de compte à compte</h2>
 
-<form (ngSubmit)="onSubmit()" [formGroup]="form">
+<form (ngSubmit)="form.value" [formGroup]="form">
   <div class="select-client">
     <mat-form-field>
       <mat-label>Client du compte débiteur</mat-label>
       <mat-select formControlName="idClientDebitFormControl" (selectionChange)="findAccount($event.value)">
         @for (client of clients; track client) {
-          <mat-option [value]="client.id">{{ client.id }}</mat-option>
+          <mat-option name="clientDebitAccount" [value]="client.id">{{ client.id }}</mat-option>
         }
       </mat-select>
     </mat-form-field>
@@ -15,9 +15,9 @@
     
     <mat-form-field>
       <mat-label>Client du compte créditeur</mat-label>
-      <mat-select>
+      <mat-select formControlName = "idClientCreditFormControl">
         @for (client of clients; track client) {
-          <mat-option [value]="client.id">{{ client.id }}</mat-option>
+          <mat-option name="clientCreditAccount" [value]="client.id">{{ client.id }}</mat-option>
         }
       </mat-select>
     </mat-form-field>
@@ -26,18 +26,18 @@
   <div class="select-account-type">
     <mat-form-field>
       <mat-label>Type de compte</mat-label>
-      <mat-select>
+      <mat-select formControlName="typeDebitAccountFormControl" >
         @for (account of accountTypes; track account) {
-          <mat-option [value]="account">{{ account }}</mat-option>
+          <mat-option name="typeDebitAccount" [value]="account">{{ account }}</mat-option>
         }
       </mat-select>
     </mat-form-field>
     
     <mat-form-field>
       <mat-label>Type de compte</mat-label>
-      <mat-select>
+      <mat-select formControlName="typeCreditAccountFormControl" >
         @for (account of accountTypes; track account) {
-          <mat-option [value]="account">{{ account }}</mat-option>
+          <mat-option name="typeCreditAccount" [value]="account">{{ account }}</mat-option>
         }
       </mat-select>
     </mat-form-field>
@@ -46,9 +46,9 @@
   <div class="select-account">
     <mat-form-field>
       <mat-label>Compte débiteur</mat-label>
-      <mat-select>
+      <mat-select formControlName="idDebitAccountFormControl">
         @for (account of currentAccounts; track account) {
-          <mat-option [value]="account.id">{{ account.id }}</mat-option>
+          <mat-option name="debitAccount" [value]="account.id">{{ account.id }}</mat-option>
         }
       </mat-select>
     </mat-form-field>
@@ -57,9 +57,9 @@
     
     <mat-form-field>
       <mat-label>Compte créditeur</mat-label>
-      <mat-select>
+      <mat-select formControlName="idCreditAccountFormControl">
         @for (account of currentAccounts; track account) {
-          <mat-option [value]="account.id">{{ account.id }}</mat-option>
+          <mat-option name="creditAccount" [value]="account.id">{{ account.id }}</mat-option>
         }
       </mat-select>
     </mat-form-field>
@@ -68,9 +68,9 @@
   
   <mat-form-field class="example-full-width">
     <mat-label>Montant</mat-label>
-    <input matInput placeholder="Ex. 2500" value="" />
+    <input matInput name="amount" formControlName="amountFormControl" placeholder="Ex. 2500" value="" />
   </mat-form-field>
 
-  <button mat-stroked-button color="primary" type="submit">Valider</button>
+  <button mat-stroked-button color="primary" (click)="onSubmit(form.value)">Valider</button>
   
 </form>
