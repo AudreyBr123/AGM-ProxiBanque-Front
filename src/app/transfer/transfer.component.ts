@@ -17,7 +17,7 @@ import { TransferDtoRequest } from '../models/transfer-dto-request.model';
 })
 export class TransferComponent implements OnInit {
   
-  
+  //tri à faire dans les variables
   clients: ClientModel[] = [];
   currentAccounts: CurrentAccountModel[] = [];
   savingAccounts: SavingAccountModel[] = [];
@@ -26,13 +26,18 @@ export class TransferComponent implements OnInit {
   typeCreditAccount = "currentAccount";
   typeDebitAccount = "currentAccount";
 
-
   currentAccount = new CurrentAccountModel(null, 0.0, new Date());
   savingAccount = new SavingAccountModel(null, 0.0, new Date());
   personInfos = new PersonInfos("", "", "", "", "", "", "");
   debitClient= new ClientModel(0, this.personInfos, null, null);
   creditClient= new ClientModel(0, this.personInfos, null, null);
   
+  // Comptes trouvés, à utiliser pour renvoyer le compte retrouvé avec type de compte et id client
+  DebitCurrentAccount = new CurrentAccountModel(null, 0.0, new Date());
+  DebitSavingAccount = new SavingAccountModel(null, 0.0, new Date());
+  CreditCurrentAccount = new CurrentAccountModel(null, 0.0, new Date());
+  CreditSavingAccount = new SavingAccountModel(null, 0.0, new Date());
+
   
   form = new FormGroup({
     idClientDebitFormControl: new FormControl('', [Validators.required]),
@@ -68,12 +73,13 @@ export class TransferComponent implements OnInit {
     "Compte Epargne"
   ]
   
+  // Permet de trouver les comptes des clients
   findAccount(idClientDebit: number) {
     this.clientService.getClientById(idClientDebit)
     .subscribe((client) => {
       this.debitClient = client
     })
-    // return this.debitClient.currentAccount;
+     this.debitClient.currentAccount;
   }
   
   
