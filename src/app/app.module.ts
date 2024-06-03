@@ -42,7 +42,7 @@ import { AdvisorClientListComponent } from './advisor-client-list/advisor-client
     ClientCreateComponent,
     ClientEditComponent,
     TransferComponent,
-    AdvisorClientListComponent
+    AdvisorClientListComponent,
   ],
   imports: [
     BrowserModule,
