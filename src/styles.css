@@ -59,3 +59,8 @@ text-decoration: none;
 .table-container {
     max-width: 90%;
 }
+
+mat-dialog-actions {
+    display: flex;
+    justify-content: center;
+}

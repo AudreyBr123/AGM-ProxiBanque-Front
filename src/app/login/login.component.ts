@@ -28,10 +28,7 @@ export class LoginComponent {
     this.password = this.loginForm.controls['password'] as FormControl;
   }
 
-  onSubmit(value:string): void {
-    // if(this.matcher =)
-    console.log('Le formulaire a été soumis : ', value);
-    
+  onSubmit(value:string): void {    
     const user = new UserModel(this.email.value, this.password.value)
 
     //On recupere la reponse du back-end au submit du formulaire de connexion
