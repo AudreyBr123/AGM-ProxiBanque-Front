@@ -20,7 +20,8 @@ export class ClientShowComponent implements OnInit {
     this.client = new ClientModel(
       0,
       new PersonInfos('Prénom', 'Nom', 'Email', '0101010101', '1 rue blabla', '11000', 'Ville'),
-      {id: 0, balance: 10000, creationDate: new Date(formatDate(Date.now(), 'short' , this.locale))},
+      { id: 0, balance: 10000, creationDate: new Date(formatDate(Date.now(), 'short' , this.locale))},
+      { id: 0, balance: 10000, creationDate: new Date(formatDate(Date.now(), 'short', this.locale))}
     )
   }
 

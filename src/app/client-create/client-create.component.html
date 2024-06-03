@@ -53,11 +53,12 @@
                     Le numéro de téléphone est <strong>obligatoire</strong>
                 </mat-error>
             </mat-form-field>
-            <div *ngIf="isAddMode">
+            <!-- Dont touch this code, it handles showing the checkboxes if we are creating a new account, or, if an account isnt created-->
+            <div *ngIf="isAddMode || (!isAddMode && (client.currentAccount?.id === null || client.savingAccount?.id === null))">
                 <section class="example-section" [formGroup]="accounts">
                     <h4>Sélectionner les comptes que vous voulez créer :</h4>
-                    <p><mat-checkbox formControlName="savingAccount">Compte courant</mat-checkbox></p>
-                    <p><mat-checkbox formControlName="currentAccount">Compte épargne</mat-checkbox></p>
+                    <p *ngIf="isAddMode || (!isAddMode && (client.currentAccount?.id === null))"><mat-checkbox formControlName="currentAccount">Compte courant</mat-checkbox></p>
+                    <p *ngIf="isAddMode || (!isAddMode && (client.savingAccount?.id === null))"><mat-checkbox formControlName="savingAccount">Compte épargne</mat-checkbox></p>
                   </section>
             </div>
             <button mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid" *ngIf="isAddMode">Créer</button>

@@ -3,9 +3,10 @@ import { ClientModel } from '../models/client.model';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { PersonInfos } from '../models/person-infos';
-import { AccountModel } from '../models/account.model';
 import { ClientService } from '../services/client.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CurrentAccountModel } from '../models/current-account.model';
+import { SavingAccountModel } from '../models/saving-account.model';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -22,8 +23,9 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class ClientCreateComponent {
   personInfos = new PersonInfos("", "", "", "", "", "", "");
-  account = new AccountModel(null, 500.0, new Date());
-  client = new ClientModel(0, this.personInfos, this.account);
+  currentAccount = new CurrentAccountModel(null, 0.0, new Date());
+  savingAccount = new SavingAccountModel(null, 0.0, new Date());
+  client = new ClientModel(0, this.personInfos, null, null);
   id: number = 0;
   isAddMode: boolean = false;
   loading = false;
@@ -56,6 +58,8 @@ export class ClientCreateComponent {
       this.service.getClientById(this.id).subscribe((DBclient) => {
         this.client = DBclient;
         this.personInfos = DBclient.personInfos;
+        this.client.currentAccount = DBclient.currentAccount;
+        this.client.savingAccount = DBclient.savingAccount;
       });
     }
   }
@@ -79,13 +83,22 @@ export class ClientCreateComponent {
 
   resetClient() {
     this.personInfos = new PersonInfos("", "", "", "", "", "", "");
-    this.account = new AccountModel(0, 0.0, new Date());
-    this.client = new ClientModel(0, this.personInfos, this.account);
+    this.currentAccount = new CurrentAccountModel(null, 0.0, new Date());
+    this.savingAccount = new SavingAccountModel(null, 0.0, new Date());
+    this.client = new ClientModel(0, this.personInfos, null, null);
   }
 
   private createClient() {
     console.log(this.client);
     console.log(`current account : ${this.accounts.value.currentAccount}`);
+
+    if(this.accounts.value.currentAccount) {
+      this.client.currentAccount = this.currentAccount;
+    }
+
+    if(this.accounts.value.savingAccount) {
+      this.client.savingAccount = this.savingAccount;
+    }
 
     this.service.postClient(this.client)
       .subscribe({
@@ -101,6 +114,18 @@ export class ClientCreateComponent {
 
   private updateClient() {
     console.log(this.client);
+
+    if(this.client.currentAccount === null) {
+      if(this.accounts.value.currentAccount) {
+        this.client.currentAccount = this.currentAccount;
+      }
+    }
+
+    if(this.client.savingAccount === null) {
+      if(this.accounts.value.savingAccount) {
+        this.client.savingAccount = this.savingAccount;
+      }
+    }
 
     this.service.putClient(this.client.id, this.client)
       .subscribe({

@@ -24,14 +24,24 @@
       <td mat-cell *matCellDef="let client"> {{client.personInfos.lastName}} </td>
     </ng-container>
 
-      <ng-container matColumnDef="accountNumber">
+      <ng-container matColumnDef="currentAccountNumber">
         <th mat-header-cell *matHeaderCellDef> N° Compte Courant </th>
-        <td mat-cell *matCellDef="let client"> {{client.account.id}} </td>
+        <td mat-cell *matCellDef="let client"> {{client.currentAccount?.id}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="accountBalance">
+      <ng-container matColumnDef="currentAccountBalance">
         <th mat-header-cell *matHeaderCellDef> Solde </th>
-        <td mat-cell *matCellDef="let client"> {{client.account.balance}} </td>
+        <td mat-cell *matCellDef="let client"> {{client.currentAccount?.balance}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="savingAccountNumber">
+        <th mat-header-cell *matHeaderCellDef> N° Compte épargne </th>
+        <td mat-cell *matCellDef="let client"> {{client.savingAccount?.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="savingAccountBalance">
+        <th mat-header-cell *matHeaderCellDef> Solde </th>
+        <td mat-cell *matCellDef="let client"> {{client.savingAccount?.balance}} </td>
       </ng-container>
 
       <ng-container matColumnDef="buttonShow">
