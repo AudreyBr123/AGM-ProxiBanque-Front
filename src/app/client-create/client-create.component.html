@@ -57,8 +57,30 @@
             <div *ngIf="isAddMode || (!isAddMode && (client.currentAccount?.id === null || client.savingAccount?.id === null))">
                 <section class="example-section" [formGroup]="accounts">
                     <h4>Sélectionner les comptes que vous voulez créer :</h4>
-                    <p *ngIf="isAddMode || (!isAddMode && (client.currentAccount?.id === null))"><mat-checkbox formControlName="currentAccount">Compte courant</mat-checkbox></p>
-                    <p *ngIf="isAddMode || (!isAddMode && (client.savingAccount?.id === null))"><mat-checkbox formControlName="savingAccount">Compte épargne</mat-checkbox></p>
+                    <div *ngIf="isAddMode || (!isAddMode && (client.currentAccount?.id === null))">
+                        <p><mat-checkbox formControlName="currentAccount">Compte courant</mat-checkbox></p>
+                        <div *ngIf="accounts.value.currentAccount">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Solde compte courant</mat-label>
+                                <input type="number" matInput placeholder="Ex. 530.00" value="0" [(ngModel)]="currentAccount.balance" name="currentAccountBalance" required formControlName="currentAccountFormControl" [errorStateMatcher]="matcher">
+                                <mat-error *ngIf="accounts.get('currentAccountFormControl')?.hasError('required')">
+                                    Le solde est <strong>obligatoire</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div *ngIf="isAddMode || (!isAddMode && (client.savingAccount?.id === null))">
+                        <p><mat-checkbox formControlName="savingAccount">Compte épargne</mat-checkbox></p>
+                        <div *ngIf="accounts.value.savingAccount">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Solde compte épargne</mat-label>
+                                <input type="number" matInput placeholder="Ex. 530.00" value="0" [(ngModel)]="savingAccount.balance" name="savingAccountBalance" required formControlName="savingAccountFormControl" [errorStateMatcher]="matcher">
+                                <mat-error *ngIf="accounts.get('savingAccountFormControl')?.hasError('required')">
+                                    Le solde est <strong>obligatoire</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
                   </section>
             </div>
             <button class="btn-grad" mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid" *ngIf="isAddMode">Créer</button>
