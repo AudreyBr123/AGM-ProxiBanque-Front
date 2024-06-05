@@ -7,7 +7,7 @@
       <div class="select-client">
         <mat-form-field style="width:25vw">
           <mat-label>Client du compte débiteur</mat-label>
-          <mat-select formControlName="idClientDebitFormControl" (selectionChange)="findClientAccounts($event.value)">
+          <mat-select formControlName="idClientDebitFormControl" (selectionChange)="findClientAccountsDebit($event.value)">
             @for (debitClient of clients; track debitClient) {
               <mat-option name="clientDebitAccount" [value]="debitClient.id">{{ debitClient.id }} : {{ debitClient.personInfos.firstName }}  {{ debitClient.personInfos.lastName }}  </mat-option>
             }
@@ -19,9 +19,9 @@
       <div>
         <mat-form-field style="width:25vw">
           <mat-label>Compte débiteur</mat-label>
-          <mat-select formControlName="idDebitAccountFormControl" (selectionChange)="findAccount($event.value)" >
-            <mat-option name="debitAccount" [value]="debitCurrentAccount.id"> {{ debitCurrentAccount.id }} : Compte courant </mat-option>
-            <mat-option name="debitAccount" [value]="debitSavingAccount.id"> {{ debitSavingAccount.id }} : Compte épargne </mat-option>
+          <mat-select formControlName="idDebitAccountFormControl" (selectionChange)="findAccountDebit($event.value)" >
+            <mat-option name="debitAccount" [value]="accountTypes.at(0)"> {{ debitCurrentAccount.id }} : {{accountTypes.at(0)}} </mat-option>
+            <mat-option name="debitAccount" [value]="accountTypes.at(1)"> {{ debitSavingAccount.id }} : {{accountTypes.at(1)}} </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-icon>arrow_forward</mat-icon>
@@ -34,7 +34,7 @@
       <div class="select-client">
         <mat-form-field style="width:25vw">
           <mat-label>Client du compte créditeur</mat-label>
-          <mat-select formControlName="idClientCreditFormControl" (selectionChange)="findClientAccounts($event.value)">
+          <mat-select formControlName="idClientCreditFormControl" (selectionChange)="findClientAccountsCredit($event.value)">
             @for (creditClient of clients; track creditClient) {
               <mat-option name="clientCreditAccount" [value]="creditClient.id">{{ creditClient.id }} : {{ creditClient.personInfos.firstName }}  {{ creditClient.personInfos.lastName }}  </mat-option>
             }
@@ -44,10 +44,10 @@
       
       <div>
         <mat-form-field style="width:25vw">
-          <mat-label>Compte débiteur</mat-label>
-          <mat-select formControlName="idCreditAccountFormControl" (selectionChange)="findAccount($event.value)" >
-            <mat-option name="creditAccount" [value]="creditCurrentAccount.id"> {{ creditCurrentAccount.id }} : Compte courant </mat-option>
-            <mat-option name="creditAccount" [value]="creditSavingAccount.id"> {{ creditSavingAccount.id }} : Compte épargne </mat-option>
+          <mat-label>Compte créditeur</mat-label>
+          <mat-select formControlName="idCreditAccountFormControl" (selectionChange)="findAccountCredit($event.value)" >
+            <mat-option name="creditAccount"  [value]="accountTypes.at(0)"> {{ creditCurrentAccount.id }} : {{accountTypes.at(0)}} </mat-option>
+            <mat-option name="creditAccount" [value]="accountTypes.at(1)"> {{ creditSavingAccount.id }} : {{accountTypes.at(1)}} </mat-option>
           </mat-select>
         </mat-form-field>
       </div>    
@@ -62,12 +62,12 @@
   
   <div class = "account-selected-container">
   <div class="left-container">
-    <h3>Compte de débit : {{selectedAccount.id}} </h3> 
-    Solde : {{selectedAccount.balance}} 
+    <h3>Compte de débit : {{selectedDebitAccount.id}} </h3> 
+    Solde : {{selectedDebitAccount.balance}} 
   </div>
   <div class="right-container">
-    <h3>Compte de crédit : {{selectedAccount.id}} </h3> 
-    Solde : {{selectedAccount.balance}} 
+    <h3>Compte de crédit : {{selectedCreditAccount.id}} </h3> 
+    Solde : {{selectedCreditAccount.balance}} 
   </div>
 </div>
 

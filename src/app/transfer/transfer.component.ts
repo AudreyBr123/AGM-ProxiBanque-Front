@@ -22,18 +22,21 @@ export class TransferComponent implements OnInit {
   currentAccounts: CurrentAccountModel[] = [];
   savingAccounts: SavingAccountModel[] = [];
   debitAccounts: AccountModel[] = [];
+  creditAccounts: AccountModel[] = [];
+
 
   transferDtoRequest = new TransferDtoRequest("", "", 0,0,0);
-  typeCreditAccount = "currentAccount";
-  typeDebitAccount = "currentAccount";
+  typeCreditAccount = "";
+  typeDebitAccount = "";
   
   currentAccount = new CurrentAccountModel(null, 0.0, new Date());
   savingAccount = new SavingAccountModel(null, 0.0, new Date());
   personInfos = new PersonInfos("", "", "", "", "", "", "");
   debitClient= new ClientModel(0, this.personInfos, null, null);
   creditClient= new ClientModel(0, this.personInfos, null, null);
-  selectedAccount = new AccountModel(null, 0.0, new Date());
-  
+  selectedDebitAccount = new AccountModel(null, 0.0, new Date());
+  selectedCreditAccount = new AccountModel(null, 0.0, new Date());
+
   // Comptes trouvés, à utiliser pour renvoyer le compte retrouvé avec type de compte et id client
   debitCurrentAccount = new CurrentAccountModel(null, 0.0, new Date());
   debitSavingAccount = new SavingAccountModel(null, 0.0, new Date());
@@ -44,8 +47,6 @@ export class TransferComponent implements OnInit {
   form = new FormGroup({
     idClientDebitFormControl: new FormControl('', [Validators.required]),
     idClientCreditFormControl: new FormControl('', [Validators.required]),
-    typeDebitAccountFormControl: new FormControl('', [Validators.required]),
-    typeCreditAccountFormControl: new FormControl('', [Validators.required]),
     idDebitAccountFormControl: new FormControl('', [Validators.required]),
     idCreditAccountFormControl: new FormControl('', [Validators.required]),
     amountFormControl: new FormControl('', [Validators.required]),
@@ -73,7 +74,7 @@ export class TransferComponent implements OnInit {
   
   
   // Trouve les comptes du client choisi
-  findClientAccounts(idClientDebit: number) {
+  findClientAccountsDebit(idClientDebit: number) {
     console.log("this is the idClientDebit " + this.debitClient.currentAccount);
     
     this.clientService.getClientById(idClientDebit)
@@ -86,6 +87,20 @@ export class TransferComponent implements OnInit {
     console.log("this is the debit accounts ids " + this.debitAccounts.at(1)?.id);
     
   }
+
+  findClientAccountsCredit(idClientDebit: number) {
+    console.log("this is the idClientCredit " + this.creditClient.currentAccount);
+    
+    this.clientService.getClientById(idClientDebit)
+    .subscribe((client) => {
+      this.creditClient = client
+      this.creditCurrentAccount =  this.creditClient.currentAccount!
+      this.creditSavingAccount = this.creditClient.savingAccount!
+      this.creditAccounts = [this.creditCurrentAccount, this.creditSavingAccount]
+    })
+    console.log("this is the credit accounts ids " + this.creditAccounts.at(1)?.id);
+    
+  }
   
   // Options du type de compte 
   accountTypes: String[] = [
@@ -94,30 +109,44 @@ export class TransferComponent implements OnInit {
   ]
   
   // Associe le type de compte à sa version String JSON, et sélectionne le bon compte
-  findAccount(accountType: String) {
+  findAccountDebit(accountType: String) {
+    console.log( "type : "+ accountType);
+
     if (accountType == "Compte Courant"){
       this.typeDebitAccount= "currentAccount"
-      this.selectedAccount = this.debitCurrentAccount  
+      console.log("type debit account dans findAccountDebit" + this.typeDebitAccount.at(1) );
+      this.selectedDebitAccount = this.debitCurrentAccount  
+
     } else {
       this.typeDebitAccount= "savingAccount"
-      this.selectedAccount = this.debitSavingAccount  
+      console.log("type debit account dans findAccountDebit" + this.typeDebitAccount)
+      this.selectedDebitAccount = this.debitSavingAccount
+
     }
-    this.debitAccounts = [this.selectedAccount];
-    console.log(this.debitAccounts);
+    this.debitAccounts = [this.selectedDebitAccount];
   }
+
+    findAccountCredit(accountType: String) {
+      console.log( "type : "+ accountType);
+
+      if (accountType == "Compte Courant"){
+        this.typeCreditAccount= "currentAccount";
+        this.selectedCreditAccount = this.creditCurrentAccount; 
+        console.log("type credit account dans findAccountCredit" + this.typeCreditAccount);
+        
+      } else {
+        this.typeCreditAccount= "savingAccount";
+        this.selectedCreditAccount = this.creditSavingAccount;
+        console.log("type credit account dans findAccountCredit" + this.typeCreditAccount);
+      }
+      this.creditAccounts = [this.selectedCreditAccount];
+    }
   
   onSubmit(value: any) {
-    if (value.typeCreditAccountFormControl == "Compte Courant") {
-      this.typeCreditAccount= "currentAccount"
-    } else {
-      this.typeCreditAccount= "savingAccount"
-    }
-    
-    if (value.typeDebitAccountFormControl == "Compte Courant") {
-      this.typeDebitAccount= "currentAccount"
-    } else {
-      this.typeDebitAccount= "savingAccount"
-    }
+  
+    console.log("type credit account "+this.typeCreditAccount);
+    console.log("type debit account "+this.typeDebitAccount);
+
     
     this.transferDtoRequest = {
       typeCreditAccount: this.typeCreditAccount, 
@@ -127,7 +156,7 @@ export class TransferComponent implements OnInit {
       amount: value.amountFormControl
     }
     
-    console.log("Sending to the back : " + this.transferDtoRequest.amount + this.transferDtoRequest.idDebitAccount);
+    console.log("Sending to the back : " + this.transferDtoRequest.amount);
     
     this.transferService.putTransfer(this.transferDtoRequest)
     .subscribe({
