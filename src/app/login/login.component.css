@@ -19,8 +19,14 @@ mat-card-subtitle {
     box-shadow: none;
 }
 
-.main-container{
-    width: 100%;
+.main-container {
+    display: flex;
+    justify-content: center;
+}
+
+.form-and-pic-wrapper{
+    justify-self: center;
+    width: 60%;
     height: 70%;
     min-height: 70%;
     display: flex;
