@@ -65,7 +65,7 @@
           routerLink="/client-show/{{ client.id }}"
           (click)="handleClickOnShow(client.id)"
         >
-        👁️
+        <mat-icon>visibility</mat-icon>
         </button>
       </td>
     </ng-container>
@@ -78,7 +78,7 @@
           routerLink="/client-list"
           (click)="openDialog(client.id)"
         >
-        🗑️
+        <mat-icon>delete</mat-icon>
         </button>
       </td>
     </ng-container>
@@ -91,7 +91,7 @@
           routerLink="/client-edit/{{ client.id }}"
           (click)="handleClickOnEdit(client.id)"
         >
-        ✏️
+        <mat-icon>edit</mat-icon>
         </button>
       </td>
     </ng-container>
@@ -104,7 +104,7 @@
           routerLink=""
           (click)="handleClickOnTransfer(client.id)"
         >
-          💳
+        <mat-icon>sync_alt</mat-icon>
         </button>
       </td>
     </ng-container>

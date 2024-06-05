@@ -11,6 +11,7 @@ import {
   MatDialogActions,
   MatDialogClose,
 } from '@angular/material/dialog';
+import { ToastService } from 'angular-toastify';
 
 @Component({
   selector: 'app-client-list',
@@ -22,7 +23,7 @@ export class ClientListComponent implements OnInit {
   clients: ClientModel[] = [];
 
   // Transmission du service dans le constructeur
-  constructor(private service: ClientService, public dialog: MatDialog) {}
+  constructor(private service: ClientService, public dialog: MatDialog, private toastService: ToastService) {}
 
   handleClickOnShow(clientId: number) {
     console.log("Vous voulez voir la fiche du client : ", clientId)
@@ -43,7 +44,7 @@ export class ClientListComponent implements OnInit {
       this.service.getClients().subscribe(clientsFromServer => this.clients = clientsFromServer);
     })
 
-    this.openDeletionCompletedDialog();
+    this.addInfoToast();
   }
 
   openDialog(clientId: number) : void {
@@ -55,9 +56,6 @@ export class ClientListComponent implements OnInit {
     });
   }
 
-  openDeletionCompletedDialog() : void {
-    this.dialog.open(DeletionCompletedModal, {});
-  }
 
   // Je définis ici les colonnes de ma liste, mais je donnerai le tableau à lister (clients) 
   // directement dans le HTML, après l'avoir récupéré depuis le server dans la méthode ngOnInit()
@@ -81,6 +79,10 @@ export class ClientListComponent implements OnInit {
     .subscribe((clientsFromJsonServer) => {
       this.clients = clientsFromJsonServer
     })
+  }
+
+  addInfoToast(){
+    this.toastService.success("Le client est supprimé")
   }
 }
 
@@ -118,28 +120,6 @@ export class ConfirmDeleteModal {
 
   onDeleteClick(clientId: number): void {
     this.data.handleDelete(clientId);
-    this.dialogRef.close();
-  }
-}
-
-@Component({
-  selector: 'deletion-completed-modal',
-  templateUrl: 'deletion-completed-modal.html',
-  styleUrls: ['../../styles.css'],
-  standalone: true,
-  imports: [
-    MatDialogTitle,
-    MatDialogContent,
-    MatDialogActions,
-    MatDialogClose,
-  ],
-})
-
-export class DeletionCompletedModal {
-
-  constructor(public dialogRef: MatDialogRef<DeletionCompletedModal>) {}
-
-  onNoClick(): void {
     this.dialogRef.close();
   }
 }

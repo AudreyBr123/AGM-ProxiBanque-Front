@@ -35,9 +35,10 @@ body {
 }
     
 .btn-grad:hover {
-    background-position: right center; /* change the direction of the change here */
-    color: #fff;
-    text-decoration: none;
+background-position: right center; /* change the direction of the change here */
+color: #fff;
+text-decoration: none;
+cursor: pointer;
 }
 
 .list-action-icons {
@@ -50,6 +51,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .list-action-icons:hover {
@@ -64,3 +66,4 @@ mat-dialog-actions {
     display: flex;
     justify-content: center;
 }
+
