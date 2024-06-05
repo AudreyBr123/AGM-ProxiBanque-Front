@@ -8,6 +8,7 @@ import { ClientService } from '../services/client.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CurrentAccountModel } from '../models/current-account.model';
 import { SavingAccountModel } from '../models/saving-account.model';
+import { Location } from '@angular/common';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -38,8 +39,8 @@ export class ClientCreateComponent {
     emailFormControl: new FormControl('', [Validators.required, Validators.email]),
     streetFormControl: new FormControl('', [Validators.required]),
     cityFormControl: new FormControl('', [Validators.required]),
-    zipCodeFormControl: new FormControl('', [Validators.required]),
-    phoneNumberFormControl: new FormControl('', [Validators.required]),
+    zipCodeFormControl: new FormControl('', [Validators.required, Validators.pattern("(^$|[0-9]{1,5})")]),
+    phoneNumberFormControl: new FormControl('', [Validators.required, Validators.pattern("(^$|[0-9]{10})")]),
   });
 
   matcher = new MyErrorStateMatcher();
@@ -51,7 +52,7 @@ export class ClientCreateComponent {
     savingAccountFormControl: new FormControl('', [Validators.required])
   });
 
-  constructor(private _formBuilder: FormBuilder, private service: ClientService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private _formBuilder: FormBuilder, private service: ClientService, private route: ActivatedRoute, private router: Router, private location: Location) {}
   
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -141,5 +142,9 @@ export class ClientCreateComponent {
           this.loading = false;
         }
       })
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
