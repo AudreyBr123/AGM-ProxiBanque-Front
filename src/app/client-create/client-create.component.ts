@@ -38,8 +38,8 @@ export class ClientCreateComponent {
     emailFormControl: new FormControl('', [Validators.required, Validators.email]),
     streetFormControl: new FormControl('', [Validators.required]),
     cityFormControl: new FormControl('', [Validators.required]),
-    zipCodeFormControl: new FormControl('', [Validators.required]),
-    phoneNumberFormControl: new FormControl('', [Validators.required]),
+    zipCodeFormControl: new FormControl('', [Validators.required, Validators.pattern("(^$|[0-9]{1,5})")]),
+    phoneNumberFormControl: new FormControl('', [Validators.required, Validators.pattern("(^$|[0-9]{10})")]),
   });
 
   matcher = new MyErrorStateMatcher();
