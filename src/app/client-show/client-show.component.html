@@ -1,9 +1,6 @@
 <a class="btn-grad" mat-button routerLink="/client-list">Revenir à la liste</a>
-<h2> Fiche d'un client</h2>
+<h2> {{client.personInfos.firstName}} {{client.personInfos.lastName}} </h2>
 <mat-card>
-    <mat-card-header>
-        <mat-card-title>{{client.personInfos.firstName}} {{client.personInfos.lastName}}</mat-card-title> 
-    </mat-card-header>
     <mat-card-content>
         <mat-list role="list" class="card-wrapper">
             <div class="left-container">
@@ -13,25 +10,29 @@
                 <mat-list-item role="listitem"> Email : {{client.personInfos.email}}</mat-list-item>
                 <mat-list-item role="listitem"> Adresse : {{client.personInfos.street}}, {{client.personInfos.zipCode}} {{client.personInfos.city}}</mat-list-item>
                 <mat-list-item role="listitem"> Téléphone : {{client.personInfos.phoneNumber}}</mat-list-item>
+                <a class="btn-grad" mat-flat-button routerLink="/client-edit/{{client.id}}">Modifier</a>
             </div>
             <div class="right-container">
+                <div class="top-container">
                 <mat-list-item id = "compteepargne"> 
                     <!-- MEMO : Le warning "maximum three lines" est causé car il y a plus de 3 spans ci-dessous -->
                     <span matListItemTitle> Compte courant : </span>
                     <span matListItemLine> Numero : {{client.currentAccount?.id}} </span>
-                    <span matListItemLine> Solde : {{client.currentAccount?.balance}} € </span>
                     <span matListItemLine> Date de création : {{client.currentAccount?.creationDate| date:'dd/MM/yyyy'}}</span>         
+                    <span matListItemLine class="balance"> Solde : {{client.currentAccount?.balance}} € </span>
                 </mat-list-item>
+            </div>
+            <div class="bottom-container">
                 <mat-list-item id = "compteepargne"> 
                     <!-- MEMO : Le warning "maximum three lines" est causé car il y a plus de 3 spans ci-dessous -->
                     <span matListItemTitle> Compte épargne : </span>
                     <span matListItemLine> Numero : {{client.savingAccount?.id}} </span>
-                    <span matListItemLine> Solde : {{client.savingAccount?.balance}} € </span>
                     <span matListItemLine> Date de création : {{client.savingAccount?.creationDate| date:'dd/MM/yyyy'}}</span>         
+                    <span matListItemLine class="balance"> Solde : {{client.savingAccount?.balance}} € </span>
                 </mat-list-item>
             </div>
+            <a class="btn-grad" mat-flat-button routerLink="/transfer">Virement</a>
+            </div>
         </mat-list>        
-        <a class="btn-grad" mat-flat-button routerLink="/client-edit/{{client.id}}" target="_blank">Modifier</a>
-        <a class="btn-grad" mat-flat-button routerLink="/transfer" target="_blank">Virement</a>
     </mat-card-content>
 </mat-card>

@@ -38,3 +38,11 @@ background-position: right center; /* change the direction of the change here */
 color: #fff;
 text-decoration: none;
 }
+
+.active-link{
+  background-color: var(--lightBlueNav);
+}
+
+.nav-link{
+  margin-left: 1em;
+}
