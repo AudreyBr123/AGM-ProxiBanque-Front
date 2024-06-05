@@ -34,7 +34,13 @@ a{
 }
 
 mat-card{
+    width: fit-content;
     margin-left : 15em;
     margin-right : 15em;
     background-color: var(--cardGrey);
+}
+
+.card-wrapper {
+    display: flex;
+    justify-content: center;
 }
