@@ -21,7 +21,8 @@ export class TransferComponent implements OnInit {
   clients: ClientModel[] = [];
   currentAccounts: CurrentAccountModel[] = [];
   savingAccounts: SavingAccountModel[] = [];
-  
+  debitAccounts: AccountModel[] = [];
+
   transferDtoRequest = new TransferDtoRequest("", "", 0,0,0);
   typeCreditAccount = "currentAccount";
   typeDebitAccount = "currentAccount";
@@ -52,6 +53,7 @@ export class TransferComponent implements OnInit {
   
   constructor(private clientService: ClientService, private transferService: TransferService , private router: Router) {}
   
+  // Initialisation : trouve les clients et les différent comptes
   ngOnInit(): void {
     this.clientService.getClients()
     .subscribe((clientsFromJsonServer) => {
@@ -70,8 +72,8 @@ export class TransferComponent implements OnInit {
   }  
   
   
-  // Permet de trouver les comptes des clients
-  findAccount(idClientDebit: number) {
+  // Trouve les comptes du client choisi
+  findClientAccounts(idClientDebit: number) {
     console.log("this is the idClientDebit " + this.debitClient.currentAccount);
     
     this.clientService.getClientById(idClientDebit)
@@ -79,37 +81,29 @@ export class TransferComponent implements OnInit {
       this.debitClient = client
       this.debitCurrentAccount =  this.debitClient.currentAccount!
       this.debitSavingAccount = this.debitClient.savingAccount!
+      this.debitAccounts = [this.debitCurrentAccount, this.debitSavingAccount]
     })
-    console.log("this is the currentaccount id's " + this.debitCurrentAccount.id);
+    console.log("this is the debit accounts ids " + this.debitAccounts.at(1)?.id);
     
   }
   
+  // Options du type de compte 
   accountTypes: String[] = [
     "Compte Courant",
     "Compte Epargne"
   ]
   
-  findAccountType(accountType: String) {
+  // Associe le type de compte à sa version String JSON, et sélectionne le bon compte
+  findAccount(accountType: String) {
     if (accountType == "Compte Courant"){
       this.typeDebitAccount= "currentAccount"
-    } else {
-      this.typeDebitAccount= "savingAccount"
-    }
-    this.showAccount(this.typeDebitAccount);
-  }
-  
-  showAccount(typeDebitAccount: String) {
-    console.log(typeDebitAccount);
-    console.log(this.debitSavingAccount);
-    
-    
-    
-    if (typeDebitAccount == "currentAccount") {
       this.selectedAccount = this.debitCurrentAccount  
     } else {
+      this.typeDebitAccount= "savingAccount"
       this.selectedAccount = this.debitSavingAccount  
     }
-    console.log(this.selectedAccount);
+    this.debitAccounts = [this.selectedAccount];
+    console.log(this.debitAccounts);
   }
   
   onSubmit(value: any) {
