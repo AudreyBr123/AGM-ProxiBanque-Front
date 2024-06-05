@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AccountModel } from '../models/account.model';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-transfer',
@@ -29,4 +30,10 @@ export class TransferComponent {
     "Compte Courant",
     "Compte Epargne"
   ]
+
+  constructor(private location: Location) {}
+
+  goBack() {
+    this.location.back();
+  }
 }
