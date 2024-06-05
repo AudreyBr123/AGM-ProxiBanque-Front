@@ -19,7 +19,7 @@
       <div>
         <mat-form-field style="width:25vw">
           <mat-label>Compte débiteur</mat-label>
-          <mat-select formControlName="idDebitAccountFormControl" (selectionChange)="findAccountDebit($event.value)" >
+          <mat-select formControlName="typeDebitAccountFormControl" (selectionChange)="findAccountDebit($event.value)" >
             <mat-option name="debitAccount" [value]="accountTypes.at(0)"> {{ debitCurrentAccount.id }} : {{accountTypes.at(0)}} </mat-option>
             <mat-option name="debitAccount" [value]="accountTypes.at(1)"> {{ debitSavingAccount.id }} : {{accountTypes.at(1)}} </mat-option>
           </mat-select>
@@ -45,7 +45,7 @@
       <div>
         <mat-form-field style="width:25vw">
           <mat-label>Compte créditeur</mat-label>
-          <mat-select formControlName="idCreditAccountFormControl" (selectionChange)="findAccountCredit($event.value)" >
+          <mat-select formControlName="typeCreditAccountFormControl" (selectionChange)="findAccountCredit($event.value)" >
             <mat-option name="creditAccount"  [value]="accountTypes.at(0)"> {{ creditCurrentAccount.id }} : {{accountTypes.at(0)}} </mat-option>
             <mat-option name="creditAccount" [value]="accountTypes.at(1)"> {{ creditSavingAccount.id }} : {{accountTypes.at(1)}} </mat-option>
           </mat-select>

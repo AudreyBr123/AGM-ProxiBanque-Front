@@ -1,11 +1,11 @@
 export class TransferDtoRequest {
     typeCreditAccount: string;
     typeDebitAccount:string;
-    idCreditAccount:number;
-    idDebitAccount:number;
+    idCreditAccount:number | null;
+    idDebitAccount:number  | null;
     amount:number;
 
-    constructor(typeCreditAccount: string, typeDebitAccount:string, idCreditAccount:number,idDebitAccount:number, amount:number){
+    constructor(typeCreditAccount: string, typeDebitAccount:string, idCreditAccount:number ,idDebitAccount:number, amount:number){
         this.typeCreditAccount = typeCreditAccount;
         this.typeDebitAccount = typeDebitAccount;
         this.idCreditAccount = idCreditAccount;
