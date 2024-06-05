@@ -38,6 +38,7 @@ body {
 background-position: right center; /* change the direction of the change here */
 color: #fff;
 text-decoration: none;
+cursor: pointer;
 }
 
 .list-action-icons {
@@ -50,6 +51,7 @@ text-decoration: none;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .list-action-icons:hover {
