@@ -12,24 +12,29 @@ export class ChartComponent implements OnInit {
   @ViewChild('myChart', { static: true }) myChart!: ElementRef;
 
   constructor() {}
+  data1 = [200, 90, 3000]
+  data2 = [4000, 2000, 3000]
+
 
   ngOnInit(): void {
-    var myChart = new Chart("myChart", {
+    const getColor = (value: number, defaultColor: string): string => {
+      return value < 100 ? 'rgba(226, 50, 72, 0.8)' : defaultColor;
+    };
+
+    const myChart = new Chart("myChart", {
       type: 'bar',
       data: {
         labels: ['Client1', 'Client2', 'Client3'],
         datasets: [
           {
           label: 'Comptes courants',
-          data: [1200, 1900, 3000],
-          backgroundColor: [
-            'rgba(26, 41, 128, 0.8)'
-          ],
+          data: this.data1,
+          backgroundColor: this.data1.map(value => getColor(value, 'rgba(26, 41, 128, 0.8)')),
           borderWidth: 0
         },
         {
           label: 'Comptes épargnes',
-          data: [5000, 2000, 3000],
+          data: this.data2,
           backgroundColor: [
             'rgba(38, 208, 206, 0.8)'
           ],
@@ -41,9 +46,9 @@ export class ChartComponent implements OnInit {
       options: {
         indexAxis: 'y',
         scales: {
-          y: {
+          x: {
             beginAtZero: true,
-            max: 5000,
+            max: 4500,
             ticks: {
             }
           }
