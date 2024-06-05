@@ -29,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { statusReducer } from './store/status.reducer';
 import { AdvisorClientListComponent } from './advisor-client-list/advisor-client-list.component';
+import { ChartComponent } from './chart/chart.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { AdvisorClientListComponent } from './advisor-client-list/advisor-client
     ClientEditComponent,
     TransferComponent,
     AdvisorClientListComponent,
+    ChartComponent,
   ],
   imports: [
     BrowserModule,
