@@ -65,7 +65,7 @@ import { AdvisorClientListComponent } from './advisor-client-list/advisor-client
     StoreModule.forRoot({
       status:  statusReducer
     })
-  ],
+    ],
   providers: [
     provideAnimationsAsync()
   ],
