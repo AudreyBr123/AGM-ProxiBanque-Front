@@ -6,3 +6,18 @@ h2, mat-form-field {
     max-width: 400px;
   }
 
+.account-selection-container, .account-selected-container{
+    display: flex;
+    text-align: center;
+    justify-content:center;
+}
+
+.account-selected-container{
+    justify-content: space-evenly;
+}
+
+.main-container {
+    text-align: center;
+    justify-content: center;
+/* align-content: center; */
+}
