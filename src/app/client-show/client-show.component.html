@@ -1,4 +1,4 @@
-<a class="btn-grad" mat-flat-button color="primary" (click)="goBack()">Retour</a>
+<button class="btn btn-primary" (click)="goBack()">Retour</button>
 <h2>{{ client.personInfos.firstName }} {{ client.personInfos.lastName }}</h2>
 <div class="card-wrapper">
   <mat-card>
@@ -23,11 +23,9 @@
           <mat-list-item role="listitem">
             Téléphone : {{ client.personInfos.phoneNumber }}</mat-list-item
           >
-          <a
-            class="btn-grad"
-            mat-flat-button
+          <button class="btn btn-primary"
             routerLink="/client-edit/{{ client.id }}"
-            >Modifier</a
+            >Modifier</button
           >
         </div>
         <div class="right-container">
@@ -67,8 +65,8 @@
               </span>
             </mat-list-item>
           </div>
-          <a class="btn-grad" mat-flat-button routerLink="/transfer"
-            >Virement</a
+          <button class="btn btn-primary" routerLink="/transfer"
+            >Virement</button
           >
         </div>
       </mat-list>

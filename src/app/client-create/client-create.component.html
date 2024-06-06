@@ -1,4 +1,4 @@
-<a class="btn-grad" mat-flat-button color="primary" (click)="goBack()">Retour</a>
+<button class="btn btn-primary" (click)="goBack()">Retour</button>
 
 <mat-card class="example-card">
     <mat-card-header>
@@ -91,8 +91,8 @@
                     </div>
                   </section>
             </div>
-            <button class="btn-grad" mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid" *ngIf="isAddMode">Créer</button>
-            <button class="btn-grad" mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid" *ngIf="!isAddMode">Valider</button>
+            <button class="btn btn-accept" type="submit" [disabled]="!registerForm.valid" *ngIf="isAddMode">Créer</button>
+            <button class="btn btn-accept" type="submit" [disabled]="!registerForm.valid" *ngIf="!isAddMode">Valider</button>
         </form>
     </mat-card-content>
 </mat-card>

@@ -17,8 +17,7 @@ body {
     font-family: 'Asap';
 }
 
-.btn-grad {
-    background-image: linear-gradient(to right, #1A2980 0%, #26D0CE  51%, #1A2980  100%);
+.btn {
     margin: 10px;
     width:fit-content;
     padding: 10px 10px;
@@ -28,17 +27,39 @@ body {
     background-size: 200% auto;
     color: white;            
     box-shadow: 0 0 20px #eee;
-    border-radius: 10px;
+    border-radius: 3px;
     display: block;
     border: none;
     font-weight: 600;
 }
-    
-.btn-grad:hover {
-background-position: right center; /* change the direction of the change here */
-color: #fff;
-text-decoration: none;
-cursor: pointer;
+
+.btn:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 0 20px #474747;
+}
+
+.btn:disabled {
+    background-color: rgb(177, 177, 177);
+    color: #363636;
+}
+
+.btn-grad {
+    background-image: linear-gradient(to right, #1A2980 0%, #26D0CE  51%, #1A2980  100%);   
+}
+
+.btn-accept {
+    background-color: rgb(40, 163, 9);
+}
+
+.btn-primary {
+    background-color: rgb(9, 132, 163);
+}
+
+.btn-cancel {
+    background-color: rgb(163, 9, 9);
 }
 
 .list-action-icons {
