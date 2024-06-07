@@ -19,7 +19,6 @@ throw new Error('Method not implemented.');
   constructor(private service: AdvisorService, private activatedRoute: ActivatedRoute) {}
 
   displayedColumns: string[] = [
-    'id',
     'firstName',
     'lastName'
   ];

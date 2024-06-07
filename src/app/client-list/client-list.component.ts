@@ -60,7 +60,6 @@ export class ClientListComponent implements OnInit {
   // Je définis ici les colonnes de ma liste, mais je donnerai le tableau à lister (clients) 
   // directement dans le HTML, après l'avoir récupéré depuis le server dans la méthode ngOnInit()
   displayedColumns: string[] = [
-    'id',
     'firstName',
     'lastName',
     'currentAccountNumber',
