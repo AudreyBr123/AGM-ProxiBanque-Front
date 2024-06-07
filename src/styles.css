@@ -24,7 +24,7 @@ body {
     padding: 10px 10px;
     text-align: center;
     text-transform: uppercase;
-    transition: 0.5s;
+    transition: 0.25s;
     background-size: 200% auto;
     color: white;            
     box-shadow: 0 0 20px #eee;
@@ -32,12 +32,13 @@ body {
     display: block;
     border: none;
     font-weight: 600;
-    }
+}
     
 .btn-grad:hover {
 background-position: right center; /* change the direction of the change here */
 color: #fff;
 text-decoration: none;
+cursor: pointer;
 }
 
 .list-action-icons {
@@ -50,6 +51,7 @@ text-decoration: none;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .list-action-icons:hover {
@@ -64,3 +66,4 @@ mat-dialog-actions {
     display: flex;
     justify-content: center;
 }
+

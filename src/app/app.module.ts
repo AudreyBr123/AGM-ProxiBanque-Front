@@ -30,6 +30,7 @@ import { StoreModule } from '@ngrx/store';
 import { statusReducer } from './store/status.reducer';
 import { AdvisorClientListComponent } from './advisor-client-list/advisor-client-list.component';
 import { ChartComponent } from './chart/chart.component';
+import { AngularToastifyModule, ToastService } from 'angular-toastify';
 
 @NgModule({
   declarations: [
@@ -64,12 +65,14 @@ import { ChartComponent } from './chart/chart.component';
     ReactiveFormsModule,
     MatCheckboxModule,
     HttpClientModule,
+    AngularToastifyModule,
     StoreModule.forRoot({
       status:  statusReducer
     })
-  ],
+    ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    [ToastService]
   ],
   bootstrap: [AppComponent]
 })

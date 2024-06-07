@@ -1,48 +1,70 @@
-<h2>Virement de compte à compte</h2>
-
-<div class="select-account">
-    <mat-form-field>
-        <mat-label>Compte débiteur</mat-label>
-        <mat-select>
-          @for (account of accounts; track account) {
-          <mat-option [value]="account.id">{{ account.id }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-
-      <mat-icon>arrow_forward</mat-icon>
-      
-      <mat-form-field>
-        <mat-label>Compte créditeur</mat-label>
-        <mat-select>
-          @for (account of accounts; track account) {
-          <mat-option [value]="account.id">{{ account.id }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
+<div class="main-container">
+  <h2>Virement de compte à compte</h2>
+  
+  <form (ngSubmit)="form.value" [formGroup]="form">
+    <div class = "account-selection-container">
+      <div class="left-container">
+        <div class="select-client">
+          <mat-form-field style="width:25vw">
+            <mat-label>Client du compte débiteur</mat-label>
+            <mat-select formControlName="idClientDebitFormControl" (selectionChange)="findClientAccountsDebit($event.value)">
+              @for (debitClient of clients; track debitClient) {
+                <mat-option name="clientDebitAccount" [value]="debitClient.id">{{ debitClient.id }} : {{ debitClient.personInfos.firstName }}  {{ debitClient.personInfos.lastName }}  </mat-option>
+              }
+            </mat-select> 
+          </mat-form-field> 
+          <mat-icon>arrow_forward</mat-icon>
+        </div>
+        <div>
+          <mat-form-field style="width:25vw">
+            <mat-label>Compte débiteur</mat-label>
+            <mat-select formControlName="typeDebitAccountFormControl" (selectionChange)="findAccountDebit($event.value)" >
+              <mat-option name="debitAccount" [value]="accountTypes.at(0)"> {{ debitCurrentAccount.id }} : {{accountTypes.at(0)}} </mat-option>
+              <mat-option name="debitAccount" [value]="accountTypes.at(1)"> {{ debitSavingAccount.id }} : {{accountTypes.at(1)}} </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-icon>arrow_forward</mat-icon>
+        </div>   
+      </div>      
+      <div class="right-container">
+        <div class="select-client">
+          <mat-form-field style="width:25vw">
+            <mat-label>Client du compte créditeur</mat-label>
+            <mat-select formControlName="idClientCreditFormControl" (selectionChange)="findClientAccountsCredit($event.value)">
+              @for (creditClient of clients; track creditClient) {
+                <mat-option name="clientCreditAccount" [value]="creditClient.id">{{ creditClient.id }} : {{ creditClient.personInfos.firstName }}  {{ creditClient.personInfos.lastName }}  </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>      
+        </div>
+        <div>
+          <mat-form-field style="width:25vw">
+            <mat-label>Compte créditeur</mat-label>
+            <mat-select formControlName="typeCreditAccountFormControl" (selectionChange)="findAccountCredit($event.value)" >
+              <mat-option name="creditAccount"  [value]="accountTypes.at(0)"> {{ creditCurrentAccount.id }} : {{accountTypes.at(0)}} </mat-option>
+              <mat-option name="creditAccount" [value]="accountTypes.at(1)"> {{ creditSavingAccount.id }} : {{accountTypes.at(1)}} </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>    
+      </div>
+    </div>
+    
+    <mat-form-field class="example-full-width" style="width:25vw">
+      <mat-label>Montant</mat-label>
+      <input matInput name="amount" formControlName="amountFormControl" placeholder="Ex. 2500" value="" />
+    </mat-form-field>
+    
+    <div class = "account-selected-container">
+      <div class="left-container">
+        <h3>Compte de débit : {{selectedDebitAccount.id}} </h3> 
+        Solde : {{selectedDebitAccount.balance}} 
+      </div>
+      <div class="right-container">
+        <h3>Compte de crédit : {{selectedCreditAccount.id}} </h3> 
+        Solde : {{selectedCreditAccount.balance}} 
+      </div>
+    </div>
+    
+    <button class="btn-grad" (click)="onSubmit(form.value)">Valider</button>    
+  </form>
 </div>
-
-<div class="select-account-type">
-    <mat-form-field>
-        <mat-label>Type de compte</mat-label>
-        <mat-select>
-          @for (account of accountTypes; track account) {
-          <mat-option [value]="account">{{ account }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-      
-      <mat-form-field>
-        <mat-label>Type de compte</mat-label>
-        <mat-select>
-          @for (account of accountTypes; track account) {
-          <mat-option [value]="account">{{ account }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-</div>
-
-<mat-form-field class="example-full-width">
-  <mat-label>Montant</mat-label>
-  <input matInput placeholder="Ex. 2500" value="" />
-</mat-form-field>

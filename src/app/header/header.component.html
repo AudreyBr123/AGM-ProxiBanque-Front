@@ -3,6 +3,7 @@
     mat-icon-button
     class="example-icon home-icon"
     aria-label="Example icon-button with home icon"
+    routerLink="/client-list"
   >
     <mat-icon>account_balance</mat-icon>
   </button>
@@ -11,13 +12,14 @@
   <span class="example-spacer"></span>
 
   <div *ngIf="this.userStatus$ !== 'GUEST'">
-    <a mat-button class="nav-link" routerLink="/client-create">Nouveau client</a>
-    <a mat-button class="nav-link" routerLink="/client-list">Liste des clients</a>
+    <a mat-button class="nav-link" routerLink="/client-create" routerLinkActive="active-link">Nouveau client</a>
+    <a mat-button class="nav-link" routerLink="/client-list" routerLinkActive="active-link">Liste des clients</a>
     <a
       *ngIf="this.userStatus$ === 'MANAGER'"
       mat-button
       class="nav-link"
       routerLink="/advisor-list"
+      routerLinkActive="active-link"
       >Liste des conseillers</a
     >
   </div>
@@ -30,6 +32,6 @@
 
 </mat-toolbar>
 
-<p class="status">
+<!-- <p class="status">
   Vous accédez à l'application en tant que {{ this.userStatus$ }}
-</p>
+</p> -->

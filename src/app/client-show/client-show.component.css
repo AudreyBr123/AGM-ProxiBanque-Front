@@ -2,11 +2,6 @@ h2{
     text-align: center;
 }
 
-mat-card{
-    margin-left : 90px;
-    margin-right : 90px;
-}
-
 a{
     margin-right: 30px;
     margin-top: 20px;
@@ -14,4 +9,38 @@ a{
 
 #compteepargne{
     margin-bottom: 15px;
+}
+
+.card-wrapper{
+    display: flex;
+    flex-direction: row;
+    column-gap: 10em;
+}
+
+.right-container{
+    display: flex;
+    flex-direction: column;
+    /* row-gap: 3em; */
+    padding: 1em;
+    border-left :1.5px solid rgb(193, 193, 193);   
+}
+
+.top-container, .bottom-container{
+    margin-bottom: 1.2em;
+}
+
+.balance {
+   font-weight: 550;
+}
+
+mat-card{
+    width: fit-content;
+    margin-left : 15em;
+    margin-right : 15em;
+    background-color: var(--cardGrey);
+}
+
+.card-wrapper {
+    display: flex;
+    justify-content: center;
 }

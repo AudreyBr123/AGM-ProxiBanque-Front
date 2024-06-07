@@ -23,6 +23,7 @@
     "@ngrx/store": "^17.2.0",
     "@cubejs-client/core": "^0.31.0",
     "chart.js": "^4.4.3",
+    "angular-toastify": "^1.0.6",
     "json-server": "^1.0.0-alpha.23",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

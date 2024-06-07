@@ -22,6 +22,7 @@ import { Router } from '@angular/router';
 
   handleLogout() {
     this.store.dispatch(setGuestStatus());
+    localStorage.setItem('role', 'GUEST');
     this.router.navigate(['login'])
     }
 }
