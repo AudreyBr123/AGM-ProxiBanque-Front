@@ -24,11 +24,14 @@
     >
   </div>
 
-  <!-- <button class="btn-grad" *ngIf="this.userStatus$ !== 'GUEST'" (click)="handleLogout()">
+  <button
+  class="btn-grad"
+  mat-flat-button
+  color="primary"
+  *ngIf="this.userStatus$ === 'ADVISOR' || this.userStatus$ === 'MANAGER'" 
+  (click)="handleLogout()">
     Déconnexion
-  </button> -->
-
-  <button class="btn-grad" (click)="handleLogout()"> Déconnexion </button>
+  </button>
 
 </mat-toolbar>
 
