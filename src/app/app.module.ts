@@ -67,7 +67,7 @@ import { AngularToastifyModule, ToastService } from 'angular-toastify';
     StoreModule.forRoot({
       status:  statusReducer
     })
-  ],
+    ],
   providers: [
     provideAnimationsAsync(),
     [ToastService]
