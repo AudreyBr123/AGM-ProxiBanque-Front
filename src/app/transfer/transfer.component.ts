@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ClientModel } from '../models/client.model';
 import { CurrentAccountModel } from '../models/current-account.model';
 import { SavingAccountModel } from '../models/saving-account.model';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PersonInfos } from '../models/person-infos';
 import { TransferService } from '../services/transfer.service';
 import { TransferDtoRequest } from '../models/transfer-dto-request.model';
@@ -40,23 +40,37 @@ export class TransferComponent implements OnInit {
   
   transferDtoRequest = new TransferDtoRequest("", "", 0,0,0); 
   
-  form = new FormGroup({
-    idClientDebitFormControl: new FormControl('', [Validators.required]),
-    idClientCreditFormControl: new FormControl('', [Validators.required]),
-    typeDebitAccountFormControl: new FormControl('', [Validators.required]),
-    typeCreditAccountFormControl: new FormControl('', [Validators.required]),
-    amountFormControl: new FormControl('', [Validators.required, Validators.min(0)]),
-  });
+  form: FormGroup;
+  idClientDebitFormControl= new FormControl('', [Validators.required]);
+  idClientCreditFormControl= new FormControl('', [Validators.required]);
+  typeDebitAccountFormControl= new FormControl('', [Validators.required]);
+  typeCreditAccountFormControl= new FormControl('', [Validators.required]);
+  amountFormControl = new FormControl('', [Validators.required, Validators.min(0)]);
   
-    // Options du type de compte 
-    accountTypes: String[] = [
-      "Compte Courant",
-      "Compte Epargne"
-    ]
-    
+  
+  // Options du type de compte 
+  accountTypes: String[] = [
+    "Compte Courant",
+    "Compte Epargne"
+  ]
+  
   
   // Méthodes
-  constructor(private clientService: ClientService, private transferService: TransferService , private router: Router, private location: Location, public dialog: MatDialog) {}
+  constructor(private clientService: ClientService, private transferService: TransferService , private router: Router, private location: Location,
+     public dialog: MatDialog, formBuilder: FormBuilder) {
+    this.form = formBuilder.group({
+      'idClientDebitFormControl': this.idClientDebitFormControl,
+      'idClientCreditFormControl': this.idClientCreditFormControl,
+      'typeDebitAccountFormControl': this.typeDebitAccountFormControl,
+      'typeCreditAccountFormControl': this.typeCreditAccountFormControl,
+      'amountFormControl': this.amountFormControl
+    });
+    this.idClientDebitFormControl = this.form.controls['idClientDebitFormControl'] as FormControl;
+    this.idClientCreditFormControl = this.form.controls['idClientCreditFormControl'] as FormControl;
+    this.typeDebitAccountFormControl = this.form.controls['typeDebitAccountFormControl'] as FormControl;
+    this.typeCreditAccountFormControl = this.form.controls['typeCreditAccountFormControl'] as FormControl;
+    this.amountFormControl = this.form.controls['amountFormControl'] as FormControl;
+  }
   
   // Initialisation : trouve les clients et les différent comptes
   ngOnInit(): void {
@@ -89,7 +103,7 @@ export class TransferComponent implements OnInit {
     })   
   }
   
-
+  
   // Associe le type de compte à sa version String JSON, et sélectionne le bon compte
   findAccount(accountType: String, source : string) {
     // Si la méthode est déclenchée pour le compte débiteur, on assigne les variables liées au débit

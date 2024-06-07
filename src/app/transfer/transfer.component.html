@@ -5,9 +5,9 @@
     <div class = "account-selection-container">
       <div class="left-container">
         <div class="select-client">
-          <mat-form-field style="width:25vw">
+          <mat-form-field style="width:25vw" [class.error]="!idClientDebitFormControl.valid && idClientDebitFormControl.touched">
             <mat-label> Client du compte débiteur</mat-label>
-            <mat-select formControlName="idClientDebitFormControl" (selectionChange)="findClientAccountsDebit($event.value)">
+            <mat-select [formControl] ="$any(idClientDebitFormControl)" (selectionChange)="findClientAccountsDebit($event.value)">
               @for (debitClient of clients; track debitClient) {
                 <mat-option name="clientDebitAccount" [value]="debitClient.id">{{ debitClient.id }} : {{ debitClient.personInfos.firstName }}  {{ debitClient.personInfos.lastName }}  </mat-option>
               }
@@ -49,10 +49,14 @@
       </div>
     </div>
     
-    <mat-form-field class="example-full-width" style="width:25vw">
+    <div  [class.error]="!amountFormControl.valid && amountFormControl.touched">
       <mat-label>Montant</mat-label>
-      <input matInput name="amount" formControlName="amountFormControl" placeholder="Ex. 2500" value="" />
+    <mat-form-field class="example-full-width" style="width:25vw">
+      <input matInput name="amount" [formControl]="$any(amountFormControl)" placeholder="Ex. 2500" value="" />
+      @if (amountFormControl.hasError('required')) {<mat-error> Montant obligatoire</mat-error>}
+      @else if (!amountFormControl.valid) {<mat-error>Montant doit être positif</mat-error>}     
     </mat-form-field>
+  </div>
     
     <div class = "account-selected-container">
       <div class="left-container">
