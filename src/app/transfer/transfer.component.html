@@ -55,12 +55,12 @@
     
     <div  [class.error]="!amountFormControl.valid && amountFormControl.touched">
       <mat-label>Montant</mat-label>
-    <mat-form-field class="example-full-width" style="width:25vw">
-      <input matInput name="amount" [formControl]="$any(amountFormControl)" placeholder="Ex. 2500" value="" />
-      @if (amountFormControl.hasError('required')) {<mat-error> Montant obligatoire</mat-error>}
-      @else if (!amountFormControl.valid) {<mat-error>Montant doit être positif</mat-error>}     
-    </mat-form-field>
-  </div>
+      <mat-form-field class="example-full-width" style="width:25vw">
+        <input matInput name="amount" [formControl]="$any(amountFormControl)" placeholder="Ex. 2500" value="" />
+        @if (amountFormControl.hasError('required')) {<mat-error> Montant obligatoire</mat-error>}
+        @else if (!amountFormControl.valid) {<mat-error>Montant doit être positif</mat-error>}     
+      </mat-form-field>
+    </div>
     
     <div class = "account-selected-container">
       <div class="left-container">
@@ -73,6 +73,7 @@
       </div>
     </div>
     
-    <button type="submit" class="btn-grad" (click)="openDialog(form.value)">Valider</button>    
+    @if (!form.valid && form.touched) {<mat-error>Veuillez saisir des valeurs valides</mat-error>}
+    <button type="submit" class="btn-grad" (click)="openDialog(form.value)" [disabled]="!form.valid" >Valider</button>    
   </form>
 </div>
