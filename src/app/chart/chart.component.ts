@@ -12,7 +12,10 @@ export class ChartComponent implements OnInit {
   @ViewChild('myChart', { static: true }) myChart!: ElementRef;
 
   constructor() {}
+  // Soldes des comptes courants
   data1 = [200, 90, 3000]
+
+  // Soldes des comptes épargne
   data2 = [4000, 2000, 3000]
 
 
