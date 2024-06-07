@@ -9,6 +9,7 @@ import { AdvisorListComponent } from './advisor-list/advisor-list.component';
 import { TransferComponent } from './transfer/transfer.component';
 import { AdvisorClientListComponent } from './advisor-client-list/advisor-client-list.component';
 import { ChartComponent } from './chart/chart.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 // import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'advisor-client-list/:id', component: AdvisorClientListComponent},
   { path: 'transfer', component: TransferComponent },
   { path: 'chart', component:ChartComponent },
-  { path: '**', component: LoginComponent }
+  { path: '', redirectTo: '/login', pathMatch: 'full'},
+  { path: '**', component: PageNotFoundComponent}
 ];
 
 // const routes: Routes = [

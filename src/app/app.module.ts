@@ -31,6 +31,7 @@ import { statusReducer } from './store/status.reducer';
 import { AdvisorClientListComponent } from './advisor-client-list/advisor-client-list.component';
 import { ChartComponent } from './chart/chart.component';
 import { AngularToastifyModule, ToastService } from 'angular-toastify';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { AngularToastifyModule, ToastService } from 'angular-toastify';
     TransferComponent,
     AdvisorClientListComponent,
     ChartComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
