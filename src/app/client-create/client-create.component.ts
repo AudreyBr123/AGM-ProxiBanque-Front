@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ClientModel } from '../models/client.model';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { PersonInfos } from '../models/person-infos';
 import { ClientService } from '../services/client.service';
@@ -33,6 +33,7 @@ export class ClientCreateComponent {
   loading = false;
   submitted = false;
   hasError = false;
+  steps: number = 0.01;
 
   registerForm = new FormGroup({
     firstNameFormControl: new FormControl('', [Validators.required]),
@@ -47,8 +48,8 @@ export class ClientCreateComponent {
   accounts = this._formBuilder.group({
     currentAccount: false,
     savingAccount: false,
-    currentAccountFormControl: new FormControl('', [Validators.required]),
-    savingAccountFormControl: new FormControl('', [Validators.required])
+    currentAccountFormControl: new FormControl(0, [Validators.required, Validators.min(0), this.validateNumField.bind(this)]),
+    savingAccountFormControl: new FormControl(0, [Validators.required, Validators.min(0), this.validateNumField.bind(this)])
   });
 
   matcher = new MyErrorStateMatcher();
@@ -74,6 +75,12 @@ export class ClientCreateComponent {
       }
         );
     }
+
+    // this.accounts.valueChanges.subscribe(_ => {
+    //   if(!this.accounts.valid) {
+    //     console.log(this.accounts.get("currentAccountFormControl")?.errors)
+    //   }
+    // })
   }
 
   onSubmit() {
@@ -91,6 +98,32 @@ export class ClientCreateComponent {
     else {
       this.updateClient();
     }
+  }
+
+  validateNumField(control: AbstractControl): { [key: string]: any } | null {
+    let rem = control.value && this.countDecimals(Number.parseFloat(control.value)) > 2;
+    console.log(`Number.parseFloat(control.value) : ${Number.parseFloat(control.value)}`);
+    console.log(`rem : ${rem}\n`);
+   //If the remainder is not 0 then user has entered an invalid value
+    return rem ? { invalidDecimals: true } : null;
+  }
+
+  countDecimals(value: number) {
+    let text = value.toString()
+
+    // verify if number 0.000005 is represented as "5e-6"
+    if (text.indexOf('e-') > -1) {
+      let [base, trail] = text.split('e-');
+      let deg = parseInt(trail, 10);
+      return deg;
+    }
+
+    // count decimals for number in representation like "0.123456"
+    if (Math.floor(value) !== value) {
+      return value.toString().split(".")[1].length || 0;
+    }
+
+    return 0;
   }
 
   resetClient() {
