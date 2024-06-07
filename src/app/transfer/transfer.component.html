@@ -6,7 +6,7 @@
       <div class="left-container">
         <div class="select-client">
           <mat-form-field style="width:25vw">
-            <mat-label>Client du compte débiteur</mat-label>
+            <mat-label> Client du compte débiteur</mat-label>
             <mat-select formControlName="idClientDebitFormControl" (selectionChange)="findClientAccountsDebit($event.value)">
               @for (debitClient of clients; track debitClient) {
                 <mat-option name="clientDebitAccount" [value]="debitClient.id">{{ debitClient.id }} : {{ debitClient.personInfos.firstName }}  {{ debitClient.personInfos.lastName }}  </mat-option>
@@ -18,7 +18,7 @@
         <div>
           <mat-form-field style="width:25vw">
             <mat-label>Compte débiteur</mat-label>
-            <mat-select formControlName="typeDebitAccountFormControl" (selectionChange)="findAccountDebit($event.value)" >
+            <mat-select formControlName="typeDebitAccountFormControl" (selectionChange)="findAccountDebit($event.value, 'debit')" >
               <mat-option name="debitAccount" [value]="accountTypes.at(0)"> {{ debitCurrentAccount.id }} : {{accountTypes.at(0)}} </mat-option>
               <mat-option name="debitAccount" [value]="accountTypes.at(1)"> {{ debitSavingAccount.id }} : {{accountTypes.at(1)}} </mat-option>
             </mat-select>
@@ -65,6 +65,6 @@
       </div>
     </div>
     
-    <button class="btn-grad" (click)="onSubmit(form.value)">Valider</button>    
+    <button type="submit" class="btn-grad" (click)="openDialog(form.value)">Valider</button>    
   </form>
 </div>
