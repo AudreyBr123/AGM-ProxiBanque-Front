@@ -16,7 +16,7 @@ export class ChartComponent implements OnInit {
   data1 = [200, 90, 3000]
 
   // Soldes des comptes épargne
-  data2 = [4000, 2000, 3000]
+  data2 = [4000, 2000, 3300]
 
 
   ngOnInit(): void {
@@ -27,7 +27,7 @@ export class ChartComponent implements OnInit {
     const myChart = new Chart("myChart", {
       type: 'bar',
       data: {
-        labels: ['Client1', 'Client2', 'Client3'],
+        labels: ['Audrey Boureau', 'Gwendal Breton', 'Marine Spaak'],
         datasets: [
           {
           label: 'Comptes courants',
@@ -36,7 +36,7 @@ export class ChartComponent implements OnInit {
           borderWidth: 0
         },
         {
-          label: 'Comptes épargnes',
+          label: 'Comptes épargne',
           data: this.data2,
           backgroundColor: [
             'rgba(38, 208, 206, 0.8)'
@@ -53,6 +53,25 @@ export class ChartComponent implements OnInit {
             beginAtZero: true,
             max: 4500,
             ticks: {
+            }
+          }
+        },
+        plugins: {
+          legend: {
+              onClick: function(e, legendItem, legend) {
+                const index = legendItem.datasetIndex;
+                const oppositeIndex = (index == 1) ? 0 : 1;
+
+                if (oppositeIndex != undefined) {
+                  const ci = legend.chart;
+                  if (ci.isDatasetVisible(oppositeIndex)) {
+                      ci.hide(oppositeIndex);
+                      legendItem.hidden = true;
+                  } else {
+                      ci.show(oppositeIndex);
+                      legendItem.hidden = false;
+                  }
+                }
             }
           }
         }
