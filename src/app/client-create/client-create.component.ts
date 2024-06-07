@@ -8,6 +8,7 @@ import { ClientService } from '../services/client.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CurrentAccountModel } from '../models/current-account.model';
 import { SavingAccountModel } from '../models/saving-account.model';
+import { Location } from '@angular/common';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -38,18 +39,20 @@ export class ClientCreateComponent {
     emailFormControl: new FormControl('', [Validators.required, Validators.email]),
     streetFormControl: new FormControl('', [Validators.required]),
     cityFormControl: new FormControl('', [Validators.required]),
-    zipCodeFormControl: new FormControl('', [Validators.required]),
-    phoneNumberFormControl: new FormControl('', [Validators.required]),
+    zipCodeFormControl: new FormControl('', [Validators.required, Validators.pattern("(^$|[0-9]{1,5})")]),
+    phoneNumberFormControl: new FormControl('', [Validators.required, Validators.pattern("(^$|[0-9]{10})")]),
   });
 
   matcher = new MyErrorStateMatcher();
 
   accounts = this._formBuilder.group({
     currentAccount: false,
-    savingAccount: false
+    savingAccount: false,
+    currentAccountFormControl: new FormControl('', [Validators.required]),
+    savingAccountFormControl: new FormControl('', [Validators.required])
   });
 
-  constructor(private _formBuilder: FormBuilder, private service: ClientService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private _formBuilder: FormBuilder, private service: ClientService, private route: ActivatedRoute, private router: Router, private location: Location) {}
   
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -61,6 +64,12 @@ export class ClientCreateComponent {
         this.personInfos = DBclient.personInfos;
         this.client.currentAccount = DBclient.currentAccount;
         this.client.savingAccount = DBclient.savingAccount;
+        // if(DBclient.savingAccount !== null && DBclient.savingAccount !== undefined) {
+        //   this.savingAccount = DBclient.savingAccount;
+        // }
+        // if(DBclient.currentAccount !== null && DBclient.currentAccount !== undefined) {
+        //   this.currentAccount = DBclient.currentAccount;
+        // }
       });
     }
   }
@@ -90,13 +99,10 @@ export class ClientCreateComponent {
   }
 
   private createClient() {
-    console.log(this.client);
-    console.log(`current account : ${this.accounts.value.currentAccount}`);
-
     if(this.accounts.value.currentAccount) {
       this.client.currentAccount = this.currentAccount;
     }
-
+    
     if(this.accounts.value.savingAccount) {
       this.client.savingAccount = this.savingAccount;
     }
@@ -114,14 +120,12 @@ export class ClientCreateComponent {
   }
 
   private updateClient() {
-    console.log(this.client);
-
     if(this.client.currentAccount === null) {
       if(this.accounts.value.currentAccount) {
         this.client.currentAccount = this.currentAccount;
       }
     }
-
+    
     if(this.client.savingAccount === null) {
       if(this.accounts.value.savingAccount) {
         this.client.savingAccount = this.savingAccount;
@@ -138,5 +142,9 @@ export class ClientCreateComponent {
           this.loading = false;
         }
       })
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

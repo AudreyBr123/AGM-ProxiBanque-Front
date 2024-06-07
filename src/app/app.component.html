@@ -3,7 +3,13 @@
 </header>
 
 <main>
-    <router-outlet />
+    <div class="main-container">
+        <lib-toastify-toast-container 
+        [position]="'top-right'"
+        
+        ></lib-toastify-toast-container>
+        <router-outlet />        
+    </div>
 </main>
 
 <footer>

@@ -29,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { statusReducer } from './store/status.reducer';
 import { AdvisorClientListComponent } from './advisor-client-list/advisor-client-list.component';
+import { AngularToastifyModule, ToastService } from 'angular-toastify';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { AdvisorClientListComponent } from './advisor-client-list/advisor-client
     ClientCreateComponent,
     ClientEditComponent,
     TransferComponent,
-    AdvisorClientListComponent
+    AdvisorClientListComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,12 +63,14 @@ import { AdvisorClientListComponent } from './advisor-client-list/advisor-client
     ReactiveFormsModule,
     MatCheckboxModule,
     HttpClientModule,
+    AngularToastifyModule,
     StoreModule.forRoot({
       status:  statusReducer
     })
     ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    [ToastService]
   ],
   bootstrap: [AppComponent]
 })

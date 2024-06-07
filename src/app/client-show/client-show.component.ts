@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, LOCALE_ID } from '@angular/core';
 import { ClientModel } from '../models/client.model';
 import { ClientService } from '../services/client.service';
-import {formatDate} from '@angular/common';
+import {Location, formatDate} from '@angular/common';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { PersonInfos } from '../models/person-infos';
@@ -16,7 +16,7 @@ export class ClientShowComponent implements OnInit {
   id = this.activatedRoute.snapshot.params['id'];
   client: ClientModel;
 
-  constructor(@Inject(LOCALE_ID) private locale: string, private service: ClientService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(@Inject(LOCALE_ID) private locale: string, private service: ClientService, private activatedRoute: ActivatedRoute, private router: Router, private location: Location) {
     this.client = new ClientModel(
       0,
       new PersonInfos('Prénom', 'Nom', 'Email', '0101010101', '1 rue blabla', '11000', 'Ville'),
@@ -31,5 +31,9 @@ export class ClientShowComponent implements OnInit {
       console.log("Passe par client-show-component - getclientbyid");
       this.client = clientFromDB;
     });
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

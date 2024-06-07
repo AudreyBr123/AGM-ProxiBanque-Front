@@ -1,7 +1,9 @@
+<a class="btn-grad" mat-flat-button color="primary" (click)="goBack()">Retour</a>
+
 <mat-card class="example-card">
     <mat-card-header>
-        <mat-card-title *ngIf="isAddMode">Créer un client</mat-card-title>
-        <mat-card-title *ngIf="!isAddMode">Mettre a jour un client</mat-card-title>
+        <mat-card-title *ngIf="isAddMode">Création d'un client</mat-card-title>
+        <mat-card-title *ngIf="!isAddMode">Modification des informations du client</mat-card-title>
     </mat-card-header>
     <mat-card-content>
         <form (ngSubmit)="onSubmit()" [formGroup]="registerForm" class="example-form">
@@ -45,6 +47,9 @@
                 <mat-error *ngIf="registerForm.get('zipCodeFormControl')?.hasError('required')">
                     Le code postal est <strong>obligatoire</strong>
                 </mat-error>
+                <mat-error *ngIf="registerForm.get('zipCodeFormControl')?.hasError('pattern')">
+                    Le code postal est <strong>incorrect</strong>
+                </mat-error>
             </mat-form-field>
             <mat-form-field class="example-full-width">
                 <mat-label>Numéro de téléphone</mat-label>
@@ -52,17 +57,42 @@
                 <mat-error *ngIf="registerForm.get('phoneNumberFormControl')?.hasError('required')">
                     Le numéro de téléphone est <strong>obligatoire</strong>
                 </mat-error>
+                <mat-error *ngIf="registerForm.get('phoneNumberFormControl')?.hasError('pattern')">
+                    Le numéro de téléphone est <strong>incorrect</strong>
+                </mat-error>
             </mat-form-field>
             <!-- Dont touch this code, it handles showing the checkboxes if we are creating a new account, or, if an account isnt created-->
             <div *ngIf="isAddMode || (!isAddMode && (client.currentAccount?.id === null || client.savingAccount?.id === null))">
                 <section class="example-section" [formGroup]="accounts">
                     <h4>Sélectionner les comptes que vous voulez créer :</h4>
-                    <p *ngIf="isAddMode || (!isAddMode && (client.currentAccount?.id === null))"><mat-checkbox formControlName="currentAccount">Compte courant</mat-checkbox></p>
-                    <p *ngIf="isAddMode || (!isAddMode && (client.savingAccount?.id === null))"><mat-checkbox formControlName="savingAccount">Compte épargne</mat-checkbox></p>
+                    <div *ngIf="isAddMode || (!isAddMode && (client.currentAccount?.id === null))">
+                        <p><mat-checkbox formControlName="currentAccount">Compte courant</mat-checkbox></p>
+                        <div *ngIf="accounts.value.currentAccount">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Solde compte courant</mat-label>
+                                <input type="number" matInput placeholder="Ex. 530.00" value="0" [(ngModel)]="currentAccount.balance" name="currentAccountBalance" required formControlName="currentAccountFormControl" [errorStateMatcher]="matcher">
+                                <mat-error *ngIf="accounts.get('currentAccountFormControl')?.hasError('required')">
+                                    Le solde est <strong>obligatoire</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div *ngIf="isAddMode || (!isAddMode && (client.savingAccount?.id === null))">
+                        <p><mat-checkbox formControlName="savingAccount">Compte épargne</mat-checkbox></p>
+                        <div *ngIf="accounts.value.savingAccount">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Solde compte épargne</mat-label>
+                                <input type="number" matInput placeholder="Ex. 530.00" value="0" [(ngModel)]="savingAccount.balance" name="savingAccountBalance" required formControlName="savingAccountFormControl" [errorStateMatcher]="matcher">
+                                <mat-error *ngIf="accounts.get('savingAccountFormControl')?.hasError('required')">
+                                    Le solde est <strong>obligatoire</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
                   </section>
             </div>
             <button class="btn-grad" mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid" *ngIf="isAddMode">Créer</button>
-            <button mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid" *ngIf="!isAddMode">Mettre a jour</button>
+            <button class="btn-grad" mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid" *ngIf="!isAddMode">Valider</button>
         </form>
     </mat-card-content>
 </mat-card>

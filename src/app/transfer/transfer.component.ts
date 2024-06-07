@@ -9,6 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PersonInfos } from '../models/person-infos';
 import { TransferService } from '../services/transfer.service';
 import { TransferDtoRequest } from '../models/transfer-dto-request.model';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-transfer',
@@ -48,7 +49,7 @@ export class TransferComponent implements OnInit {
     amountFormControl: new FormControl('', [Validators.required]),
   });
   
-  constructor(private clientService: ClientService, private transferService: TransferService , private router: Router) {}
+  constructor(private clientService: ClientService, private transferService: TransferService , private router: Router, private location: Location) {}
   
   // Initialisation : trouve les clients et les différent comptes
   ngOnInit(): void {
@@ -163,5 +164,8 @@ export class TransferComponent implements OnInit {
   //   this.client.savingAccount = DBclient.savingAccount;
   // });
   
-  
+    goBack() {
+    this.location.back();
+  }
+
 }
