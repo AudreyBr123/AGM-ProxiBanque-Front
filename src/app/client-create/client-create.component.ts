@@ -32,6 +32,7 @@ export class ClientCreateComponent {
   isAddMode: boolean = false;
   loading = false;
   submitted = false;
+  hasError = false;
 
   registerForm = new FormGroup({
     firstNameFormControl: new FormControl('', [Validators.required]),
@@ -43,14 +44,14 @@ export class ClientCreateComponent {
     phoneNumberFormControl: new FormControl('', [Validators.required, Validators.pattern("(^$|[0-9]{10})")]),
   });
 
-  matcher = new MyErrorStateMatcher();
-
   accounts = this._formBuilder.group({
     currentAccount: false,
     savingAccount: false,
     currentAccountFormControl: new FormControl('', [Validators.required]),
     savingAccountFormControl: new FormControl('', [Validators.required])
   });
+
+  matcher = new MyErrorStateMatcher();
 
   constructor(private _formBuilder: FormBuilder, private service: ClientService, private route: ActivatedRoute, private router: Router, private location: Location) {}
   
@@ -59,18 +60,19 @@ export class ClientCreateComponent {
     this.isAddMode = !this.id;
 
     if(!this.isAddMode) {
-      this.service.getClientById(this.id).subscribe((DBclient) => {
-        this.client = DBclient;
-        this.personInfos = DBclient.personInfos;
-        this.client.currentAccount = DBclient.currentAccount;
-        this.client.savingAccount = DBclient.savingAccount;
-        // if(DBclient.savingAccount !== null && DBclient.savingAccount !== undefined) {
-        //   this.savingAccount = DBclient.savingAccount;
-        // }
-        // if(DBclient.currentAccount !== null && DBclient.currentAccount !== undefined) {
-        //   this.currentAccount = DBclient.currentAccount;
-        // }
-      });
+      this.service.getClientById(this.id).subscribe({
+        next: (DBclient) => {
+          this.client = DBclient;
+          this.personInfos = DBclient.personInfos;
+          this.client.currentAccount = DBclient.currentAccount;
+          this.client.savingAccount = DBclient.savingAccount;
+        },
+        error: error => {
+          console.log(error);
+          this.hasError = true;
+        }
+      }
+        );
     }
   }
 
@@ -115,6 +117,7 @@ export class ClientCreateComponent {
         error: error => {
           console.log("Error creating client");
           this.loading = false;
+          this.hasError = true;
         }
       })
   }
@@ -140,6 +143,7 @@ export class ClientCreateComponent {
         error: error => {
           console.log("Error updating client");
           this.loading = false;
+          this.hasError = true;
         }
       })
   }

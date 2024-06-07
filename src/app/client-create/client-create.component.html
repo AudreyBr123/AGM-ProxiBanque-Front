@@ -1,5 +1,5 @@
 <a class="btn-grad" mat-flat-button color="primary" (click)="goBack()">Retour</a>
-
+<ng-template [ngIf]="!hasError" [ngIfElse]="noClientFound">
 <mat-card class="example-card">
     <mat-card-header>
         <mat-card-title *ngIf="isAddMode">Création d'un client</mat-card-title>
@@ -96,3 +96,10 @@
         </form>
     </mat-card-content>
 </mat-card>
+</ng-template>
+<ng-template #noClientFound>
+    <div>
+        <h4>ClientNotFound Error</h4>
+        <p>Il n'y a pas de client correspondant à cet id</p>
+    </div>
+</ng-template>

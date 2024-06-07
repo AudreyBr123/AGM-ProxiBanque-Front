@@ -1,4 +1,5 @@
 <a class="btn-grad" mat-flat-button color="primary" (click)="goBack()">Retour</a>
+<ng-template [ngIf]="client.id" [ngIfElse]="noClientFound">
 <h2>{{ client.personInfos.firstName }} {{ client.personInfos.lastName }}</h2>
 <div class="card-wrapper">
   <mat-card>
@@ -75,3 +76,10 @@
     </mat-card-content>
   </mat-card>
 </div>
+</ng-template>
+<ng-template #noClientFound>
+    <div>
+        <h4>ClientNotFound Error</h4>
+        <p>Il n'y a pas de client correspondant à cet id</p>
+    </div>
+</ng-template>
