@@ -14,6 +14,7 @@
   <div *ngIf="this.userStatus$ !== 'GUEST'">
     <a mat-button class="nav-link" routerLink="/client-create" routerLinkActive="active-link">Nouveau client</a>
     <a mat-button class="nav-link" routerLink="/client-list" routerLinkActive="active-link">Liste des clients</a>
+    <a mat-button class="nav-link" routerLink="/chart" routerLinkActive="active-link">Visualisation des comptes</a>
     <a
       *ngIf="this.userStatus$ === 'MANAGER'"
       mat-button

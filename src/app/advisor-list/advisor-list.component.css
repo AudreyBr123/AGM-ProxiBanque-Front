@@ -1,5 +1,9 @@
-table, h2 {
+table {
     margin: 2em;
+}
+
+h2 {
+    margin-bottom: 2em;
 }
 
 button {
