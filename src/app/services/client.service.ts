@@ -46,16 +46,13 @@ export class ClientService {
   // Cette méthode peut retourner une valeur qui est récupérée par le composant, selon la valeur de retour on utilise "navigate" pour forcer la navigation
   handleError(error:any) {
     console.log("Passe par handleError dans le service");
-    console.log("1 " + error.message);
-    console.log("2 " + error.error.message);
-
 
     let errorMessage = '';
-    // if (error.error instanceof ErrorEvent) {
+     if (error.error instanceof ErrorEvent) {
         errorMessage = error.message;
-    // } else {
-    //     errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    // }
+    } else {
+        errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
 
     window.alert(errorMessage);
     return throwError(() => new Error(errorMessage));

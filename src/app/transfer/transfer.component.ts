@@ -11,6 +11,7 @@ import { TransferService } from '../services/transfer.service';
 import { TransferDtoRequest } from '../models/transfer-dto-request.model';
 import { Location } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { ToastService } from 'angular-toastify';
 
 @Component({
   selector: 'app-transfer',
@@ -57,7 +58,7 @@ export class TransferComponent implements OnInit {
   
   // Méthodes
   constructor(private clientService: ClientService, private transferService: TransferService , private router: Router, private location: Location,
-     public dialog: MatDialog, formBuilder: FormBuilder) {
+     public dialog: MatDialog, formBuilder: FormBuilder, private toastService: ToastService) {
     this.form = formBuilder.group({
       'idClientDebitFormControl': this.idClientDebitFormControl,
       'idClientCreditFormControl': this.idClientCreditFormControl,
@@ -167,14 +168,22 @@ export class TransferComponent implements OnInit {
     this.transferService.putTransfer(this.transferDtoRequest)
     .subscribe({
       next: () => {
+        this.addInfoToast()
         this.router.navigate(['/client-list'])
       },
       error: error => {
-        console.log("Error during transfer");
+        console.log("Error during transfer" + JSON.stringify(error));
+        console.log("Error during transfer name : " + error.name);
+        console.log("Error during transfer message : " + error);
       }
     })
+
   }
   
+  addInfoToast(){
+    this.toastService.success("Le virement a bien été effectué")
+  }
+
   goBack() {
     this.location.back();
   }
