@@ -8,6 +8,7 @@ import { ClientEditComponent } from './client-edit/client-edit.component';
 import { AdvisorListComponent } from './advisor-list/advisor-list.component';
 import { TransferComponent } from './transfer/transfer.component';
 import { AdvisorClientListComponent } from './advisor-client-list/advisor-client-list.component';
+import { ChartComponent } from './chart/chart.component';
 // import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
@@ -17,8 +18,9 @@ const routes: Routes = [
   { path: 'client-show/:id', component: ClientShowComponent },
   { path: 'client-edit/:id', component: ClientCreateComponent },
   { path: 'advisor-list', component: AdvisorListComponent },
-   { path: 'advisor-client-list/:id', component: AdvisorClientListComponent},
+  { path: 'advisor-client-list/:id', component: AdvisorClientListComponent},
   { path: 'transfer', component: TransferComponent },
+  { path: 'chart', component:ChartComponent },
   { path: '**', component: LoginComponent }
 ];
 

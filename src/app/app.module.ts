@@ -29,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { statusReducer } from './store/status.reducer';
 import { AdvisorClientListComponent } from './advisor-client-list/advisor-client-list.component';
+import { ChartComponent } from './chart/chart.component';
 import { AngularToastifyModule, ToastService } from 'angular-toastify';
 
 @NgModule({
@@ -44,6 +45,7 @@ import { AngularToastifyModule, ToastService } from 'angular-toastify';
     ClientEditComponent,
     TransferComponent,
     AdvisorClientListComponent,
+    ChartComponent,
   ],
   imports: [
     BrowserModule,
