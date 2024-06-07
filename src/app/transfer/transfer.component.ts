@@ -153,7 +153,7 @@ export class TransferComponent implements OnInit {
     });
   }
   
-  // Méthode envoyer le virement au back
+  // Méthode pour envoyer le virement au back
   onSubmit(value: any) {
     this.transferDtoRequest = {
       typeCreditAccount: this.typeCreditAccount, 
