@@ -1,7 +1,7 @@
 <div class="main-container">
   <h2>Virement de compte à compte</h2>
   
-  <form (ngSubmit)="form.value" [formGroup]="form">
+  <form (ngSubmit)="form.value" [formGroup]="form" [class.error]="!form.valid && form.touched">
     <div class = "account-selection-container">
       <div class="left-container">
         <div class="select-client">
@@ -18,7 +18,7 @@
         <div>
           <mat-form-field style="width:25vw">
             <mat-label>Compte débiteur</mat-label>
-            <mat-select formControlName="typeDebitAccountFormControl" (selectionChange)="findAccountDebit($event.value, 'debit')" >
+            <mat-select formControlName="typeDebitAccountFormControl" (selectionChange)="findAccount($event.value, 'debit')" >
               <mat-option name="debitAccount" [value]="accountTypes.at(0)"> {{ debitCurrentAccount.id }} : {{accountTypes.at(0)}} </mat-option>
               <mat-option name="debitAccount" [value]="accountTypes.at(1)"> {{ debitSavingAccount.id }} : {{accountTypes.at(1)}} </mat-option>
             </mat-select>
@@ -40,7 +40,7 @@
         <div>
           <mat-form-field style="width:25vw">
             <mat-label>Compte créditeur</mat-label>
-            <mat-select formControlName="typeCreditAccountFormControl" (selectionChange)="findAccountCredit($event.value)" >
+            <mat-select formControlName="typeCreditAccountFormControl" (selectionChange)="findAccount($event.value, 'credit')" >
               <mat-option name="creditAccount"  [value]="accountTypes.at(0)"> {{ creditCurrentAccount.id }} : {{accountTypes.at(0)}} </mat-option>
               <mat-option name="creditAccount" [value]="accountTypes.at(1)"> {{ creditSavingAccount.id }} : {{accountTypes.at(1)}} </mat-option>
             </mat-select>

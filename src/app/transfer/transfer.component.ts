@@ -10,9 +10,7 @@ import { PersonInfos } from '../models/person-infos';
 import { TransferService } from '../services/transfer.service';
 import { TransferDtoRequest } from '../models/transfer-dto-request.model';
 import { Location } from '@angular/common';
-import { ConfirmDeleteModal } from '../client-list/client-list.component';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
-import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-transfer',
@@ -40,17 +38,24 @@ export class TransferComponent implements OnInit {
   creditCurrentAccount = new CurrentAccountModel(null, 0.0, new Date());
   creditSavingAccount = new SavingAccountModel(null, 0.0, new Date());
   
-  transferDtoRequest = new TransferDtoRequest("", "", 0,0,0);
-  
+  transferDtoRequest = new TransferDtoRequest("", "", 0,0,0); 
   
   form = new FormGroup({
     idClientDebitFormControl: new FormControl('', [Validators.required]),
     idClientCreditFormControl: new FormControl('', [Validators.required]),
     typeDebitAccountFormControl: new FormControl('', [Validators.required]),
     typeCreditAccountFormControl: new FormControl('', [Validators.required]),
-    amountFormControl: new FormControl('', [Validators.required]),
+    amountFormControl: new FormControl('', [Validators.required, Validators.min(0)]),
   });
   
+    // Options du type de compte 
+    accountTypes: String[] = [
+      "Compte Courant",
+      "Compte Epargne"
+    ]
+    
+  
+  // Méthodes
   constructor(private clientService: ClientService, private transferService: TransferService , private router: Router, private location: Location, public dialog: MatDialog) {}
   
   // Initialisation : trouve les clients et les différent comptes
@@ -59,13 +64,10 @@ export class TransferComponent implements OnInit {
     .subscribe((clientsFromJsonServer) => {
       this.clients = clientsFromJsonServer
     })
-  }  
-  
+  }    
   
   // Trouve les comptes du client choisi
-  findClientAccountsDebit(idClientDebit: number) {    
-
-
+  findClientAccountsDebit(idClientDebit: number) {        
     this.clientService.getClientById(idClientDebit)
     .subscribe((client) => {
       this.debitClient = client
@@ -87,47 +89,38 @@ export class TransferComponent implements OnInit {
     })   
   }
   
-  // Options du type de compte 
-  accountTypes: String[] = [
-    "Compte Courant",
-    "Compte Epargne"
-  ]
-  
+
   // Associe le type de compte à sa version String JSON, et sélectionne le bon compte
-  findAccountDebit(accountType: String, source : string) {
-    console.log( "type : "+ accountType);
-   console.log("evenement : " + source );
-    
-    if (accountType == "Compte Courant"){
-      this.typeDebitAccount= "currentAccount"
-      console.log("type debit account dans findAccountDebit " + this.typeDebitAccount);
-      this.selectedDebitAccount = this.debitCurrentAccount  
-      
-    } else {
-      this.typeDebitAccount= "savingAccount"
-      console.log("type debit account dans findAccountDebit " + this.typeDebitAccount)
-      this.selectedDebitAccount = this.debitSavingAccount
-      
+  findAccount(accountType: String, source : string) {
+    // Si la méthode est déclenchée pour le compte débiteur, on assigne les variables liées au débit
+    if(source == "debit"){      
+      if (accountType == "Compte Courant"){
+        this.typeDebitAccount= "currentAccount"
+        console.log("type compte débiteur " + this.typeDebitAccount);
+        this.selectedDebitAccount = this.debitCurrentAccount          
+      } else {
+        this.typeDebitAccount= "savingAccount"
+        console.log("type compte débiteur " + this.typeDebitAccount)
+        this.selectedDebitAccount = this.debitSavingAccount        
+      }
+      this.debitAccounts = [this.selectedDebitAccount];
     }
-    this.debitAccounts = [this.selectedDebitAccount];
+    // Sinon, la méthode est déclenchée pour le compte créditeur : on assigne les variables liées au crédit
+    else{
+      if (accountType == "Compte Courant"){
+        this.typeCreditAccount= "currentAccount";
+        this.selectedCreditAccount = this.creditCurrentAccount; 
+        console.log("type compte créditeur " + this.typeCreditAccount);        
+      } else {
+        this.typeCreditAccount= "savingAccount";
+        this.selectedCreditAccount = this.creditSavingAccount;
+        console.log("type compte créditeur " + this.typeCreditAccount);
+      }
+      this.creditAccounts = [this.selectedCreditAccount];
+    }
   }
   
-  findAccountCredit(accountType: String) {
-    console.log( "type : "+ accountType);
-    
-    if (accountType == "Compte Courant"){
-      this.typeCreditAccount= "currentAccount";
-      this.selectedCreditAccount = this.creditCurrentAccount; 
-      console.log("type credit account dans findAccountCredit " + this.typeCreditAccount);
-      
-    } else {
-      this.typeCreditAccount= "savingAccount";
-      this.selectedCreditAccount = this.creditSavingAccount;
-      console.log("type credit account dans findAccountCredit " + this.typeCreditAccount);
-    }
-    this.creditAccounts = [this.selectedCreditAccount];
-  }
-  
+  // Méthode pour ouvrir une modale et valider le virement
   openDialog(value: any) : void { 
     console.log("montant : " + value.amountFormControl);
     console.log("idDebitAccount : " + this.selectedDebitAccount.id);
@@ -135,8 +128,8 @@ export class TransferComponent implements OnInit {
     
     this.dialog.open(ConfirmTransferModal, {      
       data: {
-        // typeCreditAccount: this.typeCreditAccount, 
-        // typeDebitAccount: this.typeDebitAccount, 
+        typeCreditAccount: this.typeCreditAccount, 
+        typeDebitAccount: this.typeDebitAccount, 
         idCreditAccount: this.selectedCreditAccount.id,
         idDebitAccount: this.selectedDebitAccount.id,
         amount: value.amountFormControl,
@@ -145,6 +138,7 @@ export class TransferComponent implements OnInit {
     });
   }
   
+  // Méthode envoyer le virement au back
   onSubmit(value: any) {
     this.transferDtoRequest = {
       typeCreditAccount: this.typeCreditAccount, 
@@ -174,8 +168,8 @@ export class TransferComponent implements OnInit {
 }
 
 
-// FIN DU COMPOSANT client-list
-// DEBUT des modales (confirmation de la du virement)
+// FIN DU COMPOSANT
+// DEBUT des modales (confirmation du virement)
 
 export interface DialogData {
   typeCreditAccount: string, 
