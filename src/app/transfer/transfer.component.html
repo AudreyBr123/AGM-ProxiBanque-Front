@@ -65,11 +65,11 @@
     <div class = "account-selected-container">
       <div class="left-container">
         <h3>Compte de débit : {{selectedDebitAccount.id}} </h3> 
-        Solde : {{selectedDebitAccount.balance}} 
+        Solde : {{selectedDebitAccount.balance | number: '1.0-2'}} €
       </div>
       <div class="right-container">
         <h3>Compte de crédit : {{selectedCreditAccount.id}} </h3> 
-        Solde : {{selectedCreditAccount.balance}} 
+        Solde : {{selectedCreditAccount.balance| number: '1.0-2'}} €
       </div>
     </div>
     
