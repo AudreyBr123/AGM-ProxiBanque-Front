@@ -3,6 +3,6 @@
     vers le compte {{data.idCreditAccount}} ({{data.typeCreditAccount == "currentAccount"? "compte courant" : "compte épargne" }}) ?</p>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button class="btn-grad" (click)="onConfirmClick(data)" cdkFocusInitial>Confirmer</button>
-  <button mat-button class="btn-grad" (click)="onNoClick()">Annuler</button>
+  <button mat-button class="btn-grad btn-grad-green" (click)="onConfirmClick(data)" cdkFocusInitial>Confirmer</button>
+  <button mat-button class="btn-grad btn-grad-red" (click)="onNoClick()">Annuler</button>
 </mat-dialog-actions>
