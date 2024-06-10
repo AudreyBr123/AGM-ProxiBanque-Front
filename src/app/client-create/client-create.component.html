@@ -1,119 +1,117 @@
 <ng-template [ngIf]="!hasError" [ngIfElse]="noClientFound">
+    <div class="page-head">
+        <h2 *ngIf="isAddMode">Création d'un client</h2>
+        <h2 *ngIf="!isAddMode">Modification des informations du client</h2>
+        <a *ngIf="!isAddMode" class="btn-grad btn-grad-grey btn-back" mat-flat-button color="primary" (click)="goBack()">Retour</a>
+    </div>
 
-<div class="page-head">
-    <h2 *ngIf="isAddMode">Création d'un client</h2>
-    <h2 *ngIf="!isAddMode">Modification des informations du client</h2>
-
-    <a *ngIf="!isAddMode" class="btn-grad btn-grad-grey btn-back" mat-flat-button color="primary" (click)="goBack()">Retour</a>
-</div>
-
-<mat-card class="example-card">
-    <mat-card-content>
-        <form (ngSubmit)="onSubmit()" [formGroup]="registerForm" class="example-form">
-            <mat-form-field class="example-full-width">
-                <mat-label>Nom</mat-label>
-                <input matInput placeholder="Ex. Doe" value="" [(ngModel)]="client.personInfos.lastName" name="lastName" required formControlName="firstNameFormControl" [errorStateMatcher]="matcher">
-                <mat-error *ngIf="registerForm.get('firstNameFormControl')?.hasError('required')">
-                    Le nom est <strong>obligatoire</strong>
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-                <mat-label>Prénom</mat-label>
-                <input matInput placeholder="Ex. John" value="" [(ngModel)]="client.personInfos.firstName" name="firstName" required formControlName="lastNameFormControl" [errorStateMatcher]="matcher">
-                <mat-error *ngIf="registerForm.get('lastNameFormControl')?.hasError('required')">
-                    Le Prénom est <strong>obligatoire</strong>
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-                <mat-label>Email</mat-label>
-                <input type="email" matInput placeholder="Ex. johndoe@gmail.com" value="" [(ngModel)]="client.personInfos.email" name="email" required formControlName="emailFormControl" [errorStateMatcher]="matcher">
-                <mat-error *ngIf="registerForm.get('emailFormControl')?.hasError('email')">Veuillez entrez un email valide</mat-error>
-                <mat-error *ngIf="registerForm.get('emailFormControl')?.hasError('required')">L'email est <strong>obligatoire</strong></mat-error>
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-                <mat-label>Adresse</mat-label>
-                <input matInput placeholder="Ex. 12 rue des does" value="" [(ngModel)]="client.personInfos.street" name="street" required formControlName="streetFormControl" [errorStateMatcher]="matcher">
-                <mat-error *ngIf="registerForm.get('streetFormControl')?.hasError('required')">
-                    L'addresse est <strong>obligatoire</strong>
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-                <mat-label>Ville</mat-label>
-                <input matInput placeholder="Ex. Bordeaux" value="" [(ngModel)]="client.personInfos.city" name="city" required formControlName="cityFormControl" [errorStateMatcher]="matcher">
-                <mat-error *ngIf="registerForm.get('cityFormControl')?.hasError('required')">
-                    La ville est <strong>obligatoire</strong>
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-                <mat-label>Code postal</mat-label>
-                <input matInput placeholder="Ex. 42000" value="" [(ngModel)]="client.personInfos.zipCode" name="zipCode" required formControlName="zipCodeFormControl" [errorStateMatcher]="matcher">
-                <mat-error *ngIf="registerForm.get('zipCodeFormControl')?.hasError('required')">
-                    Le code postal est <strong>obligatoire</strong>
-                </mat-error>
-                <mat-error *ngIf="registerForm.get('zipCodeFormControl')?.hasError('pattern')">
-                    Le code postal est <strong>incorrect</strong>
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-                <mat-label>Numéro de téléphone</mat-label>
-                <input type="tel" matInput placeholder="Ex. 035426178912" value="" [(ngModel)]="client.personInfos.phoneNumber" name="phoneNumber" required formControlName="phoneNumberFormControl" [errorStateMatcher]="matcher">
-                <mat-error *ngIf="registerForm.get('phoneNumberFormControl')?.hasError('required')">
-                    Le numéro de téléphone est <strong>obligatoire</strong>
-                </mat-error>
-                <mat-error *ngIf="registerForm.get('phoneNumberFormControl')?.hasError('pattern')">
-                    Le numéro de téléphone est <strong>incorrect</strong>
-                </mat-error>
-            </mat-form-field>
-            <!-- Dont touch this code, it handles showing the checkboxes if we are creating a new account, or, if an account isnt created-->
-            <div *ngIf="isAddMode || (!isAddMode && (client.currentAccount?.id === null || client.savingAccount?.id === null))">
-                <section class="example-section" [formGroup]="accounts">
-                    <h4>Sélectionner les comptes que vous voulez créer :</h4>
-                    <div *ngIf="isAddMode || (!isAddMode && (client.currentAccount?.id === null))">
-                        <p><mat-checkbox formControlName="currentAccount">Compte courant</mat-checkbox></p>
-                        <div *ngIf="accounts.value.currentAccount">
-                            <mat-form-field class="example-full-width">
-                                <mat-label>Solde compte courant</mat-label>
-                                <input type="number" matInput placeholder="Ex. 530.00" value="0" min="0" step=".01" [(ngModel)]="currentAccount.balance" name="currentAccountBalance" required formControlName="currentAccountFormControl" [errorStateMatcher]="matcher">
-                                <mat-error *ngIf="accounts.get('currentAccountFormControl')?.hasError('required')">
-                                    Le solde est <strong>obligatoire</strong>
-                                </mat-error>
-                                <mat-error *ngIf="accounts.get('currentAccountFormControl')?.hasError('min')">
-                                    Le solde doit être <strong>positif</strong>
-                                </mat-error>
-                                <mat-error *ngIf="accounts.get('currentAccountFormControl')?.hasError('invalidDecimals')">
-                                    Le solde doit avoir au maximum <strong>2 décimales</strong>
-                                </mat-error>
-                            </mat-form-field>
+    <mat-card class="example-card">
+        <mat-card-content>
+            <form (ngSubmit)="onSubmit()" [formGroup]="registerForm" class="example-form">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Nom</mat-label>
+                    <input matInput placeholder="Ex. Doe" value="" [(ngModel)]="client.personInfos.lastName" name="lastName" required formControlName="firstNameFormControl" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="registerForm.get('firstNameFormControl')?.hasError('required')">
+                        Le nom est <strong>obligatoire</strong>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Prénom</mat-label>
+                    <input matInput placeholder="Ex. John" value="" [(ngModel)]="client.personInfos.firstName" name="firstName" required formControlName="lastNameFormControl" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="registerForm.get('lastNameFormControl')?.hasError('required')">
+                        Le Prénom est <strong>obligatoire</strong>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput placeholder="Ex. johndoe@gmail.com" value="" [(ngModel)]="client.personInfos.email" name="email" required formControlName="emailFormControl" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="registerForm.get('emailFormControl')?.hasError('email')">Veuillez entrez un email valide</mat-error>
+                    <mat-error *ngIf="registerForm.get('emailFormControl')?.hasError('required')">L'email est <strong>obligatoire</strong></mat-error>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Adresse</mat-label>
+                    <input matInput placeholder="Ex. 12 rue des does" value="" [(ngModel)]="client.personInfos.street" name="street" required formControlName="streetFormControl" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="registerForm.get('streetFormControl')?.hasError('required')">
+                        L'addresse est <strong>obligatoire</strong>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Ville</mat-label>
+                    <input matInput placeholder="Ex. Bordeaux" value="" [(ngModel)]="client.personInfos.city" name="city" required formControlName="cityFormControl" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="registerForm.get('cityFormControl')?.hasError('required')">
+                        La ville est <strong>obligatoire</strong>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Code postal</mat-label>
+                    <input matInput placeholder="Ex. 42000" value="" [(ngModel)]="client.personInfos.zipCode" name="zipCode" required formControlName="zipCodeFormControl" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="registerForm.get('zipCodeFormControl')?.hasError('required')">
+                        Le code postal est <strong>obligatoire</strong>
+                    </mat-error>
+                    <mat-error *ngIf="registerForm.get('zipCodeFormControl')?.hasError('pattern')">
+                        Le code postal est <strong>incorrect</strong>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Numéro de téléphone</mat-label>
+                    <input type="tel" matInput placeholder="Ex. 035426178912" value="" [(ngModel)]="client.personInfos.phoneNumber" name="phoneNumber" required formControlName="phoneNumberFormControl" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="registerForm.get('phoneNumberFormControl')?.hasError('required')">
+                        Le numéro de téléphone est <strong>obligatoire</strong>
+                    </mat-error>
+                    <mat-error *ngIf="registerForm.get('phoneNumberFormControl')?.hasError('pattern')">
+                        Le numéro de téléphone est <strong>incorrect</strong>
+                    </mat-error>
+                </mat-form-field>
+                <!-- Dont touch this code, it handles showing the checkboxes if we are creating a new account, or, if an account isnt created-->
+                <div *ngIf="isAddMode || (!isAddMode && (client.currentAccount?.id === null || client.savingAccount?.id === null))">
+                    <section class="example-section" [formGroup]="accounts">
+                        <h4>Sélectionner les comptes que vous voulez créer :</h4>
+                        <div *ngIf="isAddMode || (!isAddMode && (client.currentAccount?.id === null))">
+                            <p><mat-checkbox formControlName="currentAccount">Compte courant</mat-checkbox></p>
+                            <div *ngIf="accounts.value.currentAccount">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Solde compte courant</mat-label>
+                                    <input type="number" matInput placeholder="Ex. 530.00" value="0" min="0" step=".01" [(ngModel)]="currentAccount.balance" name="currentAccountBalance" required formControlName="currentAccountFormControl" [errorStateMatcher]="matcher">
+                                    <mat-error *ngIf="accounts.get('currentAccountFormControl')?.hasError('required')">
+                                        Le solde est <strong>obligatoire</strong>
+                                    </mat-error>
+                                    <mat-error *ngIf="accounts.get('currentAccountFormControl')?.hasError('min')">
+                                        Le solde doit être <strong>positif</strong>
+                                    </mat-error>
+                                    <mat-error *ngIf="accounts.get('currentAccountFormControl')?.hasError('invalidDecimals')">
+                                        Le solde doit avoir au maximum <strong>2 décimales</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
                         </div>
-                    </div>
-                    <div *ngIf="isAddMode || (!isAddMode && (client.savingAccount?.id === null))">
-                        <p><mat-checkbox formControlName="savingAccount">Compte épargne</mat-checkbox></p>
-                        <div *ngIf="accounts.value.savingAccount">
-                            <mat-form-field class="example-full-width">
-                                <mat-label>Solde compte épargne</mat-label>
-                                <input type="number" matInput placeholder="Ex. 530.00" value="0" [(ngModel)]="savingAccount.balance" name="savingAccountBalance" required formControlName="savingAccountFormControl" [errorStateMatcher]="matcher">
-                                <mat-error *ngIf="accounts.get('savingAccountFormControl')?.hasError('invalidDecimals')">
-                                    Le solde doit avoir au maximum <strong>2 décimales</strong>
-                                </mat-error>
-                                <mat-error *ngIf="accounts.get('savingAccountFormControl')?.hasError('required')">
-                                    Le solde est <strong>obligatoire</strong>
-                                </mat-error>
-                                <mat-error *ngIf="accounts.get('savingAccountFormControl')?.hasError('min')">
-                                    Le solde doit être <strong>positif</strong>
-                                </mat-error>
-                            </mat-form-field>
+                        <div *ngIf="isAddMode || (!isAddMode && (client.savingAccount?.id === null))">
+                            <p><mat-checkbox formControlName="savingAccount">Compte épargne</mat-checkbox></p>
+                            <div *ngIf="accounts.value.savingAccount">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Solde compte épargne</mat-label>
+                                    <input type="number" matInput placeholder="Ex. 530.00" value="0" [(ngModel)]="savingAccount.balance" name="savingAccountBalance" required formControlName="savingAccountFormControl" [errorStateMatcher]="matcher">
+                                    <mat-error *ngIf="accounts.get('savingAccountFormControl')?.hasError('invalidDecimals')">
+                                        Le solde doit avoir au maximum <strong>2 décimales</strong>
+                                    </mat-error>
+                                    <mat-error *ngIf="accounts.get('savingAccountFormControl')?.hasError('required')">
+                                        Le solde est <strong>obligatoire</strong>
+                                    </mat-error>
+                                    <mat-error *ngIf="accounts.get('savingAccountFormControl')?.hasError('min')">
+                                        Le solde doit être <strong>positif</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!-- {{ accounts.get("currentAccountFormControl")?.errors | json }} -->
                         </div>
-                        <!-- {{ accounts.get("currentAccountFormControl")?.errors | json }} -->
-                    </div>
-                  </section>
-            </div>
+                    </section>
+                </div>
 
-            <button class="btn-grad btn-grad-green" mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid || !accounts.valid" *ngIf="isAddMode">Créer</button>
-            <button class="btn-grad btn-grad-green" mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid || !accounts.valid" *ngIf="!isAddMode">Valider</button>
+                <button class="btn-grad btn-grad-green" mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid || !accounts.valid" *ngIf="isAddMode">Créer</button>
+                <button class="btn-grad btn-grad-green" mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid || !accounts.valid" *ngIf="!isAddMode">Valider</button>
 
-      </form>
-    </mat-card-content>
-</mat-card>
+        </form>
+        </mat-card-content>
+    </mat-card>
 </ng-template>
 <ng-template #noClientFound>
     <div>
