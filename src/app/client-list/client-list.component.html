@@ -41,7 +41,7 @@
     <ng-container matColumnDef="currentAccountBalance">
       <th mat-header-cell *matHeaderCellDef>Solde</th>
       <td mat-cell *matCellDef="let client">
-        {{ client.currentAccount?.balance }}
+        {{ client.currentAccount?.balance | number: '1.0-2'}}
       </td>
     </ng-container>
 
@@ -53,7 +53,7 @@
     <ng-container matColumnDef="savingAccountBalance">
       <th mat-header-cell *matHeaderCellDef>Solde</th>
       <td mat-cell *matCellDef="let client">
-        {{ client.savingAccount?.balance }}
+        {{ client.savingAccount?.balance | number: '1.0-2'}}
       </td>
     </ng-container>
 
