@@ -9,9 +9,12 @@ import { Location } from '@angular/common';
   templateUrl: './advisor-client-list.component.html',
   styleUrls: ['./advisor-client-list.component.css', '../../styles.css'],
 })
+
 export class AdvisorClientListComponent implements OnInit {
 
+  // Ceci permet de récupérer l'ID de l'advisor dans l'URL
   id = this.activatedRoute.snapshot.params['id'];
+
   clients : ClientModel[] = [];
   hasError = false;
 
@@ -27,6 +30,7 @@ export class AdvisorClientListComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    // Au chargement du composant, on récupère la liste des clients suivis par ce conseiller
     this.service.getClientListByAdvisorId(this.id).subscribe({
       next: (clients) => {
         this.clients = clients;      

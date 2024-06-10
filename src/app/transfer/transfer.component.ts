@@ -60,9 +60,6 @@ export class TransferComponent implements OnInit {
     "Compte Epargne"
   ]
   
-  
-  // Méthodes
-  
   constructor(private clientService: ClientService, private transferService: TransferService , private router: Router, private location: Location,
     public dialog: MatDialog, formBuilder: FormBuilder, private toastService: ToastService) {
       
@@ -147,7 +144,10 @@ export class TransferComponent implements OnInit {
       }
     }
     
-    // Méthode pour ouvrir une modale et valider le virement
+    /**
+     * Ouvre une modale pour valider le virement
+     * @param value 
+     */
     openDialog(value: any) : void { 
       this.dialog.open(ConfirmTransferModal, {      
         data: {
@@ -161,7 +161,10 @@ export class TransferComponent implements OnInit {
       });
     }
     
-    // Méthode pour envoyer le virement au back
+    /**
+     * Transmission du virement au back-end
+     * @param value 
+     */
     onSubmit(value: any) {
       this.transferDtoRequest = {
         typeCreditAccount: this.typeCreditAccount, 

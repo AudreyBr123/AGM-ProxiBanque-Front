@@ -1,3 +1,7 @@
+// ====================================================
+// V2 : base pour une future implémentation des guards
+// ====================================================
+
 // import { inject } from "@angular/core";
 // import { Router } from "@angular/router";
 // import { Store } from "@ngrx/store";

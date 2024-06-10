@@ -10,7 +10,7 @@ import { SavingAccountModel } from '../models/saving-account.model';
 import { Location } from '@angular/common';
 import { ToastService } from 'angular-toastify';
 
-/** Error when invalid control is dirty, touched, or submitted. */
+/** Définit quand le (mauvais) remplissage du formulaire doit générer une erreur */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -23,6 +23,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './client-create.component.html',
   styleUrls: ['./client-create.component.css', '../../styles.css'],
 })
+
 export class ClientCreateComponent {
   // Données du client
   personInfos = new PersonInfos("", "", "", "", "", "", "");

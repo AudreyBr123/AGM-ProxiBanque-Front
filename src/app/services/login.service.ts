@@ -25,5 +25,4 @@ export class LoginService {
   postLogin(user: UserModel): Observable<{ role: string }> {
     return this.httpClient.post<{ role: string }>(this.endpoint + "login", JSON.stringify(user), this.httpOptions)
   }
-
 }

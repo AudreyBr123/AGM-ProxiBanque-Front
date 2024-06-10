@@ -13,11 +13,11 @@ export class AppComponent implements OnInit {
 
   constructor(private store: Store<{status: string}>) {}
 
-  // Au démarrage de l'application
+  // Au démarrage de l'application...
   ngOnInit(): void {
-    // On vérifie si le localStorage contient une info concernant le role
+    // On vérifie si le localStorage contient une information concernant le role
     if (localStorage.getItem('role') != null) {
-      // Si on a en effet une info sur le role, on la met dans le store
+      // Si c'est le cas, on la met dans le store
       if (localStorage.getItem('role') == 'MANAGER') {
         this.store.dispatch(setManagerStatus());
       }

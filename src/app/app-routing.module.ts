@@ -9,7 +9,6 @@ import { TransferComponent } from './transfer/transfer.component';
 import { AdvisorClientListComponent } from './advisor-client-list/advisor-client-list.component';
 import { ChartComponent } from './chart/chart.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-// import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -24,6 +23,10 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent}
 ];
+
+// ====================================================
+// V2 : base pour une future implémentation des guards
+// ====================================================
 
 // const routes: Routes = [
 //   { path: 'login', component: LoginComponent },
