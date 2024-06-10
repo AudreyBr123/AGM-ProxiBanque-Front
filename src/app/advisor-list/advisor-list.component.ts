@@ -15,7 +15,6 @@ export class AdvisorListComponent implements OnInit {
   constructor(private service: AdvisorService, private router: Router) {}
 
   displayedColumns: string[] = [
-    'id',
     'firstName',
     'lastName',
     'numberOfClients',

@@ -1,70 +1,81 @@
+<button class="btn-grad" (click)="goBack()">Retour</button>
+
 <div class="main-container">
   <h2>Virement de compte à compte</h2>
   
   <form (ngSubmit)="form.value" [formGroup]="form">
     <div class = "account-selection-container">
       <div class="left-container">
-        <div class="select-client">
+        <div class="select-client" [class.error]="!idClientDebitFormControl.valid && idClientDebitFormControl.touched">
           <mat-form-field style="width:25vw">
-            <mat-label>Client du compte débiteur</mat-label>
-            <mat-select formControlName="idClientDebitFormControl" (selectionChange)="findClientAccountsDebit($event.value)">
+            <mat-label> Client du compte débiteur</mat-label>
+            <mat-select [formControl] ="$any(idClientDebitFormControl)" (selectionChange)="findClientAccounts($event.value, 'debit')">
               @for (debitClient of clients; track debitClient) {
                 <mat-option name="clientDebitAccount" [value]="debitClient.id">{{ debitClient.id }} : {{ debitClient.personInfos.firstName }}  {{ debitClient.personInfos.lastName }}  </mat-option>
               }
             </mat-select> 
+            @if (idClientDebitFormControl.hasError('required')) {<mat-error> Veuillez choisir un client </mat-error>}
           </mat-form-field> 
           <mat-icon>arrow_forward</mat-icon>
         </div>
-        <div>
+        <div [class.error]="!typeDebitAccountFormControl.valid && typeDebitAccountFormControl.touched">
           <mat-form-field style="width:25vw">
             <mat-label>Compte débiteur</mat-label>
-            <mat-select formControlName="typeDebitAccountFormControl" (selectionChange)="findAccountDebit($event.value)" >
+            <mat-select [formControl]="typeDebitAccountFormControl" (selectionChange)="findAccount($event.value, 'debit')" >
               <mat-option name="debitAccount" [value]="accountTypes.at(0)"> {{ debitCurrentAccount.id }} : {{accountTypes.at(0)}} </mat-option>
               <mat-option name="debitAccount" [value]="accountTypes.at(1)"> {{ debitSavingAccount.id }} : {{accountTypes.at(1)}} </mat-option>
             </mat-select>
+            @if (typeDebitAccountFormControl.hasError('required')) {<mat-error> Veuillez choisir un compte </mat-error>}
           </mat-form-field>
           <mat-icon>arrow_forward</mat-icon>
         </div>   
       </div>      
       <div class="right-container">
-        <div class="select-client">
+        <div class="select-client" [class.error]="!idClientCreditFormControl.valid && idClientCreditFormControl.touched">
           <mat-form-field style="width:25vw">
             <mat-label>Client du compte créditeur</mat-label>
-            <mat-select formControlName="idClientCreditFormControl" (selectionChange)="findClientAccountsCredit($event.value)">
+            <mat-select [formControl]="$any(idClientCreditFormControl)" (selectionChange)="findClientAccounts($event.value, 'credit')">
               @for (creditClient of clients; track creditClient) {
                 <mat-option name="clientCreditAccount" [value]="creditClient.id">{{ creditClient.id }} : {{ creditClient.personInfos.firstName }}  {{ creditClient.personInfos.lastName }}  </mat-option>
               }
             </mat-select>
+            @if (idClientCreditFormControl.hasError('required')) {<mat-error> Veuillez choisir un client </mat-error>}
           </mat-form-field>      
         </div>
-        <div>
+        <div [class.error]="!typeCreditAccountFormControl.valid && typeCreditAccountFormControl.touched">
           <mat-form-field style="width:25vw">
             <mat-label>Compte créditeur</mat-label>
-            <mat-select formControlName="typeCreditAccountFormControl" (selectionChange)="findAccountCredit($event.value)" >
+            <mat-select [formControl]="$any(typeCreditAccountFormControl)" (selectionChange)="findAccount($event.value, 'credit')" >
               <mat-option name="creditAccount"  [value]="accountTypes.at(0)"> {{ creditCurrentAccount.id }} : {{accountTypes.at(0)}} </mat-option>
               <mat-option name="creditAccount" [value]="accountTypes.at(1)"> {{ creditSavingAccount.id }} : {{accountTypes.at(1)}} </mat-option>
             </mat-select>
+            @if (typeCreditAccountFormControl.hasError('required')) {<mat-error> Veuillez choisir un compte </mat-error>}
           </mat-form-field>
         </div>    
       </div>
     </div>
     
-    <mat-form-field class="example-full-width" style="width:25vw">
+    <div  [class.error]="!amountFormControl.valid && amountFormControl.touched">
       <mat-label>Montant</mat-label>
-      <input matInput name="amount" formControlName="amountFormControl" placeholder="Ex. 2500" value="" />
-    </mat-form-field>
+      <mat-form-field class="example-full-width" style="width:25vw">
+        <input matInput name="amount" [formControl]="$any(amountFormControl)" placeholder="Ex. 2500" value="" />
+        @if (amountFormControl.hasError('required')) {<mat-error> Montant obligatoire</mat-error>}
+        @else if (!amountFormControl.valid) {<mat-error> Le montant doit être positif</mat-error>}     
+      </mat-form-field>
+    </div>
     
     <div class = "account-selected-container">
       <div class="left-container">
         <h3>Compte de débit : {{selectedDebitAccount.id}} </h3> 
-        Solde : {{selectedDebitAccount.balance}} 
+        Solde : {{selectedDebitAccount.balance | number: '1.0-2'}} €
       </div>
       <div class="right-container">
         <h3>Compte de crédit : {{selectedCreditAccount.id}} </h3> 
-        Solde : {{selectedCreditAccount.balance}} 
+        Solde : {{selectedCreditAccount.balance| number: '1.0-2'}} €
       </div>
     </div>
-    
-    <button class="btn-grad" (click)="onSubmit(form.value)">Valider</button>    
+    <div class="button-container">
+      <button type="submit" class="btn-grad" (click)="openDialog(form.value)" [disabled]="!form.valid">Valider</button>   
+    </div> 
   </form>
 </div>

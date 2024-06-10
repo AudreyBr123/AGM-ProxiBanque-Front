@@ -15,7 +15,7 @@ export class TransferService {
   endpointClient = 'http://localhost:8080/clients'
   endpointSavingAccounts = 'http://localhost:8080/savingAccounts'
   endpointCurrentAccounts = 'http://localhost:8080/currentAccounts'
-
+  
   constructor(private httpClient : HttpClient) {} 
   
   httpOptions = {
@@ -24,8 +24,8 @@ export class TransferService {
       'Access-Control-Allow-Origin' : '*'
     })
   }
- 
-
+  
+  
   putTransfer(transferDtoRequest: TransferDtoRequest) {
     console.log("Sending request to debit account number " + transferDtoRequest.idDebitAccount + " ("+transferDtoRequest.typeDebitAccount+")" 
     + " and credit account number " + transferDtoRequest.idCreditAccount + " ("+transferDtoRequest.typeCreditAccount + ")."+
@@ -40,22 +40,22 @@ export class TransferService {
   getSavingAccounts(){
     return this.httpClient.get<SavingAccountModel[]>(this.endpointSavingAccounts);
   }
-
+  
   getCurrentAccounts(){
     return this.httpClient.get<CurrentAccountModel[]>(this.endpointCurrentAccounts);
   }
-
-
+  
+  
   // Cette méthode peut retourner une valeur qui est récupérée par le composant, selon la valeur de retour on utilise "navigate" pour forcer la navigation
   handleError(error:any) {
     console.log("Passe par handleError dans le service");
+
     let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-        errorMessage = error.error.message;
-    } else {
-        errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    for (const [key, value] of Object.entries(error.error)) {
+      errorMessage = `${value}`
     }
+
     window.alert(errorMessage);
     return throwError(() => new Error(errorMessage));
-}
+  }
 }

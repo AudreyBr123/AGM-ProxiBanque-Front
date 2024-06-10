@@ -1,4 +1,6 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -32,6 +34,8 @@ import { AdvisorClientListComponent } from './advisor-client-list/advisor-client
 import { ChartComponent } from './chart/chart.component';
 import { AngularToastifyModule, ToastService } from 'angular-toastify';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [
@@ -74,7 +78,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     ],
   providers: [
     provideAnimationsAsync(),
-    [ToastService]
+    [ToastService],
+    [{ provide: LOCALE_ID, useValue: "fr-FR" }]
   ],
   bootstrap: [AppComponent]
 })

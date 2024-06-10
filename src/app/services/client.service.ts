@@ -47,8 +47,8 @@ export class ClientService {
   handleError(error:any) {
     // console.log("Passe par handleError dans le service");
     let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-        errorMessage = error.error.message;
+     if (error.error instanceof ErrorEvent) {
+        errorMessage = error.message;
     } else {
         errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }

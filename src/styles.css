@@ -29,9 +29,10 @@ body {
     color: white;            
     box-shadow: 0 0 20px #eee;
     border-radius: 10px;
-    display: block;
     border: none;
     font-weight: 600;
+    display: flex;
+    align-items: center;
 }
     
 .btn-grad:hover {
@@ -67,3 +68,6 @@ mat-dialog-actions {
     justify-content: center;
 }
 
+h2 {
+    text-align: center;
+}

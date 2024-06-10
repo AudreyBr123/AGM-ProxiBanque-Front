@@ -14,11 +14,6 @@
     <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
 
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>ID</th>
-      <td mat-cell *matCellDef="let client">{{ client.id }}</td>
-    </ng-container>
-
     <ng-container matColumnDef="firstName">
       <th mat-header-cell *matHeaderCellDef>Prénom</th>
       <td mat-cell *matCellDef="let client">
@@ -41,7 +36,7 @@
     <ng-container matColumnDef="currentAccountBalance">
       <th mat-header-cell *matHeaderCellDef>Solde</th>
       <td mat-cell *matCellDef="let client">
-        {{ client.currentAccount?.balance }}
+        {{ client.currentAccount?.balance | number: '1.0-2'}}
       </td>
     </ng-container>
 
@@ -53,7 +48,7 @@
     <ng-container matColumnDef="savingAccountBalance">
       <th mat-header-cell *matHeaderCellDef>Solde</th>
       <td mat-cell *matCellDef="let client">
-        {{ client.savingAccount?.balance }}
+        {{ client.savingAccount?.balance | number: '1.0-2'}}
       </td>
     </ng-container>
 
@@ -72,9 +67,9 @@
 
     <ng-container matColumnDef="buttonDelete">
       <th mat-header-cell *matHeaderCellDef>Suppression</th>
-      <td mat-cell *matCellDef="let client">
+      <td mat-cell *matCellDef="let client" class="text-center">
         <button
-          class="list-action-icons"
+          class="list-action-icons button-delete"
           routerLink="/client-list"
           (click)="openDialog(client.id)"
         >
@@ -97,11 +92,11 @@
     </ng-container>
 
     <ng-container matColumnDef="buttonTransfer">
-      <th mat-header-cell *matHeaderCellDef>Virements</th>
+      <th mat-header-cell *matHeaderCellDef>Virement</th>
       <td mat-cell *matCellDef="let client">
         <button
           class="list-action-icons"
-          routerLink=""
+          routerLink= "/transfer"
           (click)="handleClickOnTransfer(client.id)"
         >
         <mat-icon>sync_alt</mat-icon>

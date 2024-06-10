@@ -46,7 +46,7 @@
                 }}</span
               >
               <span matListItemLine class="balance">
-                Solde : {{ client.currentAccount?.balance }} €
+                Solde : {{ client.currentAccount?.balance | number: '1.0-2'}} €
               </span>
             </mat-list-item>
           </div>
@@ -64,7 +64,7 @@
                 }}</span
               >
               <span matListItemLine class="balance">
-                Solde : {{ client.savingAccount?.balance }} €
+                Solde : {{ client.savingAccount?.balance | number: '1.0-2'}} €
               </span>
             </mat-list-item>
           </div>
