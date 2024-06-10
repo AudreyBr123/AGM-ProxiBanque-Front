@@ -17,12 +17,6 @@
     width: 100%;
 }
 
-.btn-grad:hover {
-    /* background-image: none; */
-    /* background-color: #188b8a; */
-    box-shadow: 0 0 20px #333333;
-}
-
 .btn-grad:disabled {
     background-image: none;
     background-color: rgb(177, 177, 177);

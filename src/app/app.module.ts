@@ -12,7 +12,6 @@ import { ClientListComponent } from './client-list/client-list.component';
 import { AdvisorListComponent } from './advisor-list/advisor-list.component';
 import { ClientShowComponent } from './client-show/client-show.component';
 import { ClientCreateComponent } from './client-create/client-create.component';
-import { ClientEditComponent } from './client-edit/client-edit.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatTableModule} from '@angular/material/table';
@@ -47,7 +46,6 @@ registerLocaleData(localeFr);
     AdvisorListComponent,
     ClientShowComponent,
     ClientCreateComponent,
-    ClientEditComponent,
     TransferComponent,
     AdvisorClientListComponent,
     ChartComponent,

@@ -12,10 +12,10 @@ export class ChartComponent implements OnInit {
   @ViewChild('myChart', { static: true }) myChart!: ElementRef;
 
   constructor() {}
-  // Soldes des comptes courants
+  // Soldes des comptes courants (données en dur pour le moment)
   data1 = [200, 90, 3000]
 
-  // Soldes des comptes épargne
+  // Soldes des comptes épargne (données en dur pour le moment)
   data2 = [4000, 2000, 3300]
 
 
@@ -58,6 +58,7 @@ export class ChartComponent implements OnInit {
         },
         plugins: {
           legend: {
+              // Cette partie du code gère l'inversion de l'action de la légende (quand on clique sur Comptes Courants, ça n'affiche que les Comptes Courants)
               onClick: function(e, legendItem, legend) {
                 const index = legendItem.datasetIndex;
                 const oppositeIndex = (index == 1) ? 0 : 1;
@@ -79,5 +80,4 @@ export class ChartComponent implements OnInit {
     });
     
   }
-
 }

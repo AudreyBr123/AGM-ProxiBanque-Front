@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AdvisorModel } from '../models/advisor.model';
 import { AdvisorService } from '../services/advisor.service';
 import { ClientModel } from '../models/client.model';
 import { ActivatedRoute } from '@angular/router';
@@ -10,11 +9,12 @@ import { Location } from '@angular/common';
   templateUrl: './advisor-client-list.component.html',
   styleUrls: ['./advisor-client-list.component.css', '../../styles.css'],
 })
+
 export class AdvisorClientListComponent implements OnInit {
-handleClickOnShow(arg0: any) {
-throw new Error('Method not implemented.');
-}
+
+  // Ceci permet de récupérer l'ID de l'advisor dans l'URL
   id = this.activatedRoute.snapshot.params['id'];
+
   clients : ClientModel[] = [];
   hasError = false;
 
@@ -30,6 +30,7 @@ throw new Error('Method not implemented.');
   ];
 
   ngOnInit(): void {
+    // Au chargement du composant, on récupère la liste des clients suivis par ce conseiller
     this.service.getClientListByAdvisorId(this.id).subscribe({
       next: (clients) => {
         this.clients = clients;      

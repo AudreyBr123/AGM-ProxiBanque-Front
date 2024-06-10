@@ -22,31 +22,12 @@ import { ToastService } from 'angular-toastify';
 export class ClientListComponent implements OnInit {
   clients: ClientModel[] = [];
 
-  // Transmission du service dans le constructeur
   constructor(private service: ClientService, public dialog: MatDialog, private toastService: ToastService) {}
-
-  handleClickOnShow(clientId: number) {
-    console.log("Vous voulez voir la fiche du client : ", clientId)
-  }
-
-  handleClickOnEdit(clientId: number) {
-    console.log("Vous voulez éditer le client : ", clientId)
-  }
-
-  handleClickOnTransfer(clientId: number) {
-    console.log("Vous voulez accéder aux virements du client : ", clientId)
-  }
-
-  handleClickOnDelete(clientId: number) {
-    // On va chercher le client grâce à l'id récupéré en URL et on le supprime
-    this.service.deleteClientById(clientId).subscribe(() => {
-      // NOTE est-ce que c'est la meilleure façon de rafraichir après avoir supprimé un client ?
-      this.service.getClients().subscribe(clientsFromServer => this.clients = clientsFromServer);
-    })
-
-    this.addInfoToast();
-  }
-
+  
+  /**
+   * Méthode appelée en étape 1, ce handler ouvre la modale de confirmation pour supprimer un client
+   * @param clientId ID du client à supprimer
+   */
   openDialog(clientId: number) : void {
     this.dialog.open(ConfirmDeleteModal, {
       data: {
@@ -56,6 +37,18 @@ export class ClientListComponent implements OnInit {
     });
   }
 
+  /**
+   * Méthode appelée en étape 2, lorsque l'utlisateur a confirmé qu'il voulait bien supprimer le client
+   * @param clientId ID du client à supprimer
+   */
+  handleClickOnDelete(clientId: number) {
+    // On va chercher le client grâce à l'id récupéré en URL et on le supprime
+    this.service.deleteClientById(clientId).subscribe(() => {
+      // Actualisation de la liste des clients
+      this.service.getClients().subscribe(clientsFromServer => this.clients = clientsFromServer);
+    })
+    this.addInfoToast();
+  }
 
   // Je définis ici les colonnes de ma liste, mais je donnerai le tableau à lister (clients) 
   // directement dans le HTML, après l'avoir récupéré depuis le server dans la méthode ngOnInit()
@@ -72,7 +65,9 @@ export class ClientListComponent implements OnInit {
     'buttonTransfer'
   ];
 
-  //Récupération des clients depuis json-server (dans un premier temps, avant la mise en place du back-end)
+  /**
+   * Au chargement du composant, récupération de la liste des clients côté back-end
+   */
   ngOnInit(): void {
     this.service.getClients()
     .subscribe((clientsFromJsonServer) => {

@@ -60,13 +60,10 @@ export class TransferComponent implements OnInit {
     "Compte Epargne"
   ]
   
-  
-  // Méthodes
-
   constructor(private clientService: ClientService, private transferService: TransferService , private router: Router, private location: Location,
     public dialog: MatDialog, formBuilder: FormBuilder, private toastService: ToastService) {
 
-      // Le constructeur créé le formulaire et initialise les FormControls
+      // Le constructeur crée le formulaire et initialise les FormControls
       this.form = formBuilder.group({
         'idClientDebitFormControl': new FormControl('', [Validators.required]),
         'idClientCreditFormControl': new FormControl('', [Validators.required]),
@@ -127,11 +124,9 @@ export class TransferComponent implements OnInit {
       if(source == "debit"){      
         if (accountType == "Compte Courant"){
           this.typeDebitAccount= "currentAccount"
-          console.log("type compte débiteur " + this.typeDebitAccount);
           this.selectedDebitAccount = this.debitCurrentAccount          
         } else {
           this.typeDebitAccount= "savingAccount"
-          console.log("type compte débiteur " + this.typeDebitAccount)
           this.selectedDebitAccount = this.debitSavingAccount        
         }
         this.debitAccounts = [this.selectedDebitAccount];
@@ -141,17 +136,18 @@ export class TransferComponent implements OnInit {
         if (accountType == "Compte Courant"){
           this.typeCreditAccount= "currentAccount";
           this.selectedCreditAccount = this.creditCurrentAccount; 
-          console.log("type compte créditeur " + this.typeCreditAccount);        
         } else {
           this.typeCreditAccount= "savingAccount";
           this.selectedCreditAccount = this.creditSavingAccount;
-          console.log("type compte créditeur " + this.typeCreditAccount);
         }
         this.creditAccounts = [this.selectedCreditAccount];
       }
     }
     
-    // Méthode pour ouvrir une modale et valider le virement
+    /**
+     * Ouvre une modale pour valider le virement
+     * @param value 
+     */
     openDialog(value: any) : void { 
        this.dialog.open(ConfirmTransferModal, {      
         data: {
@@ -165,7 +161,10 @@ export class TransferComponent implements OnInit {
       });
     }
     
-    // Méthode pour envoyer le virement au back
+    /**
+     * Transmission du virement au back-end
+     * @param value 
+     */
     onSubmit(value: any) {
       this.transferDtoRequest = {
         typeCreditAccount: this.typeCreditAccount, 
@@ -180,11 +179,6 @@ export class TransferComponent implements OnInit {
         next: () => {
           this.addInfoToast()
           this.router.navigate(['/client-list'])
-        },
-        error: error => {
-          console.log("Error during transfer" + JSON.stringify(error));
-          console.log("Error during transfer name : " + error.name);
-          console.log("Error during transfer message : " + error);
         }
       })
       

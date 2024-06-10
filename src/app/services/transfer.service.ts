@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ClientModel } from '../models/client.model';
 import { catchError, throwError } from 'rxjs';
 import { TransferDtoRequest } from '../models/transfer-dto-request.model';
 import { CurrentAccountModel } from '../models/current-account.model';
@@ -44,7 +43,6 @@ export class TransferService {
   getCurrentAccounts(){
     return this.httpClient.get<CurrentAccountModel[]>(this.endpointCurrentAccounts);
   }
-  
   
   // Cette méthode peut retourner une valeur qui est récupérée par le composant, selon la valeur de retour on utilise "navigate" pour forcer la navigation
   handleError(error:any) {
