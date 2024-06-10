@@ -15,6 +15,7 @@ throw new Error('Method not implemented.');
 }
   id = this.activatedRoute.snapshot.params['id'];
   clients : ClientModel[] = [];
+  hasError = false;
 
   constructor(private service: AdvisorService, private activatedRoute: ActivatedRoute) {}
 
@@ -24,8 +25,14 @@ throw new Error('Method not implemented.');
   ];
 
   ngOnInit(): void {
-    this.service.getClientListByAdvisorId(this.id).subscribe((clients) => {
-      this.clients = clients;      
+    this.service.getClientListByAdvisorId(this.id).subscribe({
+      next: (clients) => {
+        this.clients = clients;      
+      },
+      error: error => {
+        console.log(error);
+        this.hasError = true;
+      }
     });
   }
 
