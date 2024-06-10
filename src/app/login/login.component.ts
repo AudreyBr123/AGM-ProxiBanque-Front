@@ -18,6 +18,7 @@ export class LoginComponent {
   password: FormControl;
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   passwordFormControl = new FormControl('', [Validators.required]);
+  invalidCredentials = false;
 
   constructor(formBuilder: FormBuilder, private service: LoginService, private store: Store<{status: string}>, private router: Router) {
     this.loginForm = formBuilder.group({
@@ -50,6 +51,9 @@ export class LoginComponent {
 
         } else {
           this.store.dispatch(setGuestStatus())
+          this.emailFormControl.setErrors({ incorrectEmail: true });
+          this.passwordFormControl.setErrors({ incorrectPassword: true });
+          this.invalidCredentials = true;
         }
   })
   }
