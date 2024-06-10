@@ -1,11 +1,9 @@
 <ng-template [ngIf]="!hasError" [ngIfElse]="noClientFound">
-
-<div class="page-head">
-    <h2 *ngIf="isAddMode">Création d'un client</h2>
-    <h2 *ngIf="!isAddMode">Modification des informations du client</h2>
-
-    <a *ngIf="!isAddMode" class="btn-grad btn-grad-grey btn-back" mat-flat-button (click)="goBack()">Retour</a>
-</div>
+    <div class="page-head">
+        <h2 *ngIf="isAddMode">Création d'un client</h2>
+        <h2 *ngIf="!isAddMode">Modification des informations du client</h2>
+        <a *ngIf="!isAddMode" class="btn-grad btn-grad-grey btn-back" mat-flat-button color="primary" (click)="goBack()">Retour</a>
+    </div>
 
 <mat-card class="example-card">
     <mat-card-content>
@@ -85,35 +83,35 @@
                                 </mat-error>
                             </mat-form-field>
                         </div>
-                    </div>
-                    <div *ngIf="isAddMode || (!isAddMode && (client.savingAccount?.id === null))">
-                        <p><mat-checkbox formControlName="savingAccount">Compte épargne</mat-checkbox></p>
-                        <div *ngIf="accounts.value.savingAccount">
-                            <mat-form-field class="example-full-width">
-                                <mat-label>Solde compte épargne</mat-label>
-                                <input type="number" matInput placeholder="Ex. 530.00" value="0" [(ngModel)]="savingAccount.balance" name="savingAccountBalance" required formControlName="savingAccountFormControl" [errorStateMatcher]="matcher">
-                                <mat-error *ngIf="accounts.get('savingAccountFormControl')?.hasError('invalidDecimals')">
-                                    Le solde doit avoir au maximum <strong>2 décimales</strong>
-                                </mat-error>
-                                <mat-error *ngIf="accounts.get('savingAccountFormControl')?.hasError('required')">
-                                    Le solde est <strong>obligatoire</strong>
-                                </mat-error>
-                                <mat-error *ngIf="accounts.get('savingAccountFormControl')?.hasError('min')">
-                                    Le solde doit être <strong>positif</strong>
-                                </mat-error>
-                            </mat-form-field>
+                        <div *ngIf="isAddMode || (!isAddMode && (client.savingAccount?.id === null))">
+                            <p><mat-checkbox formControlName="savingAccount">Compte épargne</mat-checkbox></p>
+                            <div *ngIf="accounts.value.savingAccount">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Solde compte épargne</mat-label>
+                                    <input type="number" matInput placeholder="Ex. 530.00" value="0" [(ngModel)]="savingAccount.balance" name="savingAccountBalance" required formControlName="savingAccountFormControl" [errorStateMatcher]="matcher">
+                                    <mat-error *ngIf="accounts.get('savingAccountFormControl')?.hasError('invalidDecimals')">
+                                        Le solde doit avoir au maximum <strong>2 décimales</strong>
+                                    </mat-error>
+                                    <mat-error *ngIf="accounts.get('savingAccountFormControl')?.hasError('required')">
+                                        Le solde est <strong>obligatoire</strong>
+                                    </mat-error>
+                                    <mat-error *ngIf="accounts.get('savingAccountFormControl')?.hasError('min')">
+                                        Le solde doit être <strong>positif</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!-- {{ accounts.get("currentAccountFormControl")?.errors | json }} -->
                         </div>
-                        <!-- {{ accounts.get("currentAccountFormControl")?.errors | json }} -->
-                    </div>
-                  </section>
-            </div>
+                    </section>
+                </div>
 
-            <button class="btn-grad btn-grad-green" mat-stroked-button type="submit" [disabled]="!registerForm.valid || !accounts.valid" *ngIf="isAddMode">Créer</button>
-            <button class="btn-grad btn-grad-green" mat-stroked-button type="submit" [disabled]="!registerForm.valid || !accounts.valid" *ngIf="!isAddMode">Valider</button>
+                <button class="btn-grad btn-grad-green" mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid || !accounts.valid" *ngIf="isAddMode">Créer</button>
+                <button class="btn-grad btn-grad-green" mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid || !accounts.valid" *ngIf="!isAddMode">Valider</button>
 
-      </form>
-    </mat-card-content>
-</mat-card>
+
+        </form>
+        </mat-card-content>
+    </mat-card>
 </ng-template>
 <ng-template #noClientFound>
     <div>

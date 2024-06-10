@@ -4,7 +4,6 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirectiv
 import {ErrorStateMatcher} from '@angular/material/core';
 import { PersonInfos } from '../models/person-infos';
 import { ClientService } from '../services/client.service';
-
 import { ActivatedRoute, Router } from '@angular/router';
 import { CurrentAccountModel } from '../models/current-account.model';
 import { SavingAccountModel } from '../models/saving-account.model';
@@ -25,17 +24,25 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./client-create.component.css', '../../styles.css'],
 })
 export class ClientCreateComponent {
+  // Données du client
   personInfos = new PersonInfos("", "", "", "", "", "", "");
   currentAccount = new CurrentAccountModel(null, 0.0, new Date());
   savingAccount = new SavingAccountModel(null, 0.0, new Date());
   client = new ClientModel(0, this.personInfos, null, null);
+
+  // id du client
   id: number = 0;
+  // ajout/modification client
   isAddMode: boolean = false;
+
   loading = false;
   submitted = false;
   hasError = false;
+
+  // nombre de décimales des comptes
   steps: number = 0.01;
 
+  // Formulaire contenant les informations du client
   registerForm = new FormGroup({
     firstNameFormControl: new FormControl('', [Validators.required]),
     lastNameFormControl: new FormControl('', [Validators.required]),
@@ -46,6 +53,7 @@ export class ClientCreateComponent {
     phoneNumberFormControl: new FormControl('', [Validators.required, Validators.pattern("(^$|[0-9]{10})")]),
   });
 
+  // Formulaire des comptes
   accounts = this._formBuilder.group({
     currentAccount: false,
     savingAccount: false,
@@ -61,6 +69,7 @@ export class ClientCreateComponent {
     this.id = this.route.snapshot.params['id'];
     this.isAddMode = !this.id;
 
+    // Récupère les données du client
     if(!this.isAddMode) {
       this.service.getClientById(this.id).subscribe({
         next: (DBclient) => {
@@ -96,23 +105,33 @@ export class ClientCreateComponent {
     }
   }
 
+
+  /**
+   * Validateur custom pour vérifier qu'un nombre a 2 décimales
+   * @param control - le champ sur lequel appliqué le validateur
+   * @returns - null ou une erreur de la forme { nomErreur: true }
+   */
   validateNumField(control: AbstractControl): { [key: string]: any } | null {
     let rem = control.value && this.countDecimals(Number.parseFloat(control.value)) > 2;
-   //If the remainder is not 0 then user has entered an invalid value
     return rem ? { invalidDecimals: true } : null;
   }
 
+  /**
+   * Compte le nombre de décimales de la variable value
+   * @param {number} value - le nombre dont on veut compter les décimales
+   * @returns - le nombre de décimales
+   */
   countDecimals(value: number) {
     let text = value.toString()
 
-    // verify if number 0.000005 is represented as "5e-6"
+    // vérifie sie le nombre 0.000005 est représenté comme "5e-6"
     if (text.indexOf('e-') > -1) {
       let [base, trail] = text.split('e-');
       let deg = parseInt(trail, 10);
       return deg;
     }
 
-    // count decimals for number in representation like "0.123456"
+    // compte les décimales pour le nombre formaté comme "0.123456"
     if (Math.floor(value) !== value) {
       return value.toString().split(".")[1].length || 0;
     }
@@ -120,6 +139,9 @@ export class ClientCreateComponent {
     return 0;
   }
 
+  /**
+   * Reset les inputs du client
+   */
   resetClient() {
     this.personInfos = new PersonInfos("", "", "", "", "", "", "");
     this.currentAccount = new CurrentAccountModel(null, 0.0, new Date());
@@ -127,15 +149,21 @@ export class ClientCreateComponent {
     this.client = new ClientModel(0, this.personInfos, null, null);
   }
 
+  /**
+   * Créer un nouveau client, puis redirige vers la liste des clients
+   */
   private createClient() {
+    // Assigne les infos du compte courant au client
     if(this.accounts.value.currentAccount) {
       this.client.currentAccount = this.currentAccount;
     }
     
+    // Assigne les infos du compte épargne au client
     if(this.accounts.value.savingAccount) {
       this.client.savingAccount = this.savingAccount;
     }
 
+    // crée le client
     this.service.postClient(this.client)
       .subscribe({
         next: () => {
@@ -150,19 +178,25 @@ export class ClientCreateComponent {
       })
   }
 
+  /**
+   * Met à jour le client, puis redirige vers la liste des clients
+   */
   private updateClient() {
+    // Si le compte n'existait pas et qu'on à décider de le créer, assigne les infos du compte courant au client
     if(this.client.currentAccount === null) {
       if(this.accounts.value.currentAccount) {
         this.client.currentAccount = this.currentAccount;
       }
     }
     
+    // Si le compte n'existait pas et qu'on à décider de le créer, assigne les infos du compte épargne au client
     if(this.client.savingAccount === null) {
       if(this.accounts.value.savingAccount) {
         this.client.savingAccount = this.savingAccount;
       }
     }
 
+    // met a jour le client
     this.service.putClient(this.client.id, this.client)
       .subscribe({
         next: () => {
@@ -177,14 +211,25 @@ export class ClientCreateComponent {
       })
   }
 
+  /**
+   * Retour arrière
+   */
   goBack() {
     this.location.back();
   }
 
+  /**
+   * raccourci pour créer un toast de succès
+   * @param message - message du toast
+   */
   addInfoToast(message: string){
     this.toastService.success(message);
   }
 
+  /**
+   * raccourci pour créer un toast d'échec
+   * @param message - message du toast
+   */
   addErrorToast(message: string) {
     this.toastService.error(message);
   }
