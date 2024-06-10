@@ -1,6 +1,9 @@
 <ng-template [ngIf]="!hasError" [ngIfElse]="noAdvisorFound">
 
-<h2>Liste des clients suivis</h2>
+<div class="page-head">
+  <h2>Liste des clients suivis</h2>
+  <a class="btn-grad btn-grad-grey" mat-flat-button color="primary" (click)="goBack()">Retour</a>
+</div>
 
 <div class="table-container">
     <table mat-table [dataSource]="clients" class="mat-elevation-z8">    

@@ -34,6 +34,60 @@ body {
     display: flex;
     align-items: center;
 }
+
+.btn-grad-red {
+    background-image: linear-gradient(to right, #da1212 0%, #ffacaa  51%, #da1212  100%);
+    margin: 10px;
+    width:fit-content;
+    padding: 10px 10px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.25s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.btn-grad-green {
+    background-image: linear-gradient(to right, #079f34 0%, #b6d174  51%, #079f34  100%);
+    margin: 10px;
+    width:fit-content;
+    padding: 10px 10px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.25s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.btn-grad-grey {
+    background-image: linear-gradient(to right, #9b9da6 0%, #94bab9  51%, #9b9da6  100%);
+    margin: 10px;
+    width:fit-content;
+    padding: 10px 10px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.25s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
     
 .btn-grad:hover {
 background-position: right center; /* change the direction of the change here */
@@ -70,4 +124,8 @@ mat-dialog-actions {
 
 h2 {
     text-align: center;
+}
+
+.toast-success {
+    background-color: pink;
 }

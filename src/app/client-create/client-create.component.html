@@ -1,10 +1,13 @@
-<a class="btn-grad" mat-flat-button color="primary" (click)="goBack()">Retour</a>
 <ng-template [ngIf]="!hasError" [ngIfElse]="noClientFound">
+
+<div class="page-head">
+    <h2 *ngIf="isAddMode">Création d'un client</h2>
+    <h2 *ngIf="!isAddMode">Modification des informations du client</h2>
+
+    <a *ngIf="!isAddMode" class="btn-grad btn-grad-grey btn-back" mat-flat-button color="primary" (click)="goBack()">Retour</a>
+</div>
+
 <mat-card class="example-card">
-    <mat-card-header>
-        <mat-card-title *ngIf="isAddMode">Création d'un client</mat-card-title>
-        <mat-card-title *ngIf="!isAddMode">Modification des informations du client</mat-card-title>
-    </mat-card-header>
     <mat-card-content>
         <form (ngSubmit)="onSubmit()" [formGroup]="registerForm" class="example-form">
             <mat-form-field class="example-full-width">
@@ -104,9 +107,11 @@
                     </div>
                   </section>
             </div>
-            <button class="btn-grad" mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid || !accounts.valid" *ngIf="isAddMode">Créer</button>
-            <button class="btn-grad" mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid || !accounts.valid" *ngIf="!isAddMode">Valider</button>
-        </form>
+
+            <button class="btn-grad btn-grad-green" mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid || !accounts.valid" *ngIf="isAddMode">Créer</button>
+            <button class="btn-grad btn-grad-green" mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid || !accounts.valid" *ngIf="!isAddMode">Valider</button>
+
+      </form>
     </mat-card-content>
 </mat-card>
 </ng-template>

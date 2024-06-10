@@ -1,6 +1,10 @@
-<a class="btn-grad" mat-flat-button color="primary" (click)="goBack()">Retour</a>
 <ng-template [ngIf]="client.id" [ngIfElse]="noClientFound">
-<h2>{{ client.personInfos.firstName }} {{ client.personInfos.lastName }}</h2>
+
+<div class="page-head">
+  <h2>{{ client.personInfos.firstName }} {{ client.personInfos.lastName }}</h2>
+  <a class="btn-grad btn-grad-grey" mat-flat-button color="primary" (click)="goBack()">Retour</a>
+</div>
+
 <div class="card-wrapper">
   <mat-card>
     <mat-card-content>

@@ -16,7 +16,7 @@ import { ToastService } from 'angular-toastify';
 @Component({
   selector: 'app-transfer',
   templateUrl: './transfer.component.html',
-  styleUrl: './transfer.component.css'
+  styleUrls: ['./transfer.component.css', '../../styles.css'],
 })
 export class TransferComponent implements OnInit {
   

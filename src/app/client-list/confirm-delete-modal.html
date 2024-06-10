@@ -2,6 +2,6 @@
   <p>Confirmez-vous la suppression du client {{data.clientId}} ?</p>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button class="btn-grad" (click)="onDeleteClick(data.clientId)" cdkFocusInitial>Confirmer</button>
-  <button mat-button class="btn-grad" (click)="onNoClick()">Annuler</button>
+  <button mat-button class="btn-grad btn-grad-green" (click)="onDeleteClick(data.clientId)" cdkFocusInitial>Confirmer</button>
+  <button mat-button class="btn-grad btn-grad-red" (click)="onNoClick()">Annuler</button>
 </mat-dialog-actions>

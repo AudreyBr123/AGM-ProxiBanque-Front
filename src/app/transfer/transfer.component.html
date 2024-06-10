@@ -1,7 +1,6 @@
-<button class="btn-grad" (click)="goBack()">Retour</button>
+<h2>Virement de compte à compte</h2>
 
 <div class="main-container">
-  <h2>Virement de compte à compte</h2>
   
   <form (ngSubmit)="form.value" [formGroup]="form">
     <div class = "account-selection-container">
@@ -74,8 +73,9 @@
         Solde : {{selectedCreditAccount.balance| number: '1.0-2'}} €
       </div>
     </div>
+
     <div class="button-container">
-      <button type="submit" class="btn-grad" (click)="openDialog(form.value)" [disabled]="!form.valid">Valider</button>   
+      <button type="submit" class="btn-grad btn-grad-green" (click)="openDialog(form.value)" [disabled]="!form.valid">Valider</button>   
     </div> 
   </form>
 </div>

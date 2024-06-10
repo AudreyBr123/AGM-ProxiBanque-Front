@@ -83,3 +83,9 @@ mat-card-subtitle {
     border-radius: 60px;
     width: 90%;
   }
+
+  .btn-grad-green:disabled {
+    background-image: none;
+    background-color: rgb(177, 177, 177);
+    color: #363636;
+}
