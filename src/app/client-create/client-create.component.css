@@ -17,11 +17,6 @@
     width: 100%;
 }
 
-.btn-grade {
-    /* background-image: none; */
-    /* background-color: #1A2980; */
-}
-
 .btn-grad:hover {
     /* background-image: none; */
     /* background-color: #188b8a; */
@@ -32,4 +27,14 @@
     background-image: none;
     background-color: rgb(177, 177, 177);
     color: #363636;
+}
+
+.page-head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h2 {
+    margin-right: 1em;
 }

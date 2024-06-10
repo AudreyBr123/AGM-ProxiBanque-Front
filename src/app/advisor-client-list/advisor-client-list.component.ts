@@ -3,6 +3,7 @@ import { AdvisorModel } from '../models/advisor.model';
 import { AdvisorService } from '../services/advisor.service';
 import { ClientModel } from '../models/client.model';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-advisor-client-list',
@@ -16,7 +17,7 @@ throw new Error('Method not implemented.');
   id = this.activatedRoute.snapshot.params['id'];
   clients : ClientModel[] = [];
 
-  constructor(private service: AdvisorService, private activatedRoute: ActivatedRoute) {}
+  constructor(private service: AdvisorService, private activatedRoute: ActivatedRoute, private location: Location) {}
 
   displayedColumns: string[] = [
     'firstName',
@@ -27,6 +28,10 @@ throw new Error('Method not implemented.');
     this.service.getClientListByAdvisorId(this.id).subscribe((clients) => {
       this.clients = clients;      
     });
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }
