@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CurrentAccountModel } from '../models/current-account.model';
 import { SavingAccountModel } from '../models/saving-account.model';
 import { Location } from '@angular/common';
+import { ToastService } from 'angular-toastify';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -54,7 +55,7 @@ export class ClientCreateComponent {
 
   matcher = new MyErrorStateMatcher();
 
-  constructor(private _formBuilder: FormBuilder, private service: ClientService, private route: ActivatedRoute, private router: Router, private location: Location) {}
+  constructor(private _formBuilder: FormBuilder, private service: ClientService, private route: ActivatedRoute, private router: Router, private location: Location, private toastService: ToastService) {}
   
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -69,18 +70,13 @@ export class ClientCreateComponent {
           this.client.savingAccount = DBclient.savingAccount;
         },
         error: error => {
+          this.addErrorToast("Impossible de récupérer les informations du client");
           console.log(error);
           this.hasError = true;
         }
       }
         );
     }
-
-    // this.accounts.valueChanges.subscribe(_ => {
-    //   if(!this.accounts.valid) {
-    //     console.log(this.accounts.get("currentAccountFormControl")?.errors)
-    //   }
-    // })
   }
 
   onSubmit() {
@@ -102,8 +98,6 @@ export class ClientCreateComponent {
 
   validateNumField(control: AbstractControl): { [key: string]: any } | null {
     let rem = control.value && this.countDecimals(Number.parseFloat(control.value)) > 2;
-    console.log(`Number.parseFloat(control.value) : ${Number.parseFloat(control.value)}`);
-    console.log(`rem : ${rem}\n`);
    //If the remainder is not 0 then user has entered an invalid value
     return rem ? { invalidDecimals: true } : null;
   }
@@ -145,10 +139,11 @@ export class ClientCreateComponent {
     this.service.postClient(this.client)
       .subscribe({
         next: () => {
+          this.addInfoToast(`Le client ${this.client.personInfos?.firstName} ${this.client.personInfos?.lastName} à été crée avec succès`);
           this.router.navigate(['/client-list']);
         },
         error: error => {
-          console.log("Error creating client");
+          this.addErrorToast("Erreur lors de la création du client");
           this.loading = false;
           this.hasError = true;
         }
@@ -171,10 +166,11 @@ export class ClientCreateComponent {
     this.service.putClient(this.client.id, this.client)
       .subscribe({
         next: () => {
+          this.addInfoToast(`Le client ${this.client.personInfos?.firstName} ${this.client.personInfos?.lastName} à été mis à jour avec succès`);
           this.router.navigate(['/client-list'])
         },
         error: error => {
-          console.log("Error updating client");
+          this.addErrorToast(`Erreur lors de la mise à jour du client ${this.client.personInfos?.firstName} ${this.client.personInfos?.lastName}`);
           this.loading = false;
           this.hasError = true;
         }
@@ -183,5 +179,13 @@ export class ClientCreateComponent {
 
   goBack() {
     this.location.back();
+  }
+
+  addInfoToast(message: string){
+    this.toastService.success(message);
+  }
+
+  addErrorToast(message: string) {
+    this.toastService.error(message);
   }
 }
