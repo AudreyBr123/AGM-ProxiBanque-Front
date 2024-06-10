@@ -17,6 +17,11 @@ export class LoginService {
     })
   }
   
+  /**
+   * Envoie les données d'authentification
+   * @param user - Les données de l'utilisateur (email, mot de passe)
+   * @returns Un observable du résultat de l'authentification
+   */
   postLogin(user: UserModel): Observable<{ role: string }> {
     return this.httpClient.post<{ role: string }>(this.endpoint + "login", JSON.stringify(user), this.httpOptions)
   }

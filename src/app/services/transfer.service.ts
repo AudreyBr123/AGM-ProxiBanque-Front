@@ -25,31 +25,44 @@ export class TransferService {
     })
   }
   
-  
+  /**
+   * Effectue un virement entre 2 comptes
+   * @param transferDtoRequest - Les données du transfert
+   * @returns Un observable avec le résultat du transfert
+   */
   putTransfer(transferDtoRequest: TransferDtoRequest) {
-    console.log("Sending request to debit account number " + transferDtoRequest.idDebitAccount + " ("+transferDtoRequest.typeDebitAccount+")" 
-    + " and credit account number " + transferDtoRequest.idCreditAccount + " ("+transferDtoRequest.typeCreditAccount + ")."+
-    " Amount : " + transferDtoRequest.amount);
+    // console.log("Sending request to debit account number " + transferDtoRequest.idDebitAccount + " ("+transferDtoRequest.typeDebitAccount+")" 
+    // + " and credit account number " + transferDtoRequest.idCreditAccount + " ("+transferDtoRequest.typeCreditAccount + ")."+
+    // " Amount : " + transferDtoRequest.amount);
     return this.httpClient.put(this.endpoint, JSON.stringify(transferDtoRequest), this.httpOptions) 
-    
     .pipe(
       catchError(this.handleError)
     )  
   }
   
+  /**
+   * Récupère la liste des comptes épargnes
+   * @returns Un observable des comptes épargne 
+   */
   getSavingAccounts(){
     return this.httpClient.get<SavingAccountModel[]>(this.endpointSavingAccounts);
   }
   
+  /**
+   * Récupère la liste des comptes courants
+   * @returns Un observable des comptes courants
+   */
   getCurrentAccounts(){
     return this.httpClient.get<CurrentAccountModel[]>(this.endpointCurrentAccounts);
   }
   
-  
-  // Cette méthode peut retourner une valeur qui est récupérée par le composant, selon la valeur de retour on utilise "navigate" pour forcer la navigation
+  /**
+   * Gère les erreurs de l'API
+   * Cette méthode peut retourner une valeur qui est récupérée par le composant, selon la valeur de retour on utilise "navigate" pour forcer la navigation
+   * @param error - Une erreur concernant l'interaction avec l'API
+   * @returns Les informations sur l'erreur
+   */
   handleError(error:any) {
-    console.log("Passe par handleError dans le service");
-
     let errorMessage = '';
     for (const [key, value] of Object.entries(error.error)) {
       errorMessage = `${value}`
