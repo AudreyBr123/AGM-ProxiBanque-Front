@@ -22,7 +22,11 @@ throw new Error('Method not implemented.');
 
   displayedColumns: string[] = [
     'firstName',
-    'lastName'
+    'lastName',
+    'currentAccountNumber',
+    'currentAccountBalance',
+    'savingAccountNumber',
+    'savingAccountBalance',
   ];
 
   ngOnInit(): void {
