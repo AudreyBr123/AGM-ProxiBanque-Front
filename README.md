@@ -4,9 +4,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 # How to launch the project
 - Run `npm install` to get all the dependencies.
-- Run `ng serve` for angular server. 
-- Run `npx json-server db.json` to run back-end on json-server. Navigate to `http://localhost:3000/` to watch data on localhost (or use RESTer).
+- Run `ng serve` for angular server.
+- Launch back-end server.
 - Navigate to `http://localhost:4200/` to watch the website.
+
+- To try the application with MANAGER status : login = manager@proxibanque.fr, mdp = manager@proxibanque.fr
+- To try the application with ADVISOR status : login = advisor@proxibanque.fr, mdp = advisor@proxibanque.fr
 
 ## Development server
 

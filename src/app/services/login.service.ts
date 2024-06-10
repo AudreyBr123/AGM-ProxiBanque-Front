@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class LoginService {
   endpoint = 'http://localhost:8080/'
-  constructor(private httpClient : HttpClient) {} //Attention à l'ajouter aussi dans app.modules.ts
+  constructor(private httpClient : HttpClient) {}
   
   httpOptions = {
     headers: new HttpHeaders({
@@ -17,6 +17,11 @@ export class LoginService {
     })
   }
   
+  /**
+   * Envoie les données d'authentification
+   * @param user - Les données de l'utilisateur (email, mot de passe)
+   * @returns Un observable du résultat de l'authentification
+   */
   postLogin(user: UserModel): Observable<{ role: string }> {
     return this.httpClient.post<{ role: string }>(this.endpoint + "login", JSON.stringify(user), this.httpOptions)
   }

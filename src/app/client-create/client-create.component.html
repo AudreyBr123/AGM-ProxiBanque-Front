@@ -1,14 +1,20 @@
 <ng-template [ngIf]="!hasError" [ngIfElse]="noClientFound">
-
-<div class="page-head">
+  <div class="page-head">
     <!-- isAddMode = ajout d'un client / !isAddMode = modification d'un client - cela permet de factoriser le code -->
     <h2 *ngIf="isAddMode">Création d'un client</h2>
     <h2 *ngIf="!isAddMode">Modification des informations du client</h2>
 
-    <a *ngIf="!isAddMode" class="btn-grad btn-grad-grey btn-back" mat-flat-button color="primary" (click)="goBack()">Retour</a>
-</div>
+    <a
+      *ngIf="!isAddMode"
+      class="btn-grad btn-grad-grey btn-back"
+      mat-flat-button
+      color="primary"
+      (click)="goBack()"
+      >Retour</a
+    >
+  </div>
 
-<mat-card class="example-card">
+  <mat-card class="example-card">
     <mat-card-content>
         <form (ngSubmit)="onSubmit()" [formGroup]="registerForm" class="example-form">
             <mat-form-field class="example-full-width">
@@ -115,16 +121,33 @@
                   </section>
             </div>
 
-            <button class="btn-grad btn-grad-green" mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid || !accounts.valid" *ngIf="isAddMode">Créer</button>
-            <button class="btn-grad btn-grad-green" mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid || !accounts.valid" *ngIf="!isAddMode">Valider</button>
-
+        <button
+          class="btn-grad btn-grad-green"
+          mat-stroked-button
+          color="primary"
+          type="submit"
+          [disabled]="!registerForm.valid || !accounts.valid"
+          *ngIf="isAddMode"
+        >
+          Créer
+        </button>
+        <button
+          class="btn-grad btn-grad-green"
+          mat-stroked-button
+          color="primary"
+          type="submit"
+          [disabled]="!registerForm.valid || !accounts.valid"
+          *ngIf="!isAddMode"
+        >
+          Valider
+        </button>
       </form>
     </mat-card-content>
-</mat-card>
+  </mat-card>
 </ng-template>
 
 <ng-template #noClientFound>
-    <div>
-        <p>Il n'y a pas de client correspondant à cet id</p>
-    </div>
+  <div>
+    <p>Il n'y a pas de client correspondant à cet id</p>
+  </div>
 </ng-template>

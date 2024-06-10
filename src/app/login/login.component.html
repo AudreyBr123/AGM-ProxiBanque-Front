@@ -9,70 +9,71 @@
           <mat-card-subtitle> Connectez-vous </mat-card-subtitle>
         </mat-card-header>
         <form
-          [formGroup]="loginForm"
-          (ngSubmit)="(loginForm.value)"
+        [formGroup]="loginForm"
+        (ngSubmit)="(loginForm.value)"
         >
-
-          <!-- Email -->
-          <div [class.error]="!email.valid && email.touched">
-            <mat-label for="email"></mat-label><br />
-            <mat-form-field appearance="fill" class="mat-form-field-custom">
-              <input
-                matInput
-                type="email"
-                name="email"
-                id="email"
-                placeholder="email@example.com"
-                required
-                [formControl]="$any(email)"
-              />
-              @if (email.hasError('required')) {
+        <!-- Email -->
+        <div [class.error]="(!email.valid && email.touched)">
+          <mat-label for="email"></mat-label><br />
+          <mat-form-field appearance="fill" class="mat-form-field-custom">
+            <input
+            matInput
+            type="email"
+            name="email"
+            id="email"
+            placeholder="email@example.com"
+            required
+            [formControl]="$any(email)"
+            />
+            @if (email.hasError('required')) {
               <mat-error>L'email est <strong>obligatoire</strong></mat-error>
-              } @else if (!email.valid) {
+            }  @else if (email.hasError('email')) {
               <mat-error>Veuillez entrez un email valide</mat-error>
-              }
-            </mat-form-field>
-          </div>
-
-          <!-- Password -->
-          <div [class.error]="!password.valid && password.touched">
-            <mat-label for="password"></mat-label><br />
-            <mat-form-field appearance="fill" class="mat-form-field-custom">
-              <input
-                class="input"
-                matInput
-                type="password"
-                name="password"
-                id="password"
-                placeholder="password"
-                required
-                [formControl]="$any(password)"
-              />
-              @if (password.hasError('required')) {
+            }
+          </mat-form-field>
+        </div>
+        <!-- Password -->
+        <div [class.error]="!password.valid && password.touched">
+          <mat-label for="password"></mat-label><br />
+          <mat-form-field appearance="fill" class="mat-form-field-custom">
+            <input
+            class="input"
+            matInput
+            type="password"
+            name="password"
+            id="password"
+            placeholder="password"
+            required
+            [formControl]="$any(password)"
+            />
+            @if (password.hasError('required')) {
               <mat-error
-                >Le mot de passe est <strong>obligatoire</strong></mat-error
+              >Le mot de passe est <strong>obligatoire</strong></mat-error
               >
-              }
-            </mat-form-field>
-          </div>
+            }
+          </mat-form-field>
+        </div>
+        @if(invalidCredentials) {
+          <mat-error><strong>Echec d'authentification : </strong>l'email ou le mot de passe est inconnu</mat-error>
+        }
+        <!-- Submit -->
+        <button
+        class="btn-grad btn-grad-green"
+        mat-flat-button
+        (click)="onSubmit(loginForm.value)"
+        [disabled]="!loginForm.valid"
+        type="submit"
+        color="primary"
+        [disabled]="email.hasError('required') || email.hasError('email') || password.hasError('required')"
+        >
+        Connexion
+      </button>
+    </form>
+  </mat-card>
+</div>
 
-          <!-- Submit -->
-          <button
-            class="btn-grad btn-grad-green"
-            mat-flat-button
-            (click)="onSubmit(loginForm.value)"
-            [disabled]="!loginForm.valid"
-            type="submit"
-            color="primary"
-          >
-            Connexion
-          </button>
-        </form>
-      </mat-card>
-    </div>
-
-    <div class="picture-container">
-      <img src="../../assets/images/credit-cards.png" alt="credit-cards" />
-    </div>
-  </div>
+<div class="picture-container">
+  <img src="../../assets/images/credit-cards.png" alt="credit-cards" />
+</div>
+</div>
 </div>
