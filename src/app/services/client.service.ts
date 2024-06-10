@@ -10,7 +10,7 @@ import { catchError, throwError } from 'rxjs';
 export class ClientService {
   
   endpoint = 'http://localhost:8080/clients'
-  constructor(private httpClient : HttpClient) {} //Attention à l'ajouter aussi dans app.modules.ts
+  constructor(private httpClient : HttpClient) {} 
   
   httpOptions = {
     headers: new HttpHeaders({

@@ -59,7 +59,6 @@ export class AdvisorService {
     } else {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-
     return throwError(() => new Error(errorMessage));
   }
 }

@@ -4,7 +4,6 @@ import { LoginComponent } from './login/login.component';
 import { ClientCreateComponent } from './client-create/client-create.component';
 import { ClientListComponent } from './client-list/client-list.component';
 import { ClientShowComponent } from './client-show/client-show.component';
-import { ClientEditComponent } from './client-edit/client-edit.component';
 import { AdvisorListComponent } from './advisor-list/advisor-list.component';
 import { TransferComponent } from './transfer/transfer.component';
 import { AdvisorClientListComponent } from './advisor-client-list/advisor-client-list.component';
