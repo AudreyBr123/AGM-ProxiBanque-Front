@@ -1,3 +1,5 @@
+<ng-template [ngIf]="client.id" [ngIfElse]="noClientFound">
+
 <div class="page-head">
   <h2>{{ client.personInfos.firstName }} {{ client.personInfos.lastName }}</h2>
   <a class="btn-grad btn-grad-grey" mat-flat-button color="primary" (click)="goBack()">Retour</a>
@@ -48,7 +50,7 @@
                 }}</span
               >
               <span matListItemLine class="balance">
-                Solde : {{ client.currentAccount?.balance }} €
+                Solde : {{ client.currentAccount?.balance | number: '1.0-2'}} €
               </span>
             </mat-list-item>
           </div>
@@ -66,7 +68,7 @@
                 }}</span
               >
               <span matListItemLine class="balance">
-                Solde : {{ client.savingAccount?.balance }} €
+                Solde : {{ client.savingAccount?.balance | number: '1.0-2'}} €
               </span>
             </mat-list-item>
           </div>
@@ -78,3 +80,10 @@
     </mat-card-content>
   </mat-card>
 </div>
+</ng-template>
+<ng-template #noClientFound>
+    <div>
+        <h4>ClientNotFound Error</h4>
+        <p>Il n'y a pas de client correspondant à cet id</p>
+    </div>
+</ng-template>

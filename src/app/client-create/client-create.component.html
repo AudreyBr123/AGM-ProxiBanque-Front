@@ -1,10 +1,11 @@
+<ng-template [ngIf]="!hasError" [ngIfElse]="noClientFound">
+
 <div class="page-head">
     <h2 *ngIf="isAddMode">Création d'un client</h2>
     <h2 *ngIf="!isAddMode">Modification des informations du client</h2>
 
     <a *ngIf="!isAddMode" class="btn-grad btn-grad-grey btn-back" mat-flat-button color="primary" (click)="goBack()">Retour</a>
 </div>
-
 
 <mat-card class="example-card">
     <mat-card-content>
@@ -72,9 +73,15 @@
                         <div *ngIf="accounts.value.currentAccount">
                             <mat-form-field class="example-full-width">
                                 <mat-label>Solde compte courant</mat-label>
-                                <input type="number" matInput placeholder="Ex. 530.00" value="0" [(ngModel)]="currentAccount.balance" name="currentAccountBalance" required formControlName="currentAccountFormControl" [errorStateMatcher]="matcher">
+                                <input type="number" matInput placeholder="Ex. 530.00" value="0" min="0" step=".01" [(ngModel)]="currentAccount.balance" name="currentAccountBalance" required formControlName="currentAccountFormControl" [errorStateMatcher]="matcher">
                                 <mat-error *ngIf="accounts.get('currentAccountFormControl')?.hasError('required')">
                                     Le solde est <strong>obligatoire</strong>
+                                </mat-error>
+                                <mat-error *ngIf="accounts.get('currentAccountFormControl')?.hasError('min')">
+                                    Le solde doit être <strong>positif</strong>
+                                </mat-error>
+                                <mat-error *ngIf="accounts.get('currentAccountFormControl')?.hasError('invalidDecimals')">
+                                    Le solde doit avoir au maximum <strong>2 décimales</strong>
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -85,16 +92,32 @@
                             <mat-form-field class="example-full-width">
                                 <mat-label>Solde compte épargne</mat-label>
                                 <input type="number" matInput placeholder="Ex. 530.00" value="0" [(ngModel)]="savingAccount.balance" name="savingAccountBalance" required formControlName="savingAccountFormControl" [errorStateMatcher]="matcher">
+                                <mat-error *ngIf="accounts.get('savingAccountFormControl')?.hasError('invalidDecimals')">
+                                    Le solde doit avoir au maximum <strong>2 décimales</strong>
+                                </mat-error>
                                 <mat-error *ngIf="accounts.get('savingAccountFormControl')?.hasError('required')">
                                     Le solde est <strong>obligatoire</strong>
                                 </mat-error>
+                                <mat-error *ngIf="accounts.get('savingAccountFormControl')?.hasError('min')">
+                                    Le solde doit être <strong>positif</strong>
+                                </mat-error>
                             </mat-form-field>
                         </div>
+                        <!-- {{ accounts.get("currentAccountFormControl")?.errors | json }} -->
                     </div>
                   </section>
             </div>
-            <button class="btn-grad btn-grad-green" mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid" *ngIf="isAddMode">Créer</button>
-            <button class="btn-grad btn-grad-green" mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid" *ngIf="!isAddMode">Valider</button>
-        </form>
+
+            <button class="btn-grad btn-grad-green" mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid || !accounts.valid" *ngIf="isAddMode">Créer</button>
+            <button class="btn-grad btn-grad-green" mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid || !accounts.valid" *ngIf="!isAddMode">Valider</button>
+
+      </form>
     </mat-card-content>
 </mat-card>
+</ng-template>
+<ng-template #noClientFound>
+    <div>
+        <h4>ClientNotFound Error</h4>
+        <p>Il n'y a pas de client correspondant à cet id</p>
+    </div>
+</ng-template>

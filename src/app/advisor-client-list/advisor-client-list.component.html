@@ -1,3 +1,5 @@
+<ng-template [ngIf]="!hasError" [ngIfElse]="noAdvisorFound">
+
 <div class="page-head">
   <h2>Liste des clients suivis</h2>
   <a class="btn-grad btn-grad-grey" mat-flat-button color="primary" (click)="goBack()">Retour</a>
@@ -19,4 +21,10 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
 </div>
-
+</ng-template>
+<ng-template #noAdvisorFound>
+  <div>
+    <h4>AdvisorNotFoundError</h4>
+    <p>Il n'y a pas de conseiller correspondant à cet id</p>
+  </div>
+</ng-template>

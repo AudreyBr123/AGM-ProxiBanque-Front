@@ -14,10 +14,26 @@ mat-form-field {
 
 .account-selected-container{
     justify-content: space-evenly;
+    margin-bottom: 2em;
 }
 
 .main-container {
     text-align: center;
     justify-content: center;
+    align-items: center;
 }
 
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-grad:disabled {
+    background-image: none;
+    background-color: rgb(177, 177, 177);
+    color: #363636;
+}
+
+.btn-grad:disabled:hover {   
+    cursor: auto;
+}
