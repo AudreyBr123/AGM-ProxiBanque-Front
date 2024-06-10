@@ -13,7 +13,7 @@
           [class.error]="!loginForm.valid && loginForm.touched"
         >
           <!-- Email -->
-          <div [class.error]="!email.valid && email.touched">
+          <div [class.error]="(!email.valid && email.touched)">
             <mat-label for="email"></mat-label><br />
             <mat-form-field appearance="fill" class="mat-form-field-custom">
               <input
@@ -27,7 +27,7 @@
               />
               @if (email.hasError('required')) {
               <mat-error>L'email est <strong>obligatoire</strong></mat-error>
-              } @else if (!email.valid) {
+              }  @else if (email.hasError('email')) {
               <mat-error>Veuillez entrez un email valide</mat-error>
               }
             </mat-form-field>
@@ -53,6 +53,9 @@
               }
             </mat-form-field>
           </div>
+          @if(invalidCredentials) {
+            <mat-error><strong>Echec d'authentification : </strong>l'email ou le mot de passe est inconnu</mat-error>
+          }
           <!-- Submit -->
           <button
             class="btn-grad btn-grad-green"
@@ -61,6 +64,7 @@
             [disabled]="!loginForm.valid"
             type="submit"
             color="primary"
+            [disabled]="email.hasError('required') || email.hasError('email') || password.hasError('required')"
           >
             Connexion
           </button>

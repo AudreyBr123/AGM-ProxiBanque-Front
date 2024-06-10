@@ -79,6 +79,12 @@ mat-card-subtitle {
     text-decoration: none;
   }
 
+  .btn-grad:disabled {
+    background-image: none;
+    background-color: rgb(177, 177, 177);
+    color: #363636;
+}
+
   .mat-form-field-custom {
     border-radius: 60px;
     width: 90%;
