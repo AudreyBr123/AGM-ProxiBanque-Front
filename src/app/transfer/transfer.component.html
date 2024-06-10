@@ -1,3 +1,5 @@
+<button class="btn-grad" (click)="goBack()">Retour</button>
+
 <div class="main-container">
   <h2>Virement de compte à compte</h2>
   
@@ -72,7 +74,8 @@
         Solde : {{selectedCreditAccount.balance| number: '1.0-2'}} €
       </div>
     </div>
-    
-    <button type="submit" class="btn-grad" (click)="openDialog(form.value)" [disabled]="!form.valid">Valider</button>    
+    <div class="button-container">
+      <button type="submit" class="btn-grad" (click)="openDialog(form.value)" [disabled]="!form.valid">Valider</button>   
+    </div> 
   </form>
 </div>

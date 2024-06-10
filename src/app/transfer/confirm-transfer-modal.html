@@ -1,6 +1,6 @@
 <mat-dialog-content>
-  <p>Confirmez-vous le virement de  {{ data.amount }} € du compte {{data.idDebitAccount }} ({{data.typeDebitAccount}}) <br>
-    vers le compte {{data.idCreditAccount}} ({{data.typeCreditAccount}}) ?</p>
+  <p>Confirmez-vous le virement de  {{ data.amount }} € du compte {{data.idDebitAccount}} ({{data.typeDebitAccount  == "currentAccount"? "compte courant" : "compte épargne" }}) <br>
+    vers le compte {{data.idCreditAccount}} ({{data.typeCreditAccount == "currentAccount"? "compte courant" : "compte épargne" }}) ?</p>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button class="btn-grad" (click)="onConfirmClick(data)" cdkFocusInitial>Confirmer</button>

@@ -97,11 +97,11 @@
     </ng-container>
 
     <ng-container matColumnDef="buttonTransfer">
-      <th mat-header-cell *matHeaderCellDef>Virements</th>
+      <th mat-header-cell *matHeaderCellDef>Virement</th>
       <td mat-cell *matCellDef="let client">
         <button
           class="list-action-icons"
-          routerLink=""
+          routerLink= "/transfer"
           (click)="handleClickOnTransfer(client.id)"
         >
         <mat-icon>sync_alt</mat-icon>

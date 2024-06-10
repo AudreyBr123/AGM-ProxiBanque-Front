@@ -23,6 +23,11 @@ h2, mat-form-field {
     align-items: center;
 }
 
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
 .btn-grad:disabled {
     background-image: none;
     background-color: rgb(177, 177, 177);
