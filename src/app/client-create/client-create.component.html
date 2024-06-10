@@ -4,7 +4,7 @@
     <h2 *ngIf="isAddMode">Création d'un client</h2>
     <h2 *ngIf="!isAddMode">Modification des informations du client</h2>
 
-    <a *ngIf="!isAddMode" class="btn-grad btn-grad-grey btn-back" mat-flat-button color="primary" (click)="goBack()">Retour</a>
+    <a *ngIf="!isAddMode" class="btn-grad btn-grad-grey btn-back" mat-flat-button (click)="goBack()">Retour</a>
 </div>
 
 <mat-card class="example-card">
@@ -108,8 +108,8 @@
                   </section>
             </div>
 
-            <button class="btn-grad btn-grad-green" mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid || !accounts.valid" *ngIf="isAddMode">Créer</button>
-            <button class="btn-grad btn-grad-green" mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid || !accounts.valid" *ngIf="!isAddMode">Valider</button>
+            <button class="btn-grad btn-grad-green" mat-stroked-button type="submit" [disabled]="!registerForm.valid || !accounts.valid" *ngIf="isAddMode">Créer</button>
+            <button class="btn-grad btn-grad-green" mat-stroked-button type="submit" [disabled]="!registerForm.valid || !accounts.valid" *ngIf="!isAddMode">Valider</button>
 
       </form>
     </mat-card-content>

@@ -24,8 +24,6 @@ export class AdvisorListComponent implements OnInit {
   ngOnInit(): void {
     this.service.getAdvisors().subscribe((advisorsFromBack) => {
       this.advisors = advisorsFromBack;
-      console.log(advisorsFromBack.at(1));
-      
     });
   }
 

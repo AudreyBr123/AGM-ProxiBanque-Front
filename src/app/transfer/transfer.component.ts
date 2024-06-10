@@ -40,7 +40,7 @@ export class TransferComponent implements OnInit {
   selectedCreditAccount = new AccountModel(0, 0.0, new Date());
   creditCurrentAccount = new CurrentAccountModel(null, 0.0, new Date());
   creditSavingAccount = new SavingAccountModel(null, 0.0, new Date());
-
+  
   resetAccount = new AccountModel(0, 0.0, new Date()); 
   
   // Variables pour stocker les informations à envoyer au back
@@ -62,10 +62,10 @@ export class TransferComponent implements OnInit {
   
   
   // Méthodes
-
+  
   constructor(private clientService: ClientService, private transferService: TransferService , private router: Router, private location: Location,
     public dialog: MatDialog, formBuilder: FormBuilder, private toastService: ToastService) {
-
+      
       // Le constructeur créé le formulaire et initialise les FormControls
       this.form = formBuilder.group({
         'idClientDebitFormControl': new FormControl('', [Validators.required]),
@@ -100,13 +100,13 @@ export class TransferComponent implements OnInit {
           this.debitSavingAccount = this.debitClient.savingAccount!
           // Utilisé pour afficher les comptes dans le HTML
           this.debitAccounts = [this.debitCurrentAccount, this.debitSavingAccount]
-
+          
           // Réinitialise les comptes pour enlever les valeurs précédentes en cas de changement de client
           this.selectedDebitAccount = this.resetAccount 
           this.form.get('typeDebitAccountFormControl')?.reset()
         })  
-
-       // Sinon, la méthode est lancée pour le compte créditeur donc on actualise les variables liées au compte créditeur
+        
+        // Sinon, la méthode est lancée pour le compte créditeur donc on actualise les variables liées au compte créditeur
       } else {
         this.clientService.getClientById(idClient)
         .subscribe((client) => {
@@ -127,11 +127,9 @@ export class TransferComponent implements OnInit {
       if(source == "debit"){      
         if (accountType == "Compte Courant"){
           this.typeDebitAccount= "currentAccount"
-          console.log("type compte débiteur " + this.typeDebitAccount);
           this.selectedDebitAccount = this.debitCurrentAccount          
         } else {
           this.typeDebitAccount= "savingAccount"
-          console.log("type compte débiteur " + this.typeDebitAccount)
           this.selectedDebitAccount = this.debitSavingAccount        
         }
         this.debitAccounts = [this.selectedDebitAccount];
@@ -140,12 +138,10 @@ export class TransferComponent implements OnInit {
       else{
         if (accountType == "Compte Courant"){
           this.typeCreditAccount= "currentAccount";
-          this.selectedCreditAccount = this.creditCurrentAccount; 
-          console.log("type compte créditeur " + this.typeCreditAccount);        
+          this.selectedCreditAccount = this.creditCurrentAccount;      
         } else {
           this.typeCreditAccount= "savingAccount";
           this.selectedCreditAccount = this.creditSavingAccount;
-          console.log("type compte créditeur " + this.typeCreditAccount);
         }
         this.creditAccounts = [this.selectedCreditAccount];
       }
@@ -153,7 +149,7 @@ export class TransferComponent implements OnInit {
     
     // Méthode pour ouvrir une modale et valider le virement
     openDialog(value: any) : void { 
-       this.dialog.open(ConfirmTransferModal, {      
+      this.dialog.open(ConfirmTransferModal, {      
         data: {
           typeCreditAccount: this.typeCreditAccount, 
           typeDebitAccount: this.typeDebitAccount, 
@@ -174,17 +170,12 @@ export class TransferComponent implements OnInit {
         idDebitAccount: this.selectedDebitAccount.id,
         amount: value.amount
       }
-            
+      
       this.transferService.putTransfer(this.transferDtoRequest)
       .subscribe({
         next: () => {
           this.addInfoToast()
           this.router.navigate(['/client-list'])
-        },
-        error: error => {
-          console.log("Error during transfer" + JSON.stringify(error));
-          console.log("Error during transfer name : " + error.name);
-          console.log("Error during transfer message : " + error);
         }
       })
       

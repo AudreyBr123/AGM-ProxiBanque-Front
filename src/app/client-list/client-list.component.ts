@@ -40,7 +40,6 @@ export class ClientListComponent implements OnInit {
   handleClickOnDelete(clientId: number) {
     // On va chercher le client grâce à l'id récupéré en URL et on le supprime
     this.service.deleteClientById(clientId).subscribe(() => {
-      // NOTE est-ce que c'est la meilleure façon de rafraichir après avoir supprimé un client ?
       this.service.getClients().subscribe(clientsFromServer => this.clients = clientsFromServer);
     })
 
@@ -72,7 +71,7 @@ export class ClientListComponent implements OnInit {
     'buttonTransfer'
   ];
 
-  //Récupération des clients depuis json-server (dans un premier temps, avant la mise en place du back-end)
+  //Récupération des clients depuis le back-end
   ngOnInit(): void {
     this.service.getClients()
     .subscribe((clientsFromJsonServer) => {

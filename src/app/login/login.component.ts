@@ -33,7 +33,7 @@ export class LoginComponent {
     const user = new UserModel(this.email.value, this.password.value)
 
     //On recupere la reponse du back-end au submit du formulaire de connexion
-    //Si le role renvoye est manager ou advisor, on definit le statut de l'utilisateur a manager ou advisor dans le state (et on redirige)
+    //Si le role renvoye est manager ou advisor, on definit le statut de l'utilisateur a manager ou advisor dans le store (et on redirige)
     //Sinon, on definit a GUEST (et on reste sur la page login)
     this.service.postLogin(user).subscribe(
       value => {

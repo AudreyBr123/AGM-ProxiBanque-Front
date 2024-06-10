@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class LoginService {
   endpoint = 'http://localhost:8080/'
-  constructor(private httpClient : HttpClient) {} //Attention à l'ajouter aussi dans app.modules.ts
+  constructor(private httpClient : HttpClient) {}
   
   httpOptions = {
     headers: new HttpHeaders({
