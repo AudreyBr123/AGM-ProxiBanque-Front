@@ -1,0 +1,18 @@
+<header>
+    <app-header></app-header>
+</header>
+
+<main>
+    <div class="main-container">
+        <!-- La librairie toastify gère les notifications de succès / échec des opérations. -->
+        <lib-toastify-toast-container 
+        [position]="'top-right'"
+        ></lib-toastify-toast-container>
+        
+        <router-outlet />        
+    </div>
+</main>
+
+<footer>
+    <app-footer></app-footer>
+</footer>

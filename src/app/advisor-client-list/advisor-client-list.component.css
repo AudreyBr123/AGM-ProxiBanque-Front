@@ -1,0 +1,17 @@
+.page-head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h2 {
+    /* Pour espacer le bouton "retour" */
+    margin-right: 1em;
+}
+
+.table-container {
+    margin-top: 2em;
+    display: flex;
+    justify-content: center;
+    width: 90%;
+}

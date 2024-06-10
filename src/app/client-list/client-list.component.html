@@ -1,0 +1,106 @@
+<h2>Liste des clients</h2>
+
+<button
+  class="btn-grad"
+  mat-flat-button
+  routerLink="/client-create"
+>
+  <mat-icon>add</mat-icon>Créer un nouveau client
+</button>
+
+<div class="table-container">
+  <table mat-table [dataSource]="clients" class="mat-elevation-z8">
+    <!-- NOTE : L'ordre des colonnes n'est pas défini ici, mais dans la façon dont on les liste sur le fichier .ts -->
+
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef>Prénom</th>
+      <td mat-cell *matCellDef="let client">
+        {{ client.personInfos.firstName }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef>Nom</th>
+      <td mat-cell *matCellDef="let client">
+        {{ client.personInfos.lastName }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="currentAccountNumber">
+      <th mat-header-cell *matHeaderCellDef>N° Compte Courant</th>
+      <td mat-cell *matCellDef="let client">{{ client.currentAccount?.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="currentAccountBalance">
+      <th mat-header-cell *matHeaderCellDef>Solde</th>
+      <td mat-cell *matCellDef="let client">
+        {{ client.currentAccount?.balance | number: '1.0-2'}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="savingAccountNumber">
+      <th mat-header-cell *matHeaderCellDef>N° Compte épargne</th>
+      <td mat-cell *matCellDef="let client">{{ client.savingAccount?.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="savingAccountBalance">
+      <th mat-header-cell *matHeaderCellDef>Solde</th>
+      <td mat-cell *matCellDef="let client">
+        {{ client.savingAccount?.balance | number: '1.0-2'}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="buttonShow">
+      <th mat-header-cell *matHeaderCellDef>Fiche</th>
+      <td mat-cell *matCellDef="let client">
+        <button
+          class="list-action-icons"
+          routerLink="/client-show/{{ client.id }}"
+        >
+        <mat-icon>visibility</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="buttonDelete">
+      <th mat-header-cell *matHeaderCellDef>Suppression</th>
+      <td mat-cell *matCellDef="let client" class="text-center">
+        <!-- Dans le cas du "DELETE", on ouvre une modale de confirmation -->
+        <button
+          class="list-action-icons button-delete"
+          routerLink="/client-list"
+          (click)="openDialog(client.id)"
+        >
+        <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="buttonEdit">
+      <th mat-header-cell *matHeaderCellDef>Edition</th>
+      <td mat-cell *matCellDef="let client">
+        <button
+          class="list-action-icons"
+          routerLink="/client-edit/{{ client.id }}"
+        >
+        <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="buttonTransfer">
+      <th mat-header-cell *matHeaderCellDef>Virement</th>
+      <td mat-cell *matCellDef="let client">
+        <button
+          class="list-action-icons"
+          routerLink= "/transfer"
+        >
+        <mat-icon>sync_alt</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

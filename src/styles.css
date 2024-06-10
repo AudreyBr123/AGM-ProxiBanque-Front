@@ -1,0 +1,129 @@
+html,
+body {
+    height: 100%;
+}
+
+@font-face {
+    font-family: 'Asap';
+    src: url('assets/fonts/static/Asap_SemiCondensed-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    font-family: 'Asap';
+}
+
+.btn-grad {
+    background-image: linear-gradient(to right, #1A2980 0%, #26D0CE  51%, #1A2980  100%);
+    margin: 10px;
+    width:fit-content;
+    padding: 10px 10px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.25s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.btn-grad-red {
+    background-image: linear-gradient(to right, #da1212 0%, #ffacaa  51%, #da1212  100%);
+    margin: 10px;
+    width:fit-content;
+    padding: 10px 10px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.25s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.btn-grad-green {
+    background-image: linear-gradient(to right, #079f34 0%, #b6d174  51%, #079f34  100%);
+    margin: 10px;
+    width:fit-content;
+    padding: 10px 10px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.25s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.btn-grad-grey {
+    background-image: linear-gradient(to right, #9b9da6 0%, #94bab9  51%, #9b9da6  100%);
+    margin: 10px;
+    width:fit-content;
+    padding: 10px 10px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.25s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+    
+.btn-grad:hover {
+background-position: right center; /* change the direction of the change here */
+color: #fff;
+text-decoration: none;
+cursor: pointer;
+}
+
+.list-action-icons {
+    margin-top: 1.7em;
+    font-size: 1.7em;
+    background-color: var(--lightestGrey);
+    width: fit-content;
+    border-radius: 20%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.list-action-icons:hover {
+    background-color: var(--lightBlue);
+}
+
+.table-container {
+    max-width: 90%;
+}
+
+mat-dialog-actions {
+    display: flex;
+    justify-content: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+.toast-success {
+    background-color: pink;
+}

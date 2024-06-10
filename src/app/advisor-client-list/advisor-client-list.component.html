@@ -1,0 +1,55 @@
+<ng-template [ngIf]="!hasError" [ngIfElse]="noAdvisorFound">
+
+<div class="page-head">
+  <h2>Liste des clients suivis</h2>
+  <a class="btn-grad btn-grad-grey" mat-flat-button color="primary" (click)="goBack()">Retour</a>
+</div>
+
+<div class="table-container">
+    <table mat-table [dataSource]="clients" class="mat-elevation-z8">    
+        <ng-container matColumnDef="firstName">
+          <th mat-header-cell *matHeaderCellDef> Prénom </th>
+          <td mat-cell *matCellDef="let client"> {{client.personInfos.firstName}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="lastName">
+          <th mat-header-cell *matHeaderCellDef> Nom </th>
+          <td mat-cell *matCellDef="let client"> {{client.personInfos.lastName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="currentAccountNumber">
+          <th mat-header-cell *matHeaderCellDef>N° Compte Courant</th>
+          <td mat-cell *matCellDef="let client">{{ client.currentAccount?.id }}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="currentAccountBalance">
+          <th mat-header-cell *matHeaderCellDef>Solde</th>
+          <td mat-cell *matCellDef="let client">
+            {{ client.currentAccount?.balance | number: '1.0-2'}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="savingAccountNumber">
+          <th mat-header-cell *matHeaderCellDef>N° Compte épargne</th>
+          <td mat-cell *matCellDef="let client">{{ client.savingAccount?.id }}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="savingAccountBalance">
+          <th mat-header-cell *matHeaderCellDef>Solde</th>
+          <td mat-cell *matCellDef="let client">
+            {{ client.savingAccount?.balance | number: '1.0-2'}}
+          </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+</div>
+</ng-template>
+
+<ng-template #noAdvisorFound>
+  <div>
+    <h4>AdvisorNotFoundError</h4>
+    <p>Il n'y a pas de conseiller correspondant à cet id</p>
+  </div>
+</ng-template>

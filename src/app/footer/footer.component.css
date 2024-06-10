@@ -1,0 +1,16 @@
+mat-toolbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--black);
+}
+
+mat-toolbar a {
+    color: var(--darkGrey);
+}
+
+.description {
+    font-style: italic;
+    font-size: small;
+    color: var(--darkGrey);
+}
